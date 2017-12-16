@@ -1,0 +1,87 @@
+span.aa {
+    color: rgb(191,29,64);
+}
+span.ae {
+    background: linear-gradient(to right, rgb(230,173,38), rgb(230,173,38) 50%, rgb(152,199,127) 50%, rgb(152,199,127));
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+span.ah {
+    color: rgb(255,242,89);
+}
+span.ao {
+    color: rgb(120,63,4);
+}
+span.ay {
+    color: rgb(0,153,206);
+}
+span.aw {
+    background: linear-gradient(#bbf, #bbf 50%, #0f0 50%, #0f0);
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+span.eh {
+    background: linear-gradient(to right, rgb(120,63,4), rgb(120,63,4) 50%, rgb(244,190,127) 50%, rgb(244,190,127));
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+span.er {
+    color: rgb(225,124,167);
+}
+span.ey {
+    color: rgb(0,108,169);
+}
+span.ih {
+    background: linear-gradient(rgb(152,199,102), rgb(152,199,102) 50%, rgb(255,242,89) 50%, rgb(255,242,89));
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+span.iy {
+    background: linear-gradient(rgb(1,153,124), rgb(1,153,124) 50%, rgb(120,63,4) 50%, rgb(120,63,4));
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+span.iu {
+    color: rgb(244,190,127)
+}
+span.ow {
+    background: linear-gradient(rgb(221,76,54), rgb(221,76,54) 50%, rgb(137,104,158) 50%, rgb(137,104,158));
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+span.oy {
+    background: linear-gradient(to right, rgb(121,76,54), rgb(121,76,54) 50%, rgb(1,153,124) 50%, rgb(1,153,124));
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+span.uh {
+    background: linear-gradient(to right, rgb(244,190,127), rgb(244,190,127) 50%, rgb(255,242,89) 50%, rgb(255,242,89));
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+span.ul {
+    color: rgb(221,76,54);
+}
+span.uw {
+    background: linear-gradient(to right, rgb(137,104,158), rgb(137,104,158) 50%, rgb(0,153,206) 50%, rgb(0,153,206));
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+span.ch {
+    color: rgb(0,68,51);
+}
+span.f {
+    color: rgb(130,101,27);
+}
+span.jh {
+    color: rgb(152,199,102);
+}
+span.sh {
+    color: rgb(67,36,12);
+}
+span.weird {
+    color: rgb(110,120,172);
+}
+span.silent {
+    color: rgb(255, 255, 255);
+}
