@@ -1,0 +1,57 @@
+<svg xmlns="http://www.w3.org/2000/svg">
+    <linearGradient id="ae">
+        <stop offset="0%" stop-color="rgb(230,173,38)"/>
+        <stop offset="50%" stop-color="rgb(230,173,38)"/>
+        <stop offset="50%" stop-color="rgb(244,190,127)"/>
+        <stop offset="100%" stop-color="rgb(244,190,127)"/>
+    </linearGradient>
+    <linearGradient id="aw" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0%" stop-color="#bbf"/>
+        <stop offset="50%" stop-color="#bbf"/>
+        <stop offset="50%" stop-color="#0f0"/>
+        <stop offset="100%" stop-color="#0f0"/>
+    </linearGradient>
+    <linearGradient id="eh">
+        <stop offset="0%" stop-color="rgb(120,63,4)"/>
+        <stop offset="50%" stop-color="rgb(120,63,4)"/>
+        <stop offset="50%" stop-color="rgb(244,190,127)"/>
+        <stop offset="100%" stop-color="rgb(244,190,127)"/>
+    </linearGradient>
+    <linearGradient id="ih" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0%" stop-color="rgb(152,199,102)"/>
+        <stop offset="50%" stop-color="rgb(152,199,102)"/>
+        <stop offset="50%" stop-color="rgb(255,242,89)"/>
+        <stop offset="100%" stop-color="rgb(255,242,89)"/>
+    </linearGradient>
+    <linearGradient id="iy" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0%" stop-color="rgb(1,153,124)"/>
+        <stop offset="50%" stop-color="rgb(1,153,124)"/>
+        <stop offset="50%" stop-color="rgb(120,63,4)"/>
+        <stop offset="100%" stop-color="rgb(120,63,4)"/>
+    </linearGradient>
+    <linearGradient id="ow" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0%" stop-color="rgb(221,76,54)"/>
+        <stop offset="50%" stop-color="rgb(221,76,54)"/>
+        <stop offset="50%" stop-color="rgb(137,104,158)"/>
+        <stop offset="100%" stop-color="rgb(137,104,158)"/>
+    </linearGradient>
+    <linearGradient id="oy">
+        <stop offset="0%" stop-color="rgb(121,76,54)"/>
+        <stop offset="50%" stop-color="rgb(121,76,54)"/>
+        <stop offset="50%" stop-color="rgb(1,153,124)"/>
+        <stop offset="100%" stop-color="rgb(1,153,124)"/>
+    </linearGradient>
+    <linearGradient id="uh">
+        <stop offset="0%" stop-color="rgb(244,190,127)"/>
+        <stop offset="50%" stop-color="rgb(244,190,127)"/>
+        <stop offset="50%" stop-color="rgb(255,242,89)"/>
+        <stop offset="100%" stop-color="rgb(255,242,89)"/>
+    </linearGradient>
+    <linearGradient id="uw">
+        <stop offset="0%" stop-color="rgb(137,104,158)"/>
+        <stop offset="50%" stop-color="rgb(137,104,158)"/>
+        <stop offset="50%" stop-color="rgb(0,153,206))"/>
+        <stop offset="100%" stop-color="rgb(0,153,206))"/>
+    </linearGradient>
+}
+</svg>  

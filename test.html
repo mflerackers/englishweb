@@ -1,0 +1,38 @@
+<html>
+<header>
+    <link href="https://fonts.googleapis.com/css?family=Kalam" rel="stylesheet">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-109740765-2"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        
+        gtag('config', 'UA-109740765-2');
+    </script>
+    <link rel="stylesheet" type="text/css" href="./colors.css/">
+    <link rel="stylesheet" type="text/css" href="./svg-colors.css/">
+    <style>
+        .ae {
+            fill:url("colors.svg#ae");
+        }
+        div.svgcontainer {
+            display: inline-block;
+            width: 200px;
+            margin:0 auto;
+        }
+    </style>
+</header>
+<body>
+    <object data="./colors.svg" type="image/svg+xml"></object>
+    <svg style="display:none;" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+        <circle id="circ" cx="100" cy="100" r="100"/>
+    </svg>
+    <div class="svgcontainer">
+        <svg viewBox="0 0 200 200" class="aa"><use xlink:href="#circ"/></svg>
+    </div>
+    <div class="svgcontainer">
+        <svg viewBox="0 0 200 200" class="ae"><use xlink:href="#circ"/></svg>
+    </div>
+</body>
