@@ -17,10 +17,75 @@
         .ae {
             fill:url("colors.svg#ae");
         }
-        div.svgcontainer {
+        body {
+            background: #f17563;
+            font-family: Open Sans;
+            font-size: 50px;
+            color: #222;
+        }
+        label {
+            -webkit-perspective: 1000px;
+            perspective: 1000px;
+            -webkit-transform-style: preserve-3d;
+            transform-style: preserve-3d;
             display: inline-block;
             width: 200px;
-            margin:0 auto;
+            height: 300px;
+            margin-top: 150px;
+            -webkit-transform: translate(-50%, -50%);
+            transform: translate(-50%, -50%);
+            cursor: pointer;
+        }
+        
+        .card {
+            position: relative;
+            height: 100%;
+            width: 100%;
+            -webkit-transform-style: preserve-3d;
+            transform-style: preserve-3d;
+            -webkit-transition: all 600ms;
+            transition: all 600ms;
+            z-index: 20;
+        }
+        
+        .card div {
+            position: absolute;
+            height: 100%;
+            width: 100%;
+            background: #fff;
+            text-align: center;
+            line-height: 300px;
+            -webkit-backface-visibility: hidden;
+            backface-visibility: hidden;
+            border-radius: 8px;
+        }
+        
+        .card .back {
+            background: #222;
+            color: #fff;
+            -webkit-transform: rotateY(180deg);
+            transform: rotateY(180deg);
+        }
+        
+        label:hover .card {
+            -webkit-transform: rotateY(20deg);
+            transform: rotateY(20deg);
+            box-shadow: 0 10px 10px rgba(50,50,50,.2);
+        }
+        
+        input {
+            display: none;
+        }
+        
+        :checked + .card {
+            transform: rotateY(180deg);
+            -webkit-transform: rotateY(180deg);
+        }
+        
+        label:hover :checked + .card {
+            transform: rotateY(160deg);
+            -webkit-transform: rotateY(160deg);
+            box-shadow: 0 10px 10px rgba(255,255,255,.2);
         }
     </style>
 </header>
@@ -29,10 +94,55 @@
     <svg style="display:none;" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
         <circle id="circ" cx="100" cy="100" r="100"/>
     </svg>
-    <div class="svgcontainer">
-        <svg viewBox="0 0 200 200" class="aa"><use xlink:href="#circ"/></svg>
-    </div>
-    <div class="svgcontainer">
-        <svg viewBox="0 0 200 200" class="ae"><use xlink:href="#circ"/></svg>
-    </div>
+    <label>
+        <input type="checkbox"/>
+        <div class="card">
+            <div class="front">Front</div>
+            <div class="back">
+                <svg style="padding:70px 20px;" viewBox="0 0 200 200" class="aa"><use xlink:href="#circ"/></svg>
+            </div>
+        </div>
+    </label>
+    <label>
+        <input type="checkbox"/>
+        <div class="card">
+            <div class="front">Front</div>
+            <div class="back">
+                <svg style="padding:70px 20px;" viewBox="0 0 200 200" class="aa"><use xlink:href="#circ"/></svg>
+            </div>
+        </div>
+    </label>
+    <label>
+        <input type="checkbox"/>
+        <div class="card">
+            <div class="front">Front</div>
+            <div class="back">
+                <svg style="padding:70px 20px;" viewBox="0 0 200 200" class="ae"><use xlink:href="#circ"/></svg>
+            </div>
+        </div>
+    </label>
+    <script>
+    function cardClicked(event) {
+        let clickedCard = event.target;
+        let clickedPhoneme = clickedCard.parentNode.querySelector("svg").className.baseVal;
+        let cards = document.querySelectorAll("input[type=checkbox]");
+        for (let i=0; i < cards.length; ++i) {
+            let card = cards[i];
+            if (card == clickedCard)
+                continue;
+            if (card.disabled)
+                continue;
+            let phoneme = card.parentNode.querySelector("svg").className.baseVal;
+            if (phoneme == clickedPhoneme) {
+                clickedCard.disabled = true;
+                card.disabled = true;
+                continue;
+            }
+            card.checked = false;
+        }
+    }
+    let cards = document.querySelectorAll("input[type=checkbox]");
+    for (let i=0; i < cards.length; ++i)
+        cards[i].addEventListener('click', cardClicked);
+    </script>
 </body>
