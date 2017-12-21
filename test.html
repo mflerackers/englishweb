@@ -130,7 +130,7 @@
             let card = cards[i];
             if (card == clickedCard)
                 continue;
-            if (card.disabled)
+            if (card.disabled || !card.checked)
                 continue;
             let phoneme = card.parentNode.querySelector("svg").className.baseVal;
             if (phoneme == clickedPhoneme) {
