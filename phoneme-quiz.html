@@ -103,7 +103,7 @@
         }
 
         .card .back svg {
-            padding: 30% 5%;
+            padding: 35% 10%;
         }
         
         input {
@@ -224,9 +224,6 @@
                 let node = cardTemplate.content.cloneNode(true);
                 let svg = node.querySelector("label div.card div.back svg");
                 svg.setAttribute("class",gamePhonemes[i]);
-                /*let cards = document.querySelectorAll("input[type=checkbox]");
-                for (let i=0; i < cards.length; ++i)
-                    cards[i].addEventListener('click', cardClicked);*/
                 let input = node.querySelector("label input");
                 input.addEventListener('click', cardClicked);
                 div.appendChild(node);
