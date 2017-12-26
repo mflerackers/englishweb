@@ -140,7 +140,7 @@
             </div>
         </label>
     </template>
-    <div style="margin-top: 150px;"><center><fieldset>
+    <div style="margin-top: 15vh;"><center><fieldset>
         
     </center></fieldset></div>
     <script>
@@ -207,7 +207,12 @@
             let gamePhonemes = permutation(phonemes, count);
             gamePhonemes = gamePhonemes.concat(gamePhonemes.slice());
             gamePhonemes = permutation(gamePhonemes);
+            let div = document.createElement("div");
             for (let i = 0; i < count*2; ++i) {
+                if (i > 0 && i % count == 0) {
+                    fieldset.appendChild(div);
+                    div = document.createElement("div");
+                }
                 let node = cardTemplate.content.cloneNode(true);
                 let svg = node.querySelector("label div.card div.back svg");
                 svg.setAttribute("class",gamePhonemes[i]);
@@ -216,8 +221,9 @@
                     cards[i].addEventListener('click', cardClicked);*/
                 let input = node.querySelector("label input");
                 input.addEventListener('click', cardClicked);
-                fieldset.appendChild(node);
+                div.appendChild(node);
             }
+            fieldset.appendChild(div);
         }
         function playPhoneme(phoneme, finished) {
             let source = audioContext.createBufferSource();
