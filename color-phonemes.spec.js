@@ -55,6 +55,9 @@ describe("Transform tests", function() {
     it("psychiatrist", function() {
         expect(doTransform("psychiatrist")).toEqual([ "S", "UH", "K", "AY", "UH", "T", "R", "UH", "S", "T" ]);
     });
+    it("pseudonym", function() {
+        expect(doTransform("pseudonym")).toEqual([ "S", "UW", "D", "UH", "N", "IH", "M" ]);
+    });
 });
 
 describe("Match tests", function() {
@@ -90,5 +93,8 @@ describe("Match tests", function() {
     });
     it("psychiatrist", function() {
         expect(doMatch("psychiatrist")).toBeTruthy();
+    });
+    it("pseudonym", function() {
+        expect(doMatch("pseudonym")).toBeTruthy();
     });
 });
