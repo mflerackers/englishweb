@@ -52,6 +52,9 @@ describe("Transform tests", function() {
     it("psychotic", function() {
         expect(doTransform("psychotic")).toEqual([ "S", "AY", "K", "AA", "T", "IH", "K" ]);
     });
+    it("psychiatrist", function() {
+        expect(doTransform("psychiatrist")).toEqual([ "S", "UH", "K", "AY", "UH", "T", "R", "UH", "S", "T" ]);
+    });
 });
 
 describe("Match tests", function() {
@@ -84,5 +87,8 @@ describe("Match tests", function() {
     });
     it("psychotic", function() {
         expect(doMatch("psychotic")).toBeTruthy();
+    });
+    it("psychiatrist", function() {
+        expect(doMatch("psychiatrist")).toBeTruthy();
     });
 });
