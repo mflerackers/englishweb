@@ -49,9 +49,12 @@ describe("Transform tests", function() {
     it("alphabet", function() {
         expect(doTransform("alphabet")).toEqual([ "AE", "L", "F", "UH", "B", "EH", "T" ]);
     });
-  });
-  
-  describe("Match tests", function() {
+    it("psychotic", function() {
+        expect(doTransform("psychotic")).toEqual([ "S", "AY", "K", "AA", "T", "IH", "K" ]);
+    });
+});
+
+describe("Match tests", function() {
     it("apple", function() {
         expect(doMatch("apple")).toBeTruthy();
     });
@@ -79,4 +82,7 @@ describe("Transform tests", function() {
     it("alphabet", function() {
         expect(doMatch("alphabet")).toBeTruthy();
     });
-  });
+    it("psychotic", function() {
+        expect(doMatch("psychotic")).toBeTruthy();
+    });
+});
