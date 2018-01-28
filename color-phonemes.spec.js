@@ -58,6 +58,9 @@ describe("Transform tests", function() {
     it("pseudonym", function() {
         expect(doTransform("pseudonym")).toEqual([ "S", "UW", "D", "UH", "N", "IH", "M" ]);
     });
+    it("confusion", function() {
+        expect(doTransform("confusion")).toEqual([ "K", "UH", "N", "F", "IU", "JH", "UH", "N" ]);
+    });
 });
 
 describe("Match tests", function() {
@@ -96,5 +99,8 @@ describe("Match tests", function() {
     });
     it("pseudonym", function() {
         expect(doMatch("pseudonym")).toBeTruthy();
+    });
+    it("confusion", function() {
+        expect(doMatch("confusion")).toBeTruthy();
     });
 });

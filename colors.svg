@@ -54,6 +54,12 @@
         <stop offset="50%" stop-color="rgb(0,153,206)"/>
         <stop offset="100%" stop-color="rgb(0,153,206)"/>
     </linearGradient>
+    <linearGradient id="sh">
+        <stop offset="50%" stop-color="rgb(0,68,51)"/>
+        <stop offset="100%" stop-color="rgb(0,68,51)"/>
+        <stop offset="0%" stop-color="rgb(244,190,131)"/>
+        <stop offset="50%" stop-color="rgb(244,190,131)"/>
+    </linearGradient>
 }
 </defs>
 </svg>  
