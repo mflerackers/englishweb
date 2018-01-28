@@ -97,7 +97,7 @@ letters = {
     IH : ["ee", "e", "i", "ui", "y"],
     IU : ["iew", "ue", "u"],
     IY : ["i", "y", "ee", "ea", "e"],
-    JH : ["d", "dge", "ge", "g", "j", "su"], // su added for ZH
+    JH : ["d", "dge", "ge", "g", "j", "su", "s"], // su added for ZH
     K  : ["ch", "ck", "c", "k", "q"],
     L  : ["ll", "l", "le"],
     M  : ["mm", "m"],
@@ -111,7 +111,7 @@ letters = {
     SH : ["ch", "ci", "c", "sh", "si", "ti"],
     T  : ["tt", "t"],
     TH : ["th"],
-    UH : ["a", "e", "i", "ia", "oo", "ou", "o", "u", "y"],
+    UH : ["a", "e", "i", "ia", "io", "oo", "ou", "o", "u", "y"],
     UL : ["al", "l", "ull", "ul"],
     UW : ["eu", "oo", "ou", "o", "u", "ue", "wo"],
     V  : ["v", "v", "f"],

@@ -95,11 +95,13 @@ span.jh {
     color: rgb(152,199,102);
 }
 span.sh {
-    color: rgb(110, 120, 172);
+    background: linear-gradient(to right, rgb(0,68,51), rgb(0,68,51) 50%, rgb(244,190,131) 50%, rgb(244,190,131));
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
 }
 span.weird {
     color: rgb(110,120,172);
 }
 span.silent {
-    color: rgb(255, 255, 255);
+    color: rgb(255,255,255);
 }
