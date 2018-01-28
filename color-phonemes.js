@@ -80,7 +80,7 @@ class MatchCandidate {
 letters = {
     AA : ["o", "au", "aw", "ou", "a"],
     AE : ["a"],
-    AH : ["ou", "u", "a", "e", "o", "oo", "i"],
+    AH : ["ou", "u", "a", "e", "o", "oo", "io", "i", "y"],
     AO : ["oa", "au", "aw", "ou", "oo", "o", "a"],
     AW : ["ou", "ow"],
     AY : ["ie", "uy", "ey", "i", "y"],
@@ -111,7 +111,7 @@ letters = {
     SH : ["ch", "ci", "c", "sh", "si", "ti"],
     T  : ["tt", "t"],
     TH : ["th"],
-    UH : ["a", "e", "i", "ia", "io", "oo", "ou", "o", "u", "y"],
+    UH : ["a", "e", "i", "ia", "oo", "ou", "o", "u"],
     UL : ["al", "l", "ull", "ul"],
     UW : ["eu", "oo", "ou", "o", "u", "ue", "wo"],
     V  : ["v", "v", "f"],
@@ -163,7 +163,7 @@ function transformPhonemes(phonemes) {
                     newPhonemes.push("UL");
                     continue;
                 } else {
-                    newPhonemes.push("UH");
+                    newPhonemes.push("AH");
                     break;
                 }
                 continue;
