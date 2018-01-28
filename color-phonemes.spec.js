@@ -3,12 +3,15 @@ let c = require("./color-phonemes.js");
 
 function doTransform(word) {
     let phonemes = RiTa.getPhonemes(word).toUpperCase().split("-");
+    //console.log(phonemes)
+    //console.log(c.transformPhonemes(phonemes))
     return c.transformPhonemes(phonemes);
 }
 
 function doMatch(word) {
     let phonemes = RiTa.getPhonemes(word).toUpperCase().split("-");
     phonemes = c.transformPhonemes(phonemes);
+    //console.log(phonemes)
     return c.matchPhonemes(word, phonemes);
 }
 
@@ -26,13 +29,13 @@ describe("Transform tests", function() {
         expect(doTransform("apple")).toEqual([ "AE", "P", "UL" ]);
     });
     it("causality", function() {
-        expect(doTransform("causality")).toEqual([ "K", "AO", "Z", "AE", "L", "UH", "T", "IY" ]);
+        expect(doTransform("causality")).toEqual([ 'K', 'AO', 'Z', 'AE', 'L', 'AH', 'T', 'IY' ]);
     });
     it("motorcycle", function() {
         expect(doTransform("motorcycle")).toEqual([ "M", "OW", "T", "ER", "S", "AY", "K", "UL" ]);
     });
     it("politician", function() {
-        expect(doTransform("politician")).toEqual([ "P", "AA", "L", "UH", "T", "IH", "SH", "UH", "N" ]);
+        expect(doTransform("politician")).toEqual([ "P", "AA", "L", "AH", "T", "IH", "SH", "AH", "N" ]);
     });
     it("palindrome", function() {
         expect(doTransform("palindrome")).toEqual([ "P", "AE", "L", "IH", "N", "D", "R", "OW", "M" ]);
@@ -44,22 +47,22 @@ describe("Transform tests", function() {
         expect(doTransform("postulate")).toEqual([ "P", "AA", "S", "CH", "UL", "EY", "T" ]);
     });
     it("southern", function() {
-        expect(doTransform("southern")).toEqual([ "S", "UH", "DH", "ER", "N" ]);
+        expect(doTransform("southern")).toEqual([ "S", "AH", "DH", "ER", "N" ]);
     });
     it("alphabet", function() {
-        expect(doTransform("alphabet")).toEqual([ "AE", "L", "F", "UH", "B", "EH", "T" ]);
+        expect(doTransform("alphabet")).toEqual([ "AE", "L", "F", "AH", "B", "EH", "T" ]);
     });
     it("psychotic", function() {
         expect(doTransform("psychotic")).toEqual([ "S", "AY", "K", "AA", "T", "IH", "K" ]);
     });
     it("psychiatrist", function() {
-        expect(doTransform("psychiatrist")).toEqual([ "S", "UH", "K", "AY", "UH", "T", "R", "UH", "S", "T" ]);
+        expect(doTransform("psychiatrist")).toEqual([ "S", "AH", "K", "AY", "AH", "T", "R", "AH", "S", "T" ]);
     });
     it("pseudonym", function() {
-        expect(doTransform("pseudonym")).toEqual([ "S", "UW", "D", "UH", "N", "IH", "M" ]);
+        expect(doTransform("pseudonym")).toEqual([ "S", "UW", "D", "AH", "N", "IH", "M" ]);
     });
     it("confusion", function() {
-        expect(doTransform("confusion")).toEqual([ "K", "UH", "N", "F", "IU", "JH", "UH", "N" ]);
+        expect(doTransform("confusion")).toEqual([ "K", "AH", "N", "F", "IU", "JH", "AH", "N" ]);
     });
 });
 
