@@ -143,7 +143,7 @@ function transformPhonemes(phonemes) {
                     newPhonemes.push("IU");
                     continue;
                 } else {
-                    newPhonemes.push("Y");
+                    newPhonemes.push("IY");
                 }
                 break;
             }
