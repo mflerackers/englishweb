@@ -62,7 +62,7 @@ describe("Transform tests", function() {
         expect(doTransform("pseudonym")).toEqual([ "S", "UW", "D", "AH", "N", "IH", "M" ]);
     });
     it("confusion", function() {
-        expect(doTransform("confusion")).toEqual([ "K", "AH", "N", "F", "IU", "JH", "AH", "N" ]);
+        expect(doTransform("confusion")).toEqual([ "K", "AH", "N", "F", "IU", "ZH", "AH", "N" ]);
     });
 });
 
