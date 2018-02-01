@@ -97,7 +97,7 @@ letters = {
     IH : ["ee", "e", "i", "ui", "y"],
     IU : ["iew", "ue", "u"],
     IY : ["i", "y", "ee", "ea", "e"],
-    JH : ["d", "dge", "ge", "g", "j", "su", "s"], // su added for ZH
+    JH : ["d", "dge", "ge", "g", "j", "s"],
     K  : ["ch", "ck", "c", "k", "q"],
     L  : ["ll", "l", "le"],
     M  : ["mm", "m"],
@@ -117,7 +117,8 @@ letters = {
     V  : ["v", "v", "f"],
     W  : ["u", "wh", "w"],
     X  : ["x", "cs", "ks"],
-    Z  : ["zz", "z", "s"]
+    Z  : ["zz", "z", "s"],
+    ZH : ["s", "su"]
 };
 
 silents = ["ew", "e", "gh", "g", "h", "k", "w", "t"];
@@ -179,10 +180,6 @@ function transformPhonemes(phonemes) {
             case "AH":
             prev = phoneme;
             continue;
-            case "ZH": {
-                newPhonemes.push("JH");
-                continue;
-            }
         }
         newPhonemes.push(phoneme);
     }
