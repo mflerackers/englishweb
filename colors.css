@@ -95,15 +95,15 @@ span.jh {
     color: rgb(152,199,102);
 }
 span.sh {
-    background: -webkit-linear-gradient(to right, rgb(0,68,51), rgb(0,68,51) 50%, rgb(244,190,131) 50%, rgb(244,190,131));
-    background: linear-gradient(to right, rgb(0,68,51), rgb(0,68,51) 50%, rgb(244,190,131) 50%, rgb(244,190,131));
+    background: -webkit-linear-gradient( rgb(0,68,51), rgb(0,68,51) 50%, rgb(244,190,131) 50%, rgb(244,190,131));
+    background: linear-gradient( rgb(0,68,51), rgb(0,68,51) 50%, rgb(244,190,131) 50%, rgb(244,190,131));
     background-clip: text;
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
 }
 span.zh {
-    background: -webkit-linear-gradient(to right, rgb(221,76,54), rgb(221,76,54) 50%, rgb(225,124,160) 50%, rgb(225,124,160));
-    background: linear-gradient(to right, rgb(221,76,54), rgb(221,76,54) 50%, rgb(225,124,160) 50%, rgb(225,124,160));
+    background: -webkit-linear-gradient( rgb(221,76,54), rgb(221,76,54) 50%, rgb(225,124,160) 50%, rgb(225,124,160));
+    background: linear-gradient( rgb(221,76,54), rgb(221,76,54) 50%, rgb(225,124,160) 50%, rgb(225,124,160));
     background-clip: text;
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
