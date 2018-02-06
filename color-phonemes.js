@@ -79,7 +79,7 @@ class MatchCandidate {
 
 letters = {
     AA : ["o", "au", "aw", "ou", "a"],
-    AE : ["a"],
+    AE : ["au", "a"],
     AH : ["ou", "u", "a", "e", "o", "oo", "io", "i", "y"],
     AO : ["oa", "au", "aw", "ou", "oo", "o", "a"],
     AW : ["ou", "ow"],
