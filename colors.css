@@ -2,8 +2,8 @@ span.aa {
     color: rgb(191,29,64);
 }
 span.ae {
-    background: -webkit-linear-gradient (to right, rgb(230,173,38), rgb(230,173,38) 50%, rgb(152,199,127) 50%, rgb(152,199,127));
-    background: linear-gradient(to right, rgb(230,173,38), rgb(230,173,38) 50%, rgb(152,199,127) 50%, rgb(152,199,127));
+    background: -webkit-linear-gradient (rgb(230,173,38), rgb(230,173,38) 50%, rgb(152,199,127) 50%, rgb(152,199,127));
+    background: linear-gradient(rgb(230,173,38), rgb(230,173,38) 50%, rgb(152,199,127) 50%, rgb(152,199,127));
     background-clip: text;
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
@@ -25,8 +25,8 @@ span.aw {
     -webkit-text-fill-color: transparent;
 }
 span.eh {
-    background: -webkit-linear-gradient(to right, rgb(120,63,4), rgb(120,63,4) 50%, rgb(244,190,127) 50%, rgb(244,190,127));
-    background: linear-gradient(to right, rgb(120,63,4), rgb(120,63,4) 50%, rgb(244,190,127) 50%, rgb(244,190,127));
+    background: -webkit-linear-gradient(rgb(120,63,4), rgb(120,63,4) 50%, rgb(244,190,127) 50%, rgb(244,190,127));
+    background: linear-gradient(rgb(120,63,4), rgb(120,63,4) 50%, rgb(244,190,127) 50%, rgb(244,190,127));
     background-clip: text;
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
@@ -62,15 +62,15 @@ span.ow {
     -webkit-text-fill-color: transparent;
 }
 span.oy {
-    background: -webkit-linear-gradient(to right, rgb(121,76,54), rgb(121,76,54) 50%, rgb(1,153,124) 50%, rgb(1,153,124));
-    background: linear-gradient(to right, rgb(121,76,54), rgb(121,76,54) 50%, rgb(1,153,124) 50%, rgb(1,153,124));
+    background: -webkit-linear-gradient(rgb(121,76,54), rgb(121,76,54) 50%, rgb(1,153,124) 50%, rgb(1,153,124));
+    background: linear-gradient(rgb(121,76,54), rgb(121,76,54) 50%, rgb(1,153,124) 50%, rgb(1,153,124));
     background-clip: text;
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
 }
 span.uh {
-    background: -webkit-linear-gradient(to right, rgb(244,190,127), rgb(244,190,127) 50%, rgb(255,242,89) 50%, rgb(255,242,89));
-    background: linear-gradient(to right, rgb(244,190,127), rgb(244,190,127) 50%, rgb(255,242,89) 50%, rgb(255,242,89));
+    background: -webkit-linear-gradient( rgb(244,190,127), rgb(244,190,127) 50%, rgb(255,242,89) 50%, rgb(255,242,89));
+    background: linear-gradient(rgb(244,190,127), rgb(244,190,127) 50%, rgb(255,242,89) 50%, rgb(255,242,89));
     background-clip: text;
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
@@ -79,8 +79,8 @@ span.ul {
     color: rgb(221,76,54);
 }
 span.uw {
-    background: -webkit-linear-gradient(to right, rgb(137,104,158), rgb(137,104,158) 50%, rgb(0,153,206) 50%, rgb(0,153,206));
-    background: linear-gradient(to right, rgb(137,104,158), rgb(137,104,158) 50%, rgb(0,153,206) 50%, rgb(0,153,206));
+    background: -webkit-linear-gradient(rgb(137,104,158), rgb(137,104,158) 50%, rgb(0,153,206) 50%, rgb(0,153,206));
+    background: linear-gradient(rgb(137,104,158), rgb(137,104,158) 50%, rgb(0,153,206) 50%, rgb(0,153,206));
     background-clip: text;
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
