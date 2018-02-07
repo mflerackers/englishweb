@@ -82,7 +82,9 @@
         
         let html = "";
         for (matches of result) {
-            html += "<span class='" + getClasses(matches) + "'>" + matches.ch + "</span>";
+            for (c of [...matches.ch]) {
+                html += "<span class='" + getClasses(matches) + "'>" + c + "</span>";
+            }
         }
         document.getElementById("worddisplay").innerHTML = html;
     }
