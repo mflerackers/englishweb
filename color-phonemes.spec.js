@@ -64,6 +64,12 @@ describe("Transform tests", function() {
     it("confusion", function() {
         expect(doTransform("confusion")).toEqual([ "K", "AH", "N", "F", "IU", "ZH", "AH", "N" ]);
     });
+    it("aisle", function() {
+        expect(doTransform("aisle")).toEqual([ "AY", "L" ]);
+    });
+    it("science", function() {
+        expect(doTransform("science")).toEqual([ "S", "AY", "AH", "N", "S" ]);
+    });
 });
 
 describe("Match tests", function() {
@@ -105,5 +111,11 @@ describe("Match tests", function() {
     });
     it("confusion", function() {
         expect(doMatch("confusion")).toBeTruthy();
+    });
+    it("aisle", function() {
+        expect(doMatch("aisle")).toBeTruthy();
+    });
+    it("science", function() {
+        expect(doMatch("science")).toBeTruthy();
     });
 });
