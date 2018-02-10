@@ -135,10 +135,11 @@
     </style>
 </header>
 <body>
-    <a href="./index.html">Text input</a>
+    <div><a href="./index.html">Text input</a></div>
+    <div><a href="./phoneme-quiz.html?voice=male">male</a> <a href="./phoneme-quiz.html?voice=female">female</a></div>
     <svg style="width:0px;height:0px;" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
         <defs>
-            <linearGradient id="ae x1="0" y1="0" x2="0" y2="1"">
+            <linearGradient id="ae" x1="0" y1="0" x2="0" y2="1">
                 <stop offset="0%" stop-color="rgb(230,173,38)"/>
                 <stop offset="50%" stop-color="rgb(230,173,38)"/>
                 <stop offset="50%" stop-color="rgb(244,190,127)"/>
@@ -265,6 +266,8 @@
 
         window.addEventListener('load', init, false);
         function init() {
+            let url = new URL(window.location.href);
+            let voice = (url.searchParams.get("voice") || "male") == "male" ? "arthur" : "monet";
             // Create audio context and preload sounds
             try {
                 window.AudioContext = window.AudioContext||window.webkitAudioContext;
@@ -275,7 +278,7 @@
             }
             for (phoneme of phonemes) {
                 let request = new XMLHttpRequest();
-                let url = './phonemes/'+phoneme+'.wav';
+                let url = "./phonemes/"+voice+"/"+phoneme+".wav";
                 let phonemeCapture = phoneme;
                 request.open('GET', url, true);
                 request.responseType = 'arraybuffer';

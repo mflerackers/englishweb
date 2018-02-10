@@ -83,7 +83,7 @@ letters = {
     AH : ["ou", "u", "a", "e", "o", "oo", "io", "i", "y"],
     AO : ["oa", "au", "aw", "ou", "oo", "o", "a"],
     AW : ["ou", "ow"],
-    AY : ["ie", "uy", "ey", "i", "y"],
+    AY : ["ai", "ie", "uy", "ey", "i", "y"],
     B  : ["bb", "b"],
     CH : ["ch", "tch", "t"],
     D  : ["dd", "d"],
@@ -99,7 +99,7 @@ letters = {
     IY : ["i", "y", "ee", "ea", "e"],
     JH : ["d", "dge", "ge", "g", "j", "s"],
     K  : ["ch", "ck", "c", "k", "q"],
-    L  : ["ll", "l", "le"],
+    L  : ["ll", "l", "l"],
     M  : ["mm", "m"],
     N  : ["nn", "n"],
     NG : ["ng", "n"],
@@ -107,7 +107,7 @@ letters = {
     OY : ["oi", "oy"],
     P  : ["pp", "p"],
     R  : ["rr", "r"],
-    S  : ["c", "ps", "sc", "ss", "s"],
+    S  : ["c", "ps", "ss", "s"],
     SH : ["ch", "ci", "c", "sh", "si", "ti"],
     T  : ["tt", "t"],
     TH : ["th"],
@@ -121,7 +121,7 @@ letters = {
     ZH : ["s", "su"]
 };
 
-silents = ["ew", "e", "gh", "g", "h", "k", "w", "t"];
+silents = ["c", "ew", "e", "gh", "g", "h", "k", "w", "s", "t"];
 
 function getSilent(graphemes) {
     //console.log("looking for silent in " + graphemes);
