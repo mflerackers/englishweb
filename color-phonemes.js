@@ -123,14 +123,9 @@ letters = {
 
 silents = ["c", "ew", "e", "gh", "g", "h", "k", "w", "s", "t"];
 
-function getSilent(graphemes) {
+function getSilents(graphemes) {
     //console.log("looking for silent in " + graphemes);
-    for (silent of silents) {
-        if (graphemes.startsWith(silent)) {
-            return silent;
-        }
-    }
-    return null;
+    return silents.filter(silent => graphemes.startsWith(silent));
 }
 
 function transformPhonemes(phonemes) {
@@ -193,29 +188,38 @@ function transformPhonemes(phonemes) {
 function matchPhonemes(word, phonemes) {
     var candidates = [new MatchCandidate(word)];
     for (phoneme of phonemes) {
-        //console.log(phoneme);
+        console.log(phoneme);
         let graphemes = letters[phoneme];
         assert(graphemes, "No graphemes found for " + phoneme + " in " + phonemes);
         var newCandidates = [];
         for (let grapheme of graphemes) {
-            //console.log(grapheme);
+            console.log("current grapheme match : ", grapheme);
             for (let candidate of candidates) {
-                //console.log(candidate);
+                console.log("current candidate match: ", candidate);
                 if (candidate.remaining.startsWith(grapheme)) {
-                    //console.log("added " + grapheme + " for " + phoneme);
+                    console.log("added " + grapheme + " for " + phoneme);
                     newCandidates.push(candidate.extend(phoneme, grapheme));
                 }
+                else {
+                    console.log("grapheme " + grapheme + " for " + phoneme + " not in " + candidate.remaining);
+                }
                 // Only match silents within a word
-                if (candidate.remaining.length != word.length) {
-                    let silent = getSilent(candidate.remaining);
-                    if (silent && candidate.remaining.indexOf(grapheme) == silent.length) {
-                        //console.log("added silent " + silent + " before " + grapheme)
-                        let silentCandidate = candidate.extend("silent", silent);
-                        newCandidates.push(silentCandidate.extend(phoneme, grapheme));
-                    }
-                    else if (silent) {
-                        ;//console.log("no match for " + silent + " and " + grapheme);
-                    }
+                if (candidate.remaining.length < word.length) {
+                    let silents = getSilents(candidate.remaining);
+                    console.log("got silents ", silents);
+                    silents.forEach(silent => {
+                        if (candidate.remaining.indexOf(grapheme) == silent.length) {
+                            console.log("added silent " + silent + " before " + grapheme)
+                            let silentCandidate = candidate.extend("silent", silent);
+                            newCandidates.push(silentCandidate.extend(phoneme, grapheme));
+                        }
+                        else {
+                            console.log("no silent match for " + silent + " and " + grapheme);
+                        }
+                    });
+                }
+                else {
+                    console.log("not trying silent letters");
                 }
             }
         }
