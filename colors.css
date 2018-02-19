@@ -62,8 +62,8 @@ span.ow {
     -webkit-text-fill-color: transparent;
 }
 span.oy {
-    background: -webkit-linear-gradient(rgb(121,76,54), rgb(121,76,54) 50%, rgb(1,153,124) 50%, rgb(1,153,124));
-    background: linear-gradient(rgb(121,76,54), rgb(121,76,54) 50%, rgb(1,153,124) 50%, rgb(1,153,124));
+    background: -webkit-linear-gradient(rgb(221,76,54), rgb(221,76,54) 50%, rgb(1,153,124) 50%, rgb(1,153,124));
+    background: linear-gradient(rgb(221,76,54), rgb(221,76,54) 50%, rgb(1,153,124) 50%, rgb(1,153,124));
     background-clip: text;
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
