@@ -107,7 +107,7 @@ letters = {
     OY : ["oi", "oy"],
     P  : ["pp", "p"],
     R  : ["rr", "r"],
-    S  : ["c", "ps", "ss", "s"],
+    S  : ["c", "ss", "s"],
     SH : ["ch", "ci", "c", "sh", "si", "ti"],
     T  : ["tt", "t"],
     TH : ["th"],
@@ -121,7 +121,7 @@ letters = {
     ZH : ["s", "su"]
 };
 
-silents = ["c", "ew", "e", "gh", "g", "h", "k", "w", "s", "t"];
+silents = ["c", "ew", "e", "gh", "g", "h", "k", "w", "p", "s", "t"];
 
 function getSilents(graphemes) {
     //console.log("looking for silent in " + graphemes);
@@ -204,7 +204,7 @@ function matchPhonemes(word, phonemes) {
                     //console.log("grapheme " + grapheme + " for " + phoneme + " not in " + candidate.remaining);
                 }
                 // Only match silents within a word
-                if (candidate.remaining.length < word.length) {
+                //if (candidate.remaining.length < word.length) {
                     let silents = getSilents(candidate.remaining);
                     //console.log("got silents ", silents);
                     silents.forEach(silent => {
@@ -217,10 +217,10 @@ function matchPhonemes(word, phonemes) {
                             //console.log("no silent match for " + silent + " and " + grapheme);
                         }
                     });
-                }
-                else {
-                    //console.log("not trying silent letters");
-                }
+                //}
+                //else {
+                //    //console.log("not trying silent letters");
+                //}
             }
         }
         candidates = newCandidates;
