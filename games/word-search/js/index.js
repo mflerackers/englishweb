@@ -254,6 +254,13 @@ let puzzle = new Puzzle(8, 8).fill({h:[[2, 2, "apple"], [4, 0, "pear"], [6, 0, "
 puzzle.renderCanvas(ctx);
 puzzle.renderList(document.getElementById("list"));
 
+/*function onresize() {
+  canvas.width  = window.innerWidth;
+  canvas.height = window.innerHeight;
+}
+
+window.addEventListener('resize', onresize, false);*/
+
 let sel = null;
 
 class Selection {
@@ -292,26 +299,22 @@ class Selection {
   }
 }
 
-canvas.addEventListener("mousedown", (event) => {
-  let x = Math.floor(event.clientX / 40);
-  let y = Math.floor(event.clientY / 40);
+function ondown(x, y) {
   sel = new Selection(x, y);
   ctx.clearRect(0, 0, 400, 400);
   puzzle.renderCanvas(ctx);
   sel.draw(ctx);
-});
+}
 
-canvas.addEventListener("mousemove", (event) => {
+function onmove(x, y) {
   if (!sel) return;
-  let x = Math.floor(event.clientX / 40);
-  let y = Math.floor(event.clientY / 40);
   sel.extendTo(x, y);
   ctx.clearRect(0, 0, 400, 400);
   puzzle.renderCanvas(ctx);
   sel.draw(ctx);
-});
+}
 
-canvas.addEventListener("mouseup", (event) => {
+function onup(x, y) {
   if (!sel) return;
   word = puzzle.getWord(sel.x, sel.y, sel.w, sel.h);
   if (word) {
@@ -330,4 +333,42 @@ canvas.addEventListener("mouseup", (event) => {
   sel = null;
   ctx.clearRect(0, 0, 400, 400);
   puzzle.renderCanvas(ctx);
+}
+
+canvas.addEventListener("mousedown", (event) => {
+  let x = Math.floor(event.clientX / 40);
+  let y = Math.floor(event.clientY / 40);
+  ondown(x, y);
+  event.preventDefault();
+});
+canvas.addEventListener("mousemove", (event) => {
+  let x = Math.floor(event.clientX / 40);
+  let y = Math.floor(event.clientY / 40);
+  onmove(x, y);
+  event.preventDefault();
+});
+canvas.addEventListener("mouseup", (event) => {
+  let x = Math.floor(event.clientX / 40);
+  let y = Math.floor(event.clientY / 40);
+  onup(x, y);
+  event.preventDefault();
+});
+
+canvas.addEventListener("touchstart", (event) => {
+  let x = Math.floor(event.touches[0].pageX / 40);
+  let y = Math.floor(event.touches[0].pageY / 40);
+  ondown(x, y);
+  event.preventDefault();
+});
+canvas.addEventListener("touchmove", (event) => {
+  let x = Math.floor(event.changedTouches[0].pageX / 40);
+  let y = Math.floor(event.changedTouches[0].pageY / 40);
+  onmove(x, y);
+  event.preventDefault();
+});
+canvas.addEventListener("touchend", (event) => {
+  let x = Math.floor(event.changedTouches[0].pageX / 40);
+  let y = Math.floor(event.changedTouches[0].pageY / 40);
+  onup(x, y);
+  event.preventDefault();
 });
