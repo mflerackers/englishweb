@@ -52,7 +52,7 @@ class Span {
   }
   
   positions(word) {
-    if (this.word && this.length < word.length) {
+    if (this.word || this.length < word.length) {
       return [];
     }
     return new Array(this.length-word.length).fill(0).map((v, i) => this.from + i);
@@ -60,7 +60,7 @@ class Span {
 }
 
 class Grid {
-  constructor(w, h) {
+  constructor(w, h, gridSize) {
     this.rows = new Array(h).fill(0).map(_ => [new Span(0, w-1)]);
     this.columns = new Array(w).fill(0).map(_ => [new Span(0, h-1)]);
   }
@@ -162,28 +162,37 @@ class Grid {
     let width = this.columns.length;
     let height = this.rows.length;
     
+    let gridSize = canvas.width / width;
+    
     ctx.fillStyle = "yellow";
     ctx.textAlign = "center";
     
     this.rows.forEach((row, i) => row.filter(span => span.word && span.found).forEach(span => {
-      drawHighlight(ctx, span.from * 40, i * 40, span.length * 40, 40, 20, true, false);
+      drawHighlight(ctx, span.from * gridSize, i * gridSize, 
+                    span.length * gridSize, gridSize, 
+                    gridSize * 0.5, true, false);
     }));
     
     this.columns.forEach((column, i) => column.filter(span => span.word && span.found).forEach(span => {
-      drawHighlight(ctx, i * 40, span.from * 40, 40, span.length * 40, 20, true, true);
+      drawHighlight(ctx, i * gridSize, span.from * gridSize,
+                    gridSize, span.length * gridSize, gridSize * 0.5, true, true);
     }));
     
     this.rows.forEach((row, i) => row.filter(span => span.word && span.found).forEach(span => {
-      drawHighlight(ctx, span.from * 40, i * 40, span.length * 40, 40, 20, false, true);
+      drawHighlight(ctx, span.from * gridSize, i * gridSize, 
+                    span.length * gridSize, gridSize, gridSize *0.5, false, true);
     }));
     
     ctx.fillStyle = "black";
+    ctx.font = (gridSize * 0.5) + 'px sans-serif';
     ctx.textAlign = "center";
     ctx.textBaseline = "middle";
     
     for (let j = 0; j < height; j++) {
       for (let i = 0; i < width; i++) {
-        ctx.fillText(grid[j*width+i], 20 + i * 40, 20 + j * 40);
+        ctx.fillText(grid[j*width+i], 
+                     gridSize * 0.5 + i * gridSize, 
+                     gridSize * 0.5 + j * gridSize);
       }
     }
   }
@@ -193,6 +202,7 @@ class Puzzle {
   constructor(w, h, words) {
     // TODO: validate that words fit the grid
     this.grid = new Grid(w, h);
+    this.sel = null;
   }
   
   generate(words) {
@@ -229,7 +239,8 @@ class Puzzle {
   renderCanvas(ctx) {
     this.grid.renderCanvas(ctx);
   }
-   
+  
+  // Checks whether there is a word at the given selection
   getWord(x, y, w, h) {
     if (w > h)
       return this.grid.getRowWord(y, x, w);
@@ -237,6 +248,7 @@ class Puzzle {
       return this.grid.getColumnWord(x, y, h);
   }
   
+  // Renders the word list in html
   renderList(parent) {
     this.words.forEach(word => {
       let li = document.createElement("li");
@@ -244,6 +256,52 @@ class Puzzle {
       li.appendChild(text);
       parent.appendChild(li);
     });
+  }
+  
+  clientToGrid(x, y) {
+    let gridSize = canvas.width / this.grid.rows.length;
+    x = Math.floor(x / gridSize);
+    y = Math.floor(y / gridSize);
+    return [x, y];
+  }
+  
+  ondraw(ctx) {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    this.renderCanvas(ctx);
+    if (this.sel)
+      this.sel.draw(ctx);
+  }
+  
+  ondown(ctx, x, y) {
+    [x, y] = this.clientToGrid(x, y);
+    this.sel = new Selection(x, y);
+    this.ondraw(ctx);
+  }
+  
+  onmove(ctx, x, y) {
+    if (!this.sel) return;
+    [x, y] = this.clientToGrid(x, y);
+    this.sel.extendTo(x, y);
+    this.ondraw(ctx);
+  }
+  
+  onup(ctx, x, y) {
+    if (!this.sel) return;
+    let word = this.getWord(this.sel.x, this.sel.y, this.sel.w, this.sel.h);
+    if (word) {
+      let list = document.getElementById("list");
+      let elements = list.getElementsByTagName("li");
+      Array.prototype.some.call(elements, li => {
+        if (li.innerText == word) {
+          li.classList.add("found");
+          return true;
+        }
+        return false;
+      })
+    }
+    console.log(word);
+    this.sel = null;
+    this.ondraw(ctx);
   }
 }
 
@@ -254,12 +312,15 @@ let puzzle = new Puzzle(8, 8).fill({h:[[2, 2, "apple"], [4, 0, "pear"], [6, 0, "
 puzzle.renderCanvas(ctx);
 puzzle.renderList(document.getElementById("list"));
 
-/*function onresize() {
-  canvas.width  = window.innerWidth;
-  canvas.height = window.innerHeight;
+function onresize() {
+  let div = document.getElementById("canvasContainer");
+  canvas.width  = div.clientWidth;
+  canvas.height = div.clientWidth;
+  puzzle.ondraw(ctx);
 }
 
-window.addEventListener('resize', onresize, false);*/
+window.addEventListener('resize', onresize, false);
+onresize();
 
 let sel = null;
 
@@ -276,7 +337,8 @@ class Selection {
     let y = this.h > 0 ? this.y : this.y + this.h + 1;
     let w = this.w > 0 ? this.w : -this.w;
     let h = this.h > 0 ? this.h : -this.h;
-    drawHighlight(ctx, x * 40, y * 40, w * 40, h * 40, 20, false, true);
+    let gridSize = canvas.width / puzzle.grid.rows.length;
+    drawHighlight(ctx, x * gridSize, y * gridSize, w * gridSize, h * gridSize, gridSize * 0.5, false, true);
   }
   
   extendTo(x, y) {
@@ -299,76 +361,53 @@ class Selection {
   }
 }
 
-function ondown(x, y) {
-  sel = new Selection(x, y);
-  ctx.clearRect(0, 0, 400, 400);
-  puzzle.renderCanvas(ctx);
-  sel.draw(ctx);
+function down(x, y) {
+  puzzle.ondown(ctx, x, y);
 }
 
-function onmove(x, y) {
-  if (!sel) return;
-  sel.extendTo(x, y);
-  ctx.clearRect(0, 0, 400, 400);
-  puzzle.renderCanvas(ctx);
-  sel.draw(ctx);
+function move(x, y) {
+  puzzle.onmove(ctx, x, y);
 }
 
-function onup(x, y) {
-  if (!sel) return;
-  word = puzzle.getWord(sel.x, sel.y, sel.w, sel.h);
-  if (word) {
-    let list = document.getElementById("list");
-    let elements = list.getElementsByTagName("li");
-    Array.prototype.some.call(elements, li => {
-      if (li.innerText == word) {
-        console.log(li)
-        li.classList.add("found");
-        return true;
-      }
-      return false;
-    })
-  }
-  console.log(word);
-  sel = null;
-  ctx.clearRect(0, 0, 400, 400);
-  puzzle.renderCanvas(ctx);
+function up(x, y) {
+  puzzle.onup(ctx, x, y);
+}
+
+function getmousePos(event) {
+  if (event.changedTouches)
+    return [event.touches[0].pageX, event.touches[0].pageY];
+  else
+    return [event.clientX, event.clientY];
 }
 
 canvas.addEventListener("mousedown", (event) => {
-  let x = Math.floor(event.clientX / 40);
-  let y = Math.floor(event.clientY / 40);
-  ondown(x, y);
+  let [x, y] = getmousePos(event);
+  down(x, y);
   event.preventDefault();
 });
 canvas.addEventListener("mousemove", (event) => {
-  let x = Math.floor(event.clientX / 40);
-  let y = Math.floor(event.clientY / 40);
-  onmove(x, y);
+  let [x, y] = getmousePos(event);
+  move(x, y);
   event.preventDefault();
 });
 canvas.addEventListener("mouseup", (event) => {
-  let x = Math.floor(event.clientX / 40);
-  let y = Math.floor(event.clientY / 40);
-  onup(x, y);
+  let [x, y] = getmousePos(event);
+  up(x, y);
   event.preventDefault();
 });
 
 canvas.addEventListener("touchstart", (event) => {
-  let x = Math.floor(event.touches[0].pageX / 40);
-  let y = Math.floor(event.touches[0].pageY / 40);
-  ondown(x, y);
+  let [x, y] = getmousePos(event);
+  down(x, y);
   event.preventDefault();
 });
 canvas.addEventListener("touchmove", (event) => {
-  let x = Math.floor(event.changedTouches[0].pageX / 40);
-  let y = Math.floor(event.changedTouches[0].pageY / 40);
-  onmove(x, y);
+  let [x, y] = getmousePos(event);
+  move(x, y);
   event.preventDefault();
 });
 canvas.addEventListener("touchend", (event) => {
-  let x = Math.floor(event.changedTouches[0].pageX / 40);
-  let y = Math.floor(event.changedTouches[0].pageY / 40);
-  onup(x, y);
+  let [x, y] = getmousePos(event);
+  up(x, y);
   event.preventDefault();
 });

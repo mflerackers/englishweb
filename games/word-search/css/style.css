@@ -9,6 +9,21 @@ html, body {
   margin: 0px;
 }
 
+ul {
+  display: inline-block;
+}
+
 li.found {
   text-decoration: line-through;
+}
+
+div#canvasContainer {
+  width: 100%;
+  display: inline-block;
+}
+
+ @media (min-aspect-ratio: 1/1) {
+   div#canvasContainer {
+    width: 50%;
+  }
 }
