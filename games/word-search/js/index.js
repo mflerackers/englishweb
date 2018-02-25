@@ -375,7 +375,7 @@ function up(x, y) {
 
 function getmousePos(event) {
   if (event.changedTouches)
-    return [event.touches[0].pageX, event.touches[0].pageY];
+    return [event.changedTouches[0].pageX, event.changedTouches[0].pageY];
   else
     return [event.clientX, event.clientY];
 }
