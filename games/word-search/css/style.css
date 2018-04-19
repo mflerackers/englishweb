@@ -11,6 +11,8 @@ html, body {
 
 ul {
   display: inline-block;
+  font-size: 7vmin;
+  padding-left: 14vmin;
 }
 
 li.found {
@@ -23,6 +25,11 @@ div#canvasContainer {
 }
 
  @media (min-aspect-ratio: 1/1) {
+   ul {
+    font-size: 4vmin;
+    padding-left: 7vmin;
+   }
+   
    div#canvasContainer {
     width: 50%;
   }
