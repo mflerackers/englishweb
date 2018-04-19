@@ -76,6 +76,9 @@ describe("Transform tests", function() {
     it("garbage", function() {
         expect(doTransform("garbage")).toEqual([ "G", "AA", "R", "B", "IH", "JH" ]);
     });
+    it("sew", function() {
+        expect(doTransform("sew")).toEqual([ "S", "OW" ]);
+    });
 });
 
 describe("Match tests", function() {
@@ -129,5 +132,8 @@ describe("Match tests", function() {
     });
     it("garbage", function() {
         expect(doMatch("garbage")).toBeTruthy();
+    });
+    it("sew", function() {
+        expect(doMatch("sew")).toBeTruthy();
     });
 });
