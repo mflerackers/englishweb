@@ -103,7 +103,7 @@ letters = {
     M  : ["mm", "m"],
     N  : ["nn", "n"],
     NG : ["ng", "n"],
-    OW : ["oa", "ou", "ow", "oe", "oi", "o"],
+    OW : ["ew", "oa", "ou", "ow", "oe", "oi", "o"],
     OY : ["oi", "oy"],
     P  : ["pp", "p"],
     R  : ["rr", "r"],
