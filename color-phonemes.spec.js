@@ -70,6 +70,15 @@ describe("Transform tests", function() {
     it("science", function() {
         expect(doTransform("science")).toEqual([ "S", "AY", "AH", "N", "S" ]);
     });
+    it("dew", function() {
+        expect(doTransform("dew")).toEqual([ "D", "UW" ]);
+    });
+    it("garbage", function() {
+        expect(doTransform("garbage")).toEqual([ "G", "AA", "R", "B", "IH", "JH" ]);
+    });
+    it("sew", function() {
+        expect(doTransform("sew")).toEqual([ "S", "OW" ]);
+    });
 });
 
 describe("Match tests", function() {
@@ -117,5 +126,14 @@ describe("Match tests", function() {
     });
     it("science", function() {
         expect(doMatch("science")).toBeTruthy();
+    });
+    it("dew", function() {
+        expect(doMatch("dew")).toBeTruthy();
+    });
+    it("garbage", function() {
+        expect(doMatch("garbage")).toBeTruthy();
+    });
+    it("sew", function() {
+        expect(doMatch("sew")).toBeTruthy();
     });
 });
