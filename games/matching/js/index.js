@@ -77,6 +77,8 @@ let dirty = true;
 
 let colors = ["white", "red", "blue", "green", "yellow", "purple"];
 
+let img = renderSprite();
+
 const popTime = 400;
 
 class Pop extends Idle {
