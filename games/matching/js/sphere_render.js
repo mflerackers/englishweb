@@ -199,9 +199,15 @@ function renderSprite() {
     colors.jh = [152,199,102];
     
     let light = vec3.normalize(vec3.fromTo([0, 0, 0],[-20, -20, 50]));
-    let img = ctx.createImageData(200,400);
+    let img = ctx.createImageData(300,50);
     
-    renderSphere(img, 25, 25, 20, colors.getColor("aa"), light);
+    renderSphere(img, 75, 25, 20, colors.getColor("aa"), light);
+    renderSphere(img, 125, 25, 20, [colors.getColor("ae0"), colors.getColor("iu")], light);
+    renderSphere(img, 175, 25, 20, colors.getColor("ah"), light);
+    renderSphere(img, 225, 25, 20, colors.getColor("ao"), light);
+    renderSphere(img, 275, 25, 20, colors.getColor("jh"), light);
+
+    /*renderSphere(img, 25, 25, 20, colors.getColor("aa"), light);
     renderSphere(img, 75, 25, 20, [colors.getColor("ae0"), colors.getColor("iu")], light);
     renderSphere(img, 125, 25, 20, colors.getColor("ah"), light);
     
@@ -229,7 +235,7 @@ function renderSprite() {
     renderSphere(img, 75, 325, 20, colors.getColor("ul"), light);
     renderSphere(img, 125, 325, 20, [colors.getColor("ow1"), colors.getColor("ey")], light);
     
-    renderSphere(img, 75, 375, 20, [colors.getColor("ul"), colors.getColor("er")], light);
+    renderSphere(img, 75, 375, 20, [colors.getColor("ul"), colors.getColor("er")], light);*/
     
     return img;
 }

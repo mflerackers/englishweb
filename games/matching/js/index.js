@@ -59,11 +59,15 @@ class Idle {
         }
     }
     
-    drawDot(x, y, pos) {
-        ctx.fillStyle = colors[getColor(x, y)];
-        ctx.beginPath();
-        ctx.arc(20+x*50, 20+y*50, 20, 0, 2 * Math.PI);
-        ctx.fill();
+    drawDot(x, y, pos, dy, s) {
+        dy = dy || 0;
+        s = s || 1;
+        //ctx.fillStyle = colors[getColor(pos)];
+        //ctx.beginPath();
+        //ctx.arc(20+x*50, 20+y*50+dy, 20 * s, 0, 2 * Math.PI);
+        //ctx.rect(x*50+10+20*(1-s), y*50+10+20*(1-s)+dy, 40 * s, 40 * s);
+        ctx.drawImage(img, getColor(pos)*50, 0, 50, 50, x*50+10+20*(1-s), y*50+10+20*(1-s)+dy, 50 * s, 50 * s);
+        //ctx.fill();
     }
 
     update() {
@@ -77,7 +81,19 @@ let dirty = true;
 
 let colors = ["white", "red", "blue", "green", "yellow", "purple"];
 
-let img = renderSprite();
+function createImageFromImageData(imagedata) {
+    var canvas = document.createElement('canvas');
+    var ctx = canvas.getContext('2d');
+    canvas.width = imagedata.width;
+    canvas.height = imagedata.height;
+    ctx.putImageData(imagedata, 0, 0);
+
+    var image = new Image();
+    image.src = canvas.toDataURL();
+    return image;
+}
+
+let img = createImageFromImageData(renderSprite());
 
 const popTime = 400;
 
@@ -91,13 +107,10 @@ class Pop extends Idle {
     
     drawDot(x, y, pos) {
         if (this.grid[pos]) {
-            ctx.fillStyle = colors[getColor(pos)];
-            ctx.beginPath();
-            ctx.arc(20+x*50, 20+y*50, 20*(popTime-time)/popTime, 0, 2 * Math.PI);
-            ctx.fill();
+            super.drawDot(x, y, pos, 0, (popTime-time)/popTime);
         }
         else 
-        super.drawDot(x, y, pos);
+            super.drawDot(x, y, pos);
     }
     
     update() {
@@ -122,10 +135,7 @@ class Drop extends Idle {
     
     drawDot(x, y, pos) {
         if (this.list && y <= this.list[x]) {
-            ctx.fillStyle = colors[getColor(pos)];
-            ctx.beginPath();
-            ctx.arc(20+x*50, 20+y*50-50*(dropTime-time)/dropTime, 20, 0, 2 * Math.PI);
-            ctx.fill();
+            super.drawDot(x, y, pos, -50*(dropTime-time)/dropTime);
         }
         else {
             super.drawDot(x, y, pos);
