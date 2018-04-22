@@ -73,6 +73,10 @@ class Idle {
     update() {
 
     }
+
+    touchup(x, y) {
+        pop(Math.floor(x/50), Math.floor(y/50));
+    }
 }
 
 let state = new Idle();
@@ -122,6 +126,8 @@ class Pop extends Idle {
         setState(new Idle());
         drop();
     }
+
+    touchup(x, y) {}
 }
 
 const dropTime = 100;
@@ -155,17 +161,19 @@ class Drop extends Idle {
             checkChains();
         }
     }
+
+    touchup(x, y) {}
 }
 
 function onresize() {
     let div = document.getElementById("canvasContainer");
     canvas.width  = div.clientWidth;
-    canvas.height = div.clientWidth;
+    canvas.height = div.clientHeight;
     dirty = true;
 }
 
 window.addEventListener('resize', onresize, false);
-onresize();
+//onresize();
 
 function setState(s) {
     state = s;
@@ -342,7 +350,7 @@ function move(x, y) {
 }
 
 function up(x, y) {
-    pop(Math.floor(x/50), Math.floor(y/50));
+    getState().touchup(x, y);
 }
 
 function getmousePos(event) {
