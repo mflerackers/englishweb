@@ -109,7 +109,7 @@ letters = {
     R  : ["rr", "r"],
     S  : ["c", "ss", "s"],
     SH : ["ch", "ci", "c", "sh", "si", "ti"],
-    T  : ["tt", "t"],
+    T  : ["d", "tt", "t"],
     TH : ["th"],
     UH : ["a", "e", "i", "ia", "oo", "ou", "o", "u"],
     UL : ["al", "l", "ol", "ull", "ul"],
