@@ -46,7 +46,9 @@
 <script>
     function getClasses(match) {
         if ((match.ph == "S" && match.ch == "c") ||
-        (match.ph == "V" && match.ch == "f")) {
+        (match.ph == "V" && match.ch == "f") ||
+        (match.ph == "T" && match.ch == "d") ||
+        (match.ph == "Z" && match.ch == "s")) {
             return "weird";
         }
         else {
