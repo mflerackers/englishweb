@@ -108,6 +108,9 @@ span.zh {
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
 }
+span.z {
+    color: rgb(165,166,164);
+}    
 span.weird {
     color: rgb(110,120,172);
 }
