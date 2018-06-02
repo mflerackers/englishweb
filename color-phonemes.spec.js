@@ -79,6 +79,9 @@ describe("Transform tests", function() {
     it("sew", function() {
         expect(doTransform("sew")).toEqual([ "S", "OW" ]);
     });
+    it("few", function() {
+        expect(doTransform("few")).toEqual([ "F", "IU" ]);
+    });
 });
 
 describe("Match tests", function() {
@@ -135,5 +138,8 @@ describe("Match tests", function() {
     });
     it("sew", function() {
         expect(doMatch("sew")).toBeTruthy();
+    });
+    it("few", function() {
+        expect(doMatch("few")).toBeTruthy();
     });
 });

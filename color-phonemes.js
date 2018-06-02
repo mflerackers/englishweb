@@ -95,7 +95,7 @@ letters = {
     F  : ["ff", "f", "ph", "gh"],
     HH : ["h"],
     IH : ["a", "ee", "e", "i", "ui", "y"],
-    IU : ["iew", "ue", "u"],
+    IU : ["ew", "iew", "ue", "u"],
     IY : ["i", "y", "ee", "ea", "e"],
     JH : ["d", "dge", "ge", "g", "j", "s"],
     K  : ["ch", "ck", "c", "k", "q"],
