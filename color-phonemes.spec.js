@@ -82,6 +82,9 @@ describe("Transform tests", function() {
     it("few", function() {
         expect(doTransform("few")).toEqual([ "F", "IU" ]);
     });
+    it("quiche", function() {
+        expect(doTransform("quiche")).toEqual([ "K", "IY", "SH" ]);
+    });
 });
 
 describe("Match tests", function() {
@@ -141,5 +144,8 @@ describe("Match tests", function() {
     });
     it("few", function() {
         expect(doMatch("few")).toBeTruthy();
+    });
+    it("quiche", function() {
+        expect(doMatch("quiche")).toBeTruthy();
     });
 });
