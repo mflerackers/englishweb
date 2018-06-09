@@ -89,7 +89,7 @@ letters = {
     D  : ["dd", "d"],
     DH : ["th"],
     EH : ["ea", "e", "ai", "a"],
-    ER : ["ear", "er", "ir", "or", "r"],
+    ER : ["ear", "er", "ir", "or", "r", "irr"],
     EY : ["ay", "ai", "a", "ei", "ey", "e"],
     G  : ["gg", "g"],
     F  : ["ff", "f", "ph", "gh"],

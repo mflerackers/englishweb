@@ -85,6 +85,9 @@ describe("Transform tests", function() {
     it("quiche", function() {
         expect(doTransform("quiche")).toEqual([ "K", "IY", "SH" ]);
     });
+    it("squirrel", function() {
+        expect(doTransform("squirrel")).toEqual([ "S", "K", "W", "ER", "UL" ]);
+    });
 });
 
 describe("Match tests", function() {
@@ -147,5 +150,8 @@ describe("Match tests", function() {
     });
     it("quiche", function() {
         expect(doMatch("quiche")).toBeTruthy();
+    });
+    it("squirrel", function() {
+        expect(doMatch("squirrel")).toBeTruthy();
     });
 });
