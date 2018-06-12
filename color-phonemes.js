@@ -39,13 +39,13 @@ class MatchCandidate {
         this.remaining = remaining;
         this.phonemes = phonemes || [];
         this.graphemes = graphemes || [];
-        this.score = score || 0;
+        this._score = score || 0;
     }
     extend(phoneme, grapheme) {
         let remaining = this.remaining.substring(grapheme.length)
         var phonemes = this.phonemes.slice()
         var graphemes = this.graphemes.slice()
-        var score = this.score
+        var score = this._score
         
         phonemes.push(phoneme)
         graphemes.push(grapheme)
@@ -74,6 +74,9 @@ class MatchCandidate {
         }
         
         return match;
+    }
+    score() {
+        return this._score + (this.remaining.length) ? -2 : 0;
     }
 }
 
@@ -227,7 +230,7 @@ function matchPhonemes(word, phonemes) {
     }
     assert(candidates.length > 0, "No candidates to match " + word + " with " + phonemes);
     let candidate = candidates.reduce(function(a, b) {
-        return a.score > b.score ? a : b;
+        return a.score() > b.score() ? a : b;
     });
     return candidate.match()
 }

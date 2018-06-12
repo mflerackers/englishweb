@@ -88,6 +88,9 @@ describe("Transform tests", function() {
     it("squirrel", function() {
         expect(doTransform("squirrel")).toEqual([ "S", "K", "W", "ER", "UL" ]);
     });
+    it("fetch", function() {
+        expect(doTransform("fetch")).toEqual([ "F", "EH", "CH" ]);
+    });
 });
 
 describe("Match tests", function() {
@@ -153,5 +156,8 @@ describe("Match tests", function() {
     });
     it("squirrel", function() {
         expect(doMatch("squirrel")).toBeTruthy();
+    });
+    it("fetch", function() {
+        expect(doMatch("fetch")).toBeTruthy();
     });
 });
