@@ -91,6 +91,9 @@ describe("Transform tests", function() {
     it("fetch", function() {
         expect(doTransform("fetch")).toEqual([ "F", "EH", "CH" ]);
     });
+    it("karaoke", function() {
+        expect(doTransform("karaoke")).toEqual([ "K", "EH", "R", "IY", "OW", "K", "IY" ]);
+    });
 });
 
 describe("Match tests", function() {
@@ -159,5 +162,8 @@ describe("Match tests", function() {
     });
     it("fetch", function() {
         expect(doMatch("fetch")).toBeTruthy();
+    });
+    it("karaoke", function() {
+        expect(doMatch("karaoke")).toBeTruthy();
     });
 });
