@@ -88,6 +88,12 @@ describe("Transform tests", function() {
     it("squirrel", function() {
         expect(doTransform("squirrel")).toEqual([ "S", "K", "W", "ER", "UL" ]);
     });
+    it("fetch", function() {
+        expect(doTransform("fetch")).toEqual([ "F", "EH", "CH" ]);
+    });
+    it("karaoke", function() {
+        expect(doTransform("karaoke")).toEqual([ "K", "EH", "R", "IY", "OW", "K", "IY" ]);
+    });
 });
 
 describe("Match tests", function() {
@@ -153,5 +159,11 @@ describe("Match tests", function() {
     });
     it("squirrel", function() {
         expect(doMatch("squirrel")).toBeTruthy();
+    });
+    it("fetch", function() {
+        expect(doMatch("fetch")).toBeTruthy();
+    });
+    it("karaoke", function() {
+        expect(doMatch("karaoke")).toBeTruthy();
     });
 });
