@@ -479,11 +479,13 @@ document.addEventListener("DOMContentLoaded", function(event) {
   let directions = [new Vector(1,0), new Vector(0,1)];
   if (params.get("diagonal")) {
     directions.push(new Vector(1,1));
+    directions.push(new Vector(1,-1));
   }
   if (params.get("backwards")) {
     directions.push(new Vector(-1,0));
     directions.push(new Vector(0,-1));
     if (params.get("diagonal")) {
+      directions.push(new Vector(-1,1));
       directions.push(new Vector(-1,-1));
     }
   }
