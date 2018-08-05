@@ -72,7 +72,10 @@
         while (m = re.exec(text)) {
             let word = m[0];
 
-            if (m[1]) {
+            if (word == "one" || word == "once" || word == "usual" || word == "usually") {
+                html += "<span class='weird'>" + word + "</span>";
+            }
+            else if (m[1]) {
                 let phonemes = RiTa.getPhonemes(word).toUpperCase().split("-");
                 phonemes = transformPhonemes(phonemes);
                 
@@ -88,7 +91,6 @@
                 }
                 
                 console.log(result);
-                
                 
                 for (matches of result) {
                     for (c of [...matches.ch]) {
