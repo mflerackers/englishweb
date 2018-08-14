@@ -75,6 +75,9 @@
             if (word == "one" || word == "once" || word == "usual" || word == "usually") {
                 html += "<span class='weird'>" + word + "</span>";
             }
+            else if (word == "obaasan") {
+                html += "<span class='OW'>o</span>b<span class='AA'>aa</span>s<span class='AH'>a</span>n";
+            }
             else if (m[1]) {
                 let phonemes = RiTa.getPhonemes(word).toUpperCase().split("-");
                 phonemes = transformPhonemes(phonemes);

@@ -56,11 +56,11 @@ class App {
       event.preventDefault();
     });
     this.canvas.addEventListener("touchmove", (event) => {
-      this.touchmove(App.getmousePos(event));
+      this.touchmove(...App.getmousePos(event));
       event.preventDefault();
     });
     this.canvas.addEventListener("touchend", (event) => {
-      this.touchup(App.getmousePos(event));
+      this.touchup(...App.getmousePos(event));
       event.preventDefault();
     });
   }
