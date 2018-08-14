@@ -8,6 +8,7 @@ ul {
   display: inline-block;
   font-size: 7vmin;
   padding-left: 14vmin;
+  margin: 0px;
 }
 
 li.found {
@@ -15,8 +16,10 @@ li.found {
 }
 
 div#canvasContainer {
-  width: 100%;
+  width: 100vw;
+  height: 100vw;
   display: inline-block;
+  vertical-align: top;
 }
 
  @media (min-aspect-ratio: 1/1) {
@@ -26,6 +29,7 @@ div#canvasContainer {
    }
    
    div#canvasContainer {
-    width: 50%;
+    width: 100vh;
+    height: 100vh;
   }
 }

@@ -34,17 +34,21 @@ class App {
     this.ctx = canvas.getContext('2d');
     this.dirty = true;
     this.prev = +new Date();
+    this.prevPos = [0, 0];
     
     this.resize();
     
     window.addEventListener('resize', () => this.resize(), false);
     
     this.canvas.addEventListener("mousedown", (event) => {
-      this.touchdown(...App.getmousePos(event));
+      this.prevPos = App.getmousePos(event)
+      this.touchdown(...this.prevPos);
       event.preventDefault();
     }); 
     this.canvas.addEventListener("mousemove", (event) => {
-      this.touchmove(...App.getmousePos(event));
+      let curPos = App.getmousePos(event);
+      this.touchmove(...curPos, curPos[0]-this.prevPos[0], curPos[1]-this.prevPos[1]);
+      this.prevPos = curPos;
       event.preventDefault();
     });
     this.canvas.addEventListener("mouseup", (event) => {
@@ -52,11 +56,14 @@ class App {
       event.preventDefault();
     });
     this.canvas.addEventListener("touchstart", (event) => {
-      this.touchdown(...App.getmousePos(event));
+      this.prevPos = App.getmousePos(event)
+      this.touchdown(...this.prevPos);
       event.preventDefault();
     });
     this.canvas.addEventListener("touchmove", (event) => {
-      this.touchmove(...App.getmousePos(event));
+      let curPos = App.getmousePos(event);
+      this.touchmove(...curPos, curPos[0]-this.prevPos[0], curPos[1]-this.prevPos[1]);
+      this.prevPos = curPos;
       event.preventDefault();
     });
     this.canvas.addEventListener("touchend", (event) => {
@@ -67,26 +74,26 @@ class App {
   
   resize() {
     this.canvas.width  = this.div.clientWidth;
-    this.canvas.height = this.div.clientWidth;
-    this.draw();
+    this.canvas.height = this.div.clientHeight;
+    this.dirty = true;
   }
   
   loop() {
     let now = +new Date();
     let dt = now - this.prev;
     this.prev = now;
-    this.update()
+    this.update(dt/1000)
     if (this.dirty)
-      this.draw();
+      this.draw(this.ctx);
     window.requestAnimationFrame(() => this.loop());
   }
   
   update(dt) {}
   
-  draw() {
-    this.ctx.clearRect(0, 0, canvas.width, canvas.height);
-    this.ctx.rect(0, 0, 100, 100);
-    this.ctx.fill();
+  draw(ctx) {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    ctx.rect(0, 0, 100, 100);
+    ctx.fill();
   }
   
   touchdown(x, y) { console.log("down", x, y); }
