@@ -167,16 +167,17 @@ refreshText(pages[currentPage]);
 
 let reader = document.getElementById("reader");
 let prevPos = [0, 0];
-let wasDown = false;
+let didTouch = false;
 
 reader.addEventListener("mousedown", (event) => {
+    if (didTouch)
+        return;
     prevPos = getmousePos(event);
-    wasDown = true;
     touchdown(...prevPos);
     //event.preventDefault();
 }); 
 reader.addEventListener("mousemove", (event) => {
-    if (!wasDown)
+    if (didTouch)
         return;
     let curPos = getmousePos(event);
     touchmove(...curPos, curPos[0]-prevPos[0], curPos[1]-prevPos[1]);
@@ -184,29 +185,28 @@ reader.addEventListener("mousemove", (event) => {
     //event.preventDefault();
 });
 reader.addEventListener("mouseup", (event) => {
-    if (!wasDown)
+    if (didTouch) {
+        didTouch = false;
         return;
+    }
     wasDown = false;
     touchup(...getmousePos(event));
     //event.preventDefault();
 });
 reader.addEventListener("touchstart", (event) => {
+    didTouch = true;
     prevPos = getmousePos(event);
     wasDown = true;
     touchdown(...prevPos);
     //event.preventDefault();
 });
 reader.addEventListener("touchmove", (event) => {
-    if (!wasDown)
-        return;
     let curPos = getmousePos(event);
     touchmove(...curPos, curPos[0]-prevPos[0], curPos[1]-prevPos[1]);
     prevPos = curPos;
     //event.preventDefault();
 });
 reader.addEventListener("touchend", (event) => {
-    if (!wasDown)
-        return;
     wasDown = false;
     touchup(...getmousePos(event));
     //event.preventDefault();
