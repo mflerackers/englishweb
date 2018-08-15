@@ -176,7 +176,7 @@ function renderSphere(img, x, y, r, c, l) {
     sphere.render(img, material, l);
 }
 
-function renderSprite() {
+function renderSprite(ctx) {
 
     let colors = {};
     colors.getColor = (id) => colors[id].map(c => c / 255.0);

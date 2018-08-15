@@ -94,6 +94,15 @@ describe("Transform tests", function() {
     it("karaoke", function() {
         expect(doTransform("karaoke")).toEqual([ "K", "EH", "R", "IY", "OW", "K", "IY" ]);
     });
+    it("surprise", function() {
+        expect(doTransform("surprise")).toEqual([ "S", "ER", "P", "R", "AY", "Z" ]);
+    });
+    it("happily", function() {
+        expect(doTransform("happily")).toEqual([ "HH", "AE", "P", "UL", "IY" ]);
+    });
+    it("their", function() {
+        expect(doTransform("their")).toEqual([ "DH", "EH", "R" ]);
+    });
 });
 
 describe("Match tests", function() {
@@ -165,5 +174,14 @@ describe("Match tests", function() {
     });
     it("karaoke", function() {
         expect(doMatch("karaoke")).toBeTruthy();
+    });
+    it("surprise", function() {
+        expect(doMatch("surprise")).toBeTruthy();
+    });
+    it("happily", function() {
+        expect(doMatch("happily")).toBeTruthy();
+    });
+    it("their", function() {
+        expect(doMatch("their")).toBeTruthy();
     });
 });
