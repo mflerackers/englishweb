@@ -144,7 +144,7 @@ function touchdown(x, y) {
 
 function touchmove(x, y, dx, dy) {
     distance += Math.abs(dx*dx+dy*dy);
-    window.scrollBy(0, -dy);
+    //window.scrollBy(0, -dy);
 }
 
 function touchup(x, y) {
@@ -161,44 +161,55 @@ function touchup(x, y) {
             refreshText(pages[++currentPage]);
         }
     }
-
-    console.log(x, reader.clientWidth)
 }
 
 refreshText(pages[currentPage]);
 
 let reader = document.getElementById("reader");
 let prevPos = [0, 0];
+let wasDown = false;
 
 reader.addEventListener("mousedown", (event) => {
-    prevPos = getmousePos(event)
+    prevPos = getmousePos(event);
+    wasDown = true;
     touchdown(...prevPos);
-    event.preventDefault();
+    //event.preventDefault();
 }); 
 reader.addEventListener("mousemove", (event) => {
+    if (!wasDown)
+        return;
     let curPos = getmousePos(event);
     touchmove(...curPos, curPos[0]-prevPos[0], curPos[1]-prevPos[1]);
     prevPos = curPos;
-    event.preventDefault();
+    //event.preventDefault();
 });
 reader.addEventListener("mouseup", (event) => {
+    if (!wasDown)
+        return;
+    wasDown = false;
     touchup(...getmousePos(event));
-    event.preventDefault();
+    //event.preventDefault();
 });
 reader.addEventListener("touchstart", (event) => {
-    prevPos = getmousePos(event)
+    prevPos = getmousePos(event);
+    wasDown = true;
     touchdown(...prevPos);
-    event.preventDefault();
+    //event.preventDefault();
 });
 reader.addEventListener("touchmove", (event) => {
+    if (!wasDown)
+        return;
     let curPos = getmousePos(event);
     touchmove(...curPos, curPos[0]-prevPos[0], curPos[1]-prevPos[1]);
     prevPos = curPos;
-    event.preventDefault();
+    //event.preventDefault();
 });
 reader.addEventListener("touchend", (event) => {
+    if (!wasDown)
+        return;
+    wasDown = false;
     touchup(...getmousePos(event));
-    event.preventDefault();
+    //event.preventDefault();
 });
 
 function getmousePos(event) {
