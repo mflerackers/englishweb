@@ -126,7 +126,8 @@ function randomColor(pos) {
 const columns = 10;
 const rows = 10;
 const margin = 10;
-let size = (canvas.width-2*margin) / columns;
+let min = Math.min(canvas.width, canvas.height);
+let size = (min-2*margin) / columns;
 let grid = new Array(columns*rows).fill(0);
 grid = grid.map((v, i) => randomColor(i));
 
@@ -449,12 +450,37 @@ function canPop(color, x, y) {
     return collected.size ? [...collected] : false;
 }
 
+const wordLists = [
+    ["heaven","saw","how","lonely","you","were"],
+    ["the","old","people","were","amazed"],
+    ["and","very","cute","baby","boy","jumped","out"],
+    ["without","any","children","and","sent","me","to","you"],
+    ["the","baby","said","dont","be","afraid"],
+    ["the","voice","said","wait","dont","cut","me"],
+    ["when","she","heard","human","voice","from","inside","it"]
+  ];
+
 class GameApp extends App {
 
     constructor(div) {
         super(div);
 
         img = this.createImageFromImageData(renderSprite(this.ctx));
+
+        this.colors = {
+            "none": "black",
+            "ah": "rgb(255,242,89)",
+            "ao": "rgb(120,63,4)"
+        };
+
+        this.recreateGradients();
+
+        this.words = [
+            [["heav", "none"], ["e","ah"], ["n", "none"]], 
+            [["s", "none"], ["aw", "ao"]], 
+            [["h", "none"], ["ow", "ow"]]
+        ];
+
         this.loop();
     }
 
@@ -470,10 +496,27 @@ class GameApp extends App {
         return image;
     }
 
+    recreateGradients() {
+        let ow = this.ctx.createLinearGradient(0, 0, 0, size);
+        ow.addColorStop(0,  "rgb(221,76,54)");
+        ow.addColorStop(0.5,"rgb(221,76,54)");
+        ow.addColorStop(0.5,"rgb(137,104,158)");
+        ow.addColorStop(1,  "rgb(137,104,158)");
+
+        this.colors["ow"] = ow;
+    }
+
     resize() {
         super.resize();
 
-        size = (canvas.width-2*margin) / columns;
+        min = Math.min(canvas.width, canvas.height);
+        size = (min-2*margin) / columns;
+
+        this.ctx.font = `${size}px sans-serif`;
+
+        if (this.colors) {
+            this.recreateGradients();
+        }
     }
 
     update(dt) {
@@ -483,6 +526,34 @@ class GameApp extends App {
     draw(ctx) {
         ctx.clearRect(0, 0, canvas.width, canvas.height);
         state.draw(ctx);
+
+        // Draw words
+        ctx.fillStyle = "white";
+        ctx.strokeStyle = "black";
+        ctx.textBaseline = "top"; 
+        if (this.canvas.width > this.canvas.height) {
+            this.words.forEach((w, i) => {
+                let x = min + 20;
+                let y = size + i * size;
+                w.forEach(p => {
+                    let [s, c] = p;
+                    c = this.colors[c];
+                    ctx.save();
+                    ctx.translate(x, y);
+                    ctx.fillStyle = c;
+                    ctx.fillText(s, 0, 0);
+                    ctx.strokeText(s, 0, 0);
+                    ctx.restore();
+                    x += ctx.measureText(s).width;
+                });
+            });
+        }
+        else {
+            this.words.forEach((w, i) => {
+                ctx.fillText(w, 20, min + 20 + i * size);
+                ctx.strokeText(w, 20, min + 20 + i * size);
+            });
+        }
     }
     
     touchdown(x, y) {
