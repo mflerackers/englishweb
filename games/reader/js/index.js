@@ -172,7 +172,7 @@ let prevPos = [0, 0];
 reader.addEventListener("mousedown", (event) => {
     prevPos = getmousePos(event)
     touchdown(...prevPos);
-    //event.preventDefault();
+    event.preventDefault();
 }); 
 reader.addEventListener("mousemove", (event) => {
     let curPos = getmousePos(event);
@@ -182,12 +182,12 @@ reader.addEventListener("mousemove", (event) => {
 });
 reader.addEventListener("mouseup", (event) => {
     touchup(...getmousePos(event));
-    //event.preventDefault();
+    event.preventDefault();
 });
 reader.addEventListener("touchstart", (event) => {
     prevPos = getmousePos(event)
     touchdown(...prevPos);
-    //event.preventDefault();
+    event.preventDefault();
 });
 reader.addEventListener("touchmove", (event) => {
     let curPos = getmousePos(event);
@@ -197,7 +197,7 @@ reader.addEventListener("touchmove", (event) => {
 });
 reader.addEventListener("touchend", (event) => {
     touchup(...getmousePos(event));
-    //event.preventDefault();
+    event.preventDefault();
 });
 
 function getmousePos(event) {
