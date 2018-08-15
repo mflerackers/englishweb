@@ -144,6 +144,7 @@ function touchdown(x, y) {
 
 function touchmove(x, y, dx, dy) {
     distance += Math.abs(dx*dx+dy*dy);
+    window.scrollBy(0, dy);
 }
 
 function touchup(x, y) {
@@ -178,7 +179,7 @@ reader.addEventListener("mousemove", (event) => {
     let curPos = getmousePos(event);
     touchmove(...curPos, curPos[0]-prevPos[0], curPos[1]-prevPos[1]);
     prevPos = curPos;
-    //event.preventDefault();
+    event.preventDefault();
 });
 reader.addEventListener("mouseup", (event) => {
     touchup(...getmousePos(event));
@@ -193,7 +194,7 @@ reader.addEventListener("touchmove", (event) => {
     let curPos = getmousePos(event);
     touchmove(...curPos, curPos[0]-prevPos[0], curPos[1]-prevPos[1]);
     prevPos = curPos;
-    //event.preventDefault();
+    event.preventDefault();
 });
 reader.addEventListener("touchend", (event) => {
     touchup(...getmousePos(event));
