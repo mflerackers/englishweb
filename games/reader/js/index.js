@@ -144,7 +144,7 @@ function touchdown(x, y) {
 
 function touchmove(x, y, dx, dy) {
     distance += Math.abs(dx*dx+dy*dy);
-    window.scrollBy(0, dy);
+    window.scrollBy(0, -dy);
 }
 
 function touchup(x, y) {
