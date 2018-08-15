@@ -238,9 +238,9 @@ class Drop extends Idle {
         if (grid.some(color => color == 0)) {
             drop();
         }
-        else {
+        /*else {
             checkChains();
-        }
+        }*/
     }
     
     touchup(x, y) {}
@@ -291,13 +291,32 @@ function setColor(color, x, y) {
     }
 }
 
-function pop(x, y) {
+/*function pop(x, y) {
     console.log("pop started");
     if (typeof x == 'number') {
         let color = getColor(x, y);
         if (color) {
             sounds[color-1].play();
             setState(new Pop([posxy(x, y)]));
+        }
+        else {
+            console.log("no color to pop");
+        }
+    }
+    else {
+        setState(new Pop(x));
+    }
+    console.log("pop done");
+}*/
+
+function pop(x, y) {
+    console.log("pop started");
+    if (typeof x == 'number') {
+        let color = getColor(x, y);
+        let list = canPop(color, x, y);
+        if (list && list.length > 2) {
+            sounds[color-1].play();
+            setState(new Pop(list));
         }
         else {
             console.log("no color to pop");
@@ -393,6 +412,41 @@ function checkChain(set, color, pos) {
     }
     
     //console.log(set, color, pos);
+}
+
+function getNeighbours(pos) {
+    let list = [];
+    let [x, y] = [xpos(pos), ypos(pos)];
+    if (x > 0) {
+        list.push(pos-1);
+    }
+    if (x < columns-1) {
+        list.push(pos+1);
+    }
+    if (y > 0) {
+        list.push(pos-columns);
+    }
+    if (y < rows-1) {
+        list.push(pos+columns);
+    }
+    return list;
+}
+
+function canPop(color, x, y) {
+    let toCheck = new Set([posxy(x, y)]);
+    let collected = new Set();
+
+    while(toCheck.size > 0) {
+        let pos = toCheck.values().next().value;
+        collected.add(pos);
+        toCheck.delete(pos);
+
+        getNeighbours(pos).forEach(p => {
+            if (!collected.has(p) && getColor(p) == color) { toCheck.add(p); }
+        });
+    }
+
+    return collected.size ? [...collected] : false;
 }
 
 class GameApp extends App {
