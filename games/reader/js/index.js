@@ -84,13 +84,13 @@ function refreshText(page) {
     if (text.length == 0) {
         return;
     }
-
+    
     let re = /([a-z]+)|([^a-z]+)/g;
     let m;
     let html = "";
     while (m = re.exec(text)) {
         let word = m[0];
-
+        
         if (word == "one" || word == "once" || word == "usual" || word == "usually") {
             html += "<span class='weird'>" + word + "</span>";
         }
@@ -129,39 +129,83 @@ function refreshText(page) {
     }
     
     reader.innerHTML = html;
-
+    
     document.getElementById("info").innerText = `Page ${currentPage+1} of ${pages.length}`;
+
+    window.scrollTo(0,0);
 }
 
 let currentPage = 0;
+let distance;
+
+function touchdown(x, y) {
+    distance = 0;
+}
+
+function touchmove(x, y, dx, dy) {
+    distance += Math.abs(dx*dx+dy*dy);
+}
+
+function touchup(x, y) {
+    if (distance > 20 * 20){
+        return;
+    }
+    if (x < reader.clientWidth * 0.25) {
+        if (currentPage > 0) {
+            refreshText(pages[--currentPage]);
+        }
+    }
+    else {
+        if (currentPage < pages.length-1) {
+            refreshText(pages[++currentPage]);
+        }
+    }
+
+    console.log(x, reader.clientWidth)
+}
 
 refreshText(pages[currentPage]);
 
 let reader = document.getElementById("reader");
+let prevPos = [0, 0];
 
-reader.addEventListener("mouseup", (event) => {
-    if (event.x < reader.clientWidth * 0.25) {
-        if (currentPage > 0) {
-            refreshText(pages[--currentPage]);
-        }
-    }
-    else {
-        if (currentPage < pages.length-1) {
-            refreshText(pages[++currentPage]);
-        }
-    }
+reader.addEventListener("mousedown", (event) => {
+    prevPos = getmousePos(event)
+    touchdown(...prevPos);
     event.preventDefault();
-  });
-reader.addEventListener("touchend", (event) => {
-    if (event.changedTouches[0].pageX < reader.clientWidth * 0.25) {
-        if (currentPage > 0) {
-            refreshText(pages[--currentPage]);
-        }
-    }
-    else {
-        if (currentPage < pages.length-1) {
-            refreshText(pages[++currentPage]);
-        }
-    }
+}); 
+reader.addEventListener("mousemove", (event) => {
+    let curPos = getmousePos(event);
+    touchmove(...curPos, curPos[0]-prevPos[0], curPos[1]-prevPos[1]);
+    prevPos = curPos;
     event.preventDefault();
 });
+reader.addEventListener("mouseup", (event) => {
+    touchup(...getmousePos(event));
+    event.preventDefault();
+});
+reader.addEventListener("touchstart", (event) => {
+    prevPos = getmousePos(event)
+    touchdown(...prevPos);
+    event.preventDefault();
+});
+reader.addEventListener("touchmove", (event) => {
+    let curPos = getmousePos(event);
+    touchmove(...curPos, curPos[0]-prevPos[0], curPos[1]-prevPos[1]);
+    prevPos = curPos;
+    event.preventDefault();
+});
+reader.addEventListener("touchend", (event) => {
+    touchup(...getmousePos(event));
+    event.preventDefault();
+});
+
+function getmousePos(event) {
+    if (event.changedTouches) {
+        return [event.changedTouches[0].pageX, event.changedTouches[0].pageY];
+    }
+    else {
+        var rect = reader.getBoundingClientRect();
+        return [event.clientX- rect.left, event.clientY - rect.top];
+    }
+}
