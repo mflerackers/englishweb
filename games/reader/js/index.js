@@ -153,7 +153,7 @@ reader.addEventListener("mouseup", (event) => {
     event.preventDefault();
   });
 reader.addEventListener("touchend", (event) => {
-    if (event.x < reader.clientWidth * 0.25) {
+    if (event.changedTouches[0].pageX < reader.clientWidth * 0.25) {
         if (currentPage > 0) {
             refreshText(pages[--currentPage]);
         }
