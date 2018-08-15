@@ -37,7 +37,7 @@ div#canvasContainer {
 div.reader {
   display: inline-block;
   font-family: 'Kalam', cursive;
-  font-size: 7vw;
+  font-size: 9vw;
 }
 div.reader span {
   -webkit-text-stroke: 1.5px black;
