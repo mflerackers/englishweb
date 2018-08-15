@@ -129,7 +129,18 @@ const margin = 10;
 let size = (canvas.width-2*margin) / columns;
 let grid = new Array(columns*rows).fill(0);
 grid = grid.map((v, i) => randomColor(i));
+
 let img;
+
+const phonemes = ["AA", "AE", "AH", "AO", "JH"];
+let voice = "monet";
+
+let sounds = phonemes.map(phoneme => 
+    new Howl({
+        src: ["../../phonemes/"+voice+"/"+phoneme+".wav"],
+        html5: true
+    })
+);
 
 class Idle {
     constructor() {
@@ -285,6 +296,7 @@ function pop(x, y) {
     if (typeof x == 'number') {
         let color = getColor(x, y);
         if (color) {
+            sounds[color-1].play();
             setState(new Pop([posxy(x, y)]));
         }
         else {
@@ -319,7 +331,7 @@ function drop() {
             }
         }
     }
-    console.log(list);
+    //console.log(list);
     if (list.length > 0)
         setState(new Drop(list));
     else
@@ -365,7 +377,7 @@ function checkChain(set, color, pos) {
             set.add(posxy(x-1, y));
             set.add(posxy(x, y));
             set.add(posxy(x+1, y));
-            console.log(`horizontal chain ${x-1}-${x+1},${y}`);
+            //console.log(`horizontal chain ${x-1}-${x+1},${y}`);
         }
     }
     
@@ -376,11 +388,11 @@ function checkChain(set, color, pos) {
             set.add(posxy(x, y-1));
             set.add(posxy(x, y));
             set.add(posxy(x, y+1));
-            console.log(`vertical chain ${x},${y-1}-${y+1}`);
+            //console.log(`vertical chain ${x},${y-1}-${y+1}`);
         }
     }
     
-    console.log(set, color, pos);
+    //console.log(set, color, pos);
 }
 
 class GameApp extends App {

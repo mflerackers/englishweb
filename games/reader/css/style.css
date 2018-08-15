@@ -1,0 +1,51 @@
+html, body {
+  width:  100%;
+  height: 100%;
+  margin: 0px;
+}
+
+ul {
+  display: inline-block;
+  font-size: 7vmin;
+  padding-left: 14vmin;
+  margin: 0px;
+}
+
+li.found {
+  text-decoration: line-through;
+}
+
+div#canvasContainer {
+  width: 100vw;
+  height: 100vw;
+  display: inline-block;
+  vertical-align: top;
+}
+
+ @media (min-aspect-ratio: 1/1) {
+   ul {
+    font-size: 4vmin;
+    padding-left: 7vmin;
+   }
+   
+   div#canvasContainer {
+    width: 100vh;
+    height: 100vh;
+  }
+}
+
+div.reader {
+  display: inline-block;
+  font-family: 'Kalam', cursive;
+  font-size: 7vw;
+}
+div.reader span {
+  -webkit-text-stroke: 1.5px black;
+}
+div.info {
+  display: inline-block;
+  font-family: 'Kalam', cursive;
+  font-size: 4vw;
+  width: 90vw;
+  text-align: right;
+}
