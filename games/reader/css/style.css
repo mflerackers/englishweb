@@ -37,15 +37,15 @@ div#canvasContainer {
 div.reader {
   display: inline-block;
   font-family: 'Kalam', cursive;
-  font-size: 9vw;
-  -moz-user-select: none;
+  font-size: 10vw;
+  /*-moz-user-select: none;
   -webkit-user-select: none;
   -ms-user-select:none;
   user-select:none;
-  -o-user-select:none;
+  -o-user-select:none;*/
 }
 div.reader span {
-  -webkit-text-stroke: 1.5px black;
+  -webkit-text-stroke: 1.2px black;
 }
 div.info {
   display: inline-block;
@@ -53,9 +53,9 @@ div.info {
   font-size: 4vw;
   width: 90vw;
   text-align: right;
-  -moz-user-select: none;
+  /*-moz-user-select: none;
   -webkit-user-select: none;
   -ms-user-select:none;
   user-select:none;
-  -o-user-select:none;
+  -o-user-select:none;*/
 }
