@@ -143,6 +143,8 @@ let sounds = phonemes.map(phoneme =>
     })
 );
 
+let positions = {};
+
 class Idle {
     constructor() {
         this.redraw = false;
@@ -157,14 +159,15 @@ class Idle {
         }
     }
     
-    drawDot(ctx, x, y, pos, dy, s) {
+    drawDot(ctx, x, y, pos, dx, dy, s) {
+        dx = dx || 0;
         dy = dy || 0;
         s = s || 1;
         //ctx.fillStyle = colors[getColor(pos)];
         //ctx.beginPath();
         //ctx.arc(20+x*50, 20+y*50+dy, 20 * s, 0, 2 * Math.PI);
         //ctx.rect(x*50+10+20*(1-s), y*50+10+20*(1-s)+dy, 40 * s, 40 * s);
-        ctx.drawImage(img, getColor(pos)*50, 0, 50, 50, margin+x*size+size*0.5*(1-s), margin+y*size+size*0.5*(1-s)+dy, s * size, s * size);
+        ctx.drawImage(img, getColor(pos)*50, 0, 50, 50, margin+x*size+size*0.5*(1-s)+dx, margin+y*size+size*0.5*(1-s)+dy, s * size, s * size);
         //ctx.fill();
     }
     
@@ -179,20 +182,31 @@ class Idle {
 
 let state = new Idle();
 
-const popTime = 0.400;
+const popTime = 0.5;
 
 class Pop extends Idle {
-    constructor(list) {
+    constructor(list, x, y) {
         console.log("popping", list);
         super();
         this.grid = new Array(columns*rows).fill(false);
         list.forEach(pos => { this.grid[pos] = true; });
         this.time = 0;
+        this.x = x;
+        this.y = y;
     }
     
     drawDot(ctx, x, y, pos) {
         if (this.grid[pos]) {
-            super.drawDot(ctx, x, y, pos, 0, (popTime-this.time)/popTime);
+            let alpha = Math.min(1, this.time/popTime);
+            let scale = (popTime-this.time)/popTime;
+            if (this.x || this.y) {
+                let dx = margin+x*size
+                let dy = margin+y*size
+                super.drawDot(ctx, x, y, pos, (this.x-dx)*alpha, (this.y-dy)*alpha, scale);
+            }
+            else {
+                super.drawDot(ctx, x, y, pos, 0, 0, scale);
+            }
         }
         else 
             super.drawDot(ctx, x, y, pos);
@@ -223,7 +237,7 @@ class Drop extends Idle {
     
     drawDot(ctx, x, y, pos) {
         if (this.list && y <= this.list[x]) {
-            super.drawDot(ctx, x, y, pos, -50*(dropTime-this.time)/dropTime);
+            super.drawDot(ctx, x, y, pos, 0, -50*(dropTime-this.time)/dropTime);
         }
         else {
             super.drawDot(ctx, x, y, pos);
@@ -317,7 +331,10 @@ function pop(x, y) {
         let list = canPop(color, x, y);
         if (list && list.length > 2) {
             sounds[color-1].play();
-            setState(new Pop(list));
+            let phoneme = phonemes[color-1];
+            let position = positions[phoneme] || [0, 0];
+            console.log("positions", phoneme, position, positions)
+            setState(new Pop(list, ...position));
         }
         else {
             console.log("no color to pop");
@@ -469,16 +486,21 @@ class GameApp extends App {
 
         this.colors = {
             "none": "black",
-            "ah": "rgb(255,242,89)",
-            "ao": "rgb(120,63,4)"
+            "AH": "rgb(255,242,89)",
+            "AO": "rgb(120,63,4)",
+            "ER": "rgb(225,124,167)",
+            "IU": "rgb(244,190,127)"
         };
 
         this.recreateGradients();
 
         this.words = [
-            [["heav", "none"], ["e","ah"], ["n", "none"]], 
-            [["s", "none"], ["aw", "ao"]], 
-            [["h", "none"], ["ow", "ow"]]
+            [["h", "none"], ["ea", "EH"], ["v", "none"], ["e","AH"], ["n", "none"]], 
+            [["s", "none"], ["aw", "AO"]], 
+            [["h", "none"], ["ow", "OW"]],
+            [["l", "none"], ["o", "OW"], ["nel", "none"], ["y", "IY"]],
+            [["you", "IU"]],
+            [["we", "none"], ["r", "ER"], ["e", "none"]],
         ];
 
         this.loop();
@@ -497,13 +519,29 @@ class GameApp extends App {
     }
 
     recreateGradients() {
+        let eh = this.ctx.createLinearGradient(0, 0, 0, size);
+        eh.addColorStop(0,  "rgb(120,63,4)");
+        eh.addColorStop(0.5,"rgb(120,63,4)");
+        eh.addColorStop(0.5,"rgb(244,190,127)");
+        eh.addColorStop(1,  "rgb(244,190,127)");
+
+        this.colors["EH"] = eh;
+
+        let iy = this.ctx.createLinearGradient(0, 0, 0, size);
+        iy.addColorStop(0,  "rgb(1,153,124)");
+        iy.addColorStop(0.5,"rgb(1,153,124)");
+        iy.addColorStop(0.5,"rgb(120,63,4)");
+        iy.addColorStop(1,  "rgb(120,63,4)");
+
+        this.colors["IY"] = iy;
+
         let ow = this.ctx.createLinearGradient(0, 0, 0, size);
         ow.addColorStop(0,  "rgb(221,76,54)");
         ow.addColorStop(0.5,"rgb(221,76,54)");
         ow.addColorStop(0.5,"rgb(137,104,158)");
         ow.addColorStop(1,  "rgb(137,104,158)");
 
-        this.colors["ow"] = ow;
+        this.colors["OW"] = ow;
     }
 
     resize() {
@@ -537,6 +575,8 @@ class GameApp extends App {
                 let y = size + i * size;
                 w.forEach(p => {
                     let [s, c] = p;
+                    if (!positions[c])
+                    positions[c] = [x, y];
                     c = this.colors[c];
                     ctx.save();
                     ctx.translate(x, y);
