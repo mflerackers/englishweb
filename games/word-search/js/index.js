@@ -478,7 +478,7 @@ document.addEventListener("DOMContentLoaded", function(event) {
     ["the","baby","said","dont","be","afraid"],
     ["the","voice","said","wait","dont","cut","me"],
     ["when","she","heard","human","voice","from","inside","it"]
-  ]
+  ];
 
   const pick = (array) => array[Math.floor(Math.random() * (array.length))];
 
