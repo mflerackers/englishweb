@@ -305,6 +305,7 @@ class Selection {
     this.direction = new Vector(1, 0);
     this.length = 0;
     this.flength = 0;
+    this.isFinished = false;
   }
   
   clone() {
@@ -396,38 +397,73 @@ class PuzzleApp extends App {
     return [x, y];
   }
   
-  draw() {
+  draw(ctx) {
     if (!this.puzzle)
       return;
     
-    this.ctx.clearRect(0, 0, canvas.width, canvas.height);
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
     
     let [wsize, hsize] = this.gridSize();
     
-    this.selections.forEach(s => s.draw(this.ctx, wsize, hsize));
+    this.selections.forEach(s => s.draw(ctx, wsize, hsize));
     if (this.selection)
-      this.selection.draw(this.ctx, wsize, hsize);
+      this.selection.draw(ctx, wsize, hsize);
     
     let x = 0;
     let y = 0;
     
-    this.ctx.fillStyle = "black";
-    this.ctx.font = (wsize * 0.5) + 'px sans-serif';
-    this.ctx.textAlign = "center";
-    this.ctx.textBaseline = "middle";
+    ctx.fillStyle = "black";
+    ctx.font = (wsize * 0.5) + 'px sans-serif';
+    ctx.textAlign = "center";
+    ctx.textBaseline = "middle";
 
     for (let j = 0; j < this.puzzle.grid.height; j++) {
       for (let i = 0; i < this.puzzle.grid.width; i++) {
         let letter = this.puzzle.grid.get(i, j);
-        this.ctx.fillText(letter, x+wsize * 0.5, y+wsize * 0.5);
+        ctx.fillText(letter, x+wsize * 0.5, y+wsize * 0.5);
         x += wsize;
       }
       x = 0;
       y += wsize;
     }
+
+    // Draw back and finish button
+    if (this.isFinished) {
+      let min = this.canvas.width;
+      let size = wsize;
+
+      ctx.save();
+      
+      ctx.translate(min*0.5 - size * 1.5, min*0.5);
+      ctx.fillStyle = "purple";
+      ctx.beginPath();
+      ctx.arc(0, 0, size, 0 , 2*Math.PI);
+      ctx.fill();
+      ctx.stroke();
+      ctx.textAlign = "center";
+      ctx.textBaseline = "middle"; 
+      ctx.fillStyle = "white";
+      ctx.fillText("↺", 0, 0);
+      ctx.strokeText("↺", 0, 0);
+
+      ctx.translate(size * 3, 0);
+      ctx.fillStyle = "purple";
+      ctx.beginPath();
+      ctx.arc(0, 0, size, 0 , 2*Math.PI);
+      ctx.fill();
+      ctx.stroke();
+      ctx.textAlign = "center";
+      ctx.textBaseline = "middle"; 
+      ctx.fillStyle = "white";
+      ctx.fillText("☛", 0, 0);
+      ctx.strokeText("☛", 0, 0);
+      
+      ctx.restore();
+    }
   }
   
   touchdown(x, y) {
+    if (this.isFinished) { return; }
     [x, y] = this.clientToGrid(x, y);
     
     this.selection = new Selection(new Vector(x, y));
@@ -435,8 +471,8 @@ class PuzzleApp extends App {
   }
   
   touchmove(x, y) {
-    if (!this.selection)
-      return;
+    if (this.isFinished) { return; }
+    if (!this.selection) { return; }
     
     [x, y] = this.clientToGrid(x, y);
     
@@ -444,22 +480,43 @@ class PuzzleApp extends App {
   }
   
   touchup(x, y) {
-    if (!this.selection)
+    if (this.isFinished) {
+      let min = this.canvas.width;
+      let [wsize, hsize] = this.gridSize();
+      let size = wsize;
+
+      x -= min*0.5 - size * 1.5;
+      y -= min*0.5;
+      if (x*x+y*y < size*size*0.25) {
+          location.reload();
+      }
+
+      x -= size * 3;
+      if (x*x+y*y < size*size*0.25) {
+          window.location.href = 'https://english.fromatogra.com/games/index.html';
+      }
       return;
+    }
+
+    if (!this.selection) { return; }
     
     let word = this.puzzle.wordAt(this.selection.position, this.selection.direction, this.selection.length+1);
     console.log(word);
     if (word) {
       let list = document.getElementById("list");
       let elements = list.getElementsByTagName("li");
-      Array.prototype.some.call(elements, li => {
+      if (Array.prototype.some.call(elements, li => {
         if (li.innerText == word) {
           li.classList.add("found");
           this.selections.push(this.selection.clone().fill());
           return true;
         }
         return false;
-      });
+      })) {
+        if (Array.prototype.every.call(elements, li => li.classList.contains("found"))) {
+          this.isFinished = true;
+        }
+      }
     }
     
     this.selection = null;
