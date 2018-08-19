@@ -7,7 +7,6 @@ class Material {
 class Phong extends Material {
     constructor({ka=0,ca=[1,1,1,1],kd=1,cd=[1,1,1,1],ks=1,cs=[1,1,1,1], n=4} = {}) {
         super();
-        console.log("lol", this.ka);
         this.ka = ka;
         this.ca = ca;
         this.kd = kd;
@@ -15,7 +14,6 @@ class Phong extends Material {
         this.ks = ks;
         this.cs = cs;
         this.n = n;
-        console.log(this);
     }
     
     colorAt(position, normal, light) {
@@ -33,7 +31,6 @@ class Phong extends Material {
 class Blinn extends Material {
     constructor({ka=0,ca=[1,1,1,1],kd=1,cd=[1,1,1,1],ks=1,cs=[1,1,1,1], n=4} = {}) {
         super();
-        console.log("lol", this.ka);
         this.ka = ka;
         this.ca = ca;
         this.kd = kd;
@@ -176,7 +173,7 @@ function renderSphere(img, x, y, r, c, l) {
     sphere.render(img, material, l);
 }
 
-function renderSprite(ctx) {
+function renderSprite(ctx, phonemes) {
 
     let colors = {};
     colors.getColor = (id) => colors[id].map(c => c / 255.0);
@@ -197,15 +194,23 @@ function renderSprite(ctx) {
     colors.ch = [0,68,51];
     colors.f  = [130,101,27];
     colors.jh = [152,199,102];
+
+    let phonemeColors = {};
+    phonemeColors.getColors = (id) => phonemeColors[id];
+    phonemeColors.EH = [colors.getColor("ao"), colors.getColor("iu")];
+    phonemeColors.AH = colors.getColor("ah");
+    phonemeColors.AO = colors.getColor("ao");
+    phonemeColors.OW = [colors.getColor("ul"), colors.getColor("ow1")];
+    phonemeColors.IY = [colors.getColor("iy0"), colors.getColor("ao")];
+    phonemeColors.IU = colors.getColor("iu");
+    phonemeColors.ER = colors.getColor("er");
     
     let light = vec3.normalize(vec3.fromTo([0, 0, 0],[-20, -20, 50]));
-    let img = ctx.createImageData(300,50);
-    
-    renderSphere(img, 75, 25, 20, colors.getColor("aa"), light);
-    renderSphere(img, 125, 25, 20, [colors.getColor("ae0"), colors.getColor("iu")], light);
-    renderSphere(img, 175, 25, 20, colors.getColor("ah"), light);
-    renderSphere(img, 225, 25, 20, colors.getColor("ao"), light);
-    renderSphere(img, 275, 25, 20, colors.getColor("jh"), light);
+    let img = ctx.createImageData(50+50*phonemes.length,50);
+
+    for (let i = 0; i < phonemes.length; i++) {
+        renderSphere(img, 50+25+i*50, 25, 20, phonemeColors.getColors(phonemes[i]), light);
+    }
 
     /*renderSphere(img, 25, 25, 20, colors.getColor("aa"), light);
     renderSphere(img, 75, 25, 20, [colors.getColor("ae0"), colors.getColor("iu")], light);

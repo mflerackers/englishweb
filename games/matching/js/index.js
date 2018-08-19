@@ -113,35 +113,30 @@ class App {
     }
 }
 
-function randomColor(pos) {
-    let tries = 100;
-    while (tries--) {
-        let color = 1 + Math.floor(Math.random() * Math.floor(5));
-        if (checkNeighbours(color, xpos(pos), ypos(pos)))
-            return color;
-    }
-    return 1;
-}
-
 const columns = 10;
 const rows = 10;
 const margin = 10;
 let min = Math.min(canvas.width, canvas.height);
 let size = (min-2*margin) / columns;
-let grid = new Array(columns*rows).fill(0);
-grid = grid.map((v, i) => randomColor(i));
+let grid;
 
 let img;
 
-const phonemes = ["AA", "AE", "AH", "AO", "JH"];
+let phonemes;
+let nextRandom;
 let voice = "monet";
+let sounds;
 
-let sounds = phonemes.map(phoneme => 
-    new Howl({
-        src: ["../../phonemes/"+voice+"/"+phoneme+".wav"],
-        html5: true
-    })
-);
+function randomColor(pos) {
+    //let tries = 100;
+    //while (tries--) {
+        let color = Math.floor(Math.random() * Math.floor(nextRandom.length));
+        color = 1 + phonemes.indexOf(nextRandom[color]);
+        //if (checkNeighbours(color, xpos(pos), ypos(pos)))
+            return color;
+    //}
+    //return 1;
+}
 
 let positions = {};
 
@@ -158,17 +153,16 @@ class Idle {
             }
         }
     }
+
+    drawDotRaw(ctx, color, x, y, s) {
+        ctx.drawImage(img, color*50, 0, 50, 50, x, y, s * size, s * size);
+    }
     
-    drawDot(ctx, x, y, pos, dx, dy, s) {
+    drawDot(ctx, i, j, pos, dx, dy, s) {
         dx = dx || 0;
         dy = dy || 0;
         s = s || 1;
-        //ctx.fillStyle = colors[getColor(pos)];
-        //ctx.beginPath();
-        //ctx.arc(20+x*50, 20+y*50+dy, 20 * s, 0, 2 * Math.PI);
-        //ctx.rect(x*50+10+20*(1-s), y*50+10+20*(1-s)+dy, 40 * s, 40 * s);
-        ctx.drawImage(img, getColor(pos)*50, 0, 50, 50, margin+x*size+size*0.5*(1-s)+dx, margin+y*size+size*0.5*(1-s)+dy, s * size, s * size);
-        //ctx.fill();
+        this.drawDotRaw(ctx, getColor(pos), margin+i*size+size*0.5*(1-s)+dx, margin+j*size+size*0.5*(1-s)+dy, s);
     }
     
     update(dt) {
@@ -182,27 +176,26 @@ class Idle {
 
 let state = new Idle();
 
-const popTime = 0.5;
+const popTime = 1.0;
 
 class Pop extends Idle {
-    constructor(list, x, y) {
-        console.log("popping", list);
+    constructor(list, trajectories, finished) {
+        console.log("popping", list, trajectories);
         super();
         this.grid = new Array(columns*rows).fill(false);
-        list.forEach(pos => { this.grid[pos] = true; });
+        list.forEach((pos, i) => { this.grid[pos] = trajectories[i] || true; });
+        this.finished = finished;
         this.time = 0;
-        this.x = x;
-        this.y = y;
     }
     
     drawDot(ctx, x, y, pos) {
-        if (this.grid[pos]) {
+        let popping = this.grid[pos];
+        if (popping) {
             let alpha = Math.min(1, this.time/popTime);
             let scale = (popTime-this.time)/popTime;
-            if (this.x || this.y) {
-                let dx = margin+x*size
-                let dy = margin+y*size
-                super.drawDot(ctx, x, y, pos, (this.x-dx)*alpha, (this.y-dy)*alpha, scale);
+            if (Array.isArray(popping)) {
+                let [dx, dy] = evaluateCatmulRom(popping, alpha);
+                super.drawDot(ctx, x, y, pos, dx, dy, scale);
             }
             else {
                 super.drawDot(ctx, x, y, pos, 0, 0, scale);
@@ -218,6 +211,9 @@ class Pop extends Idle {
             return;
         }
         this.grid.forEach((popped, pos) => { if (popped) setColor(0, pos); });
+        if (this.finished) {
+            this.finished();
+        }
         setState(new Idle());
         drop();
     }
@@ -253,12 +249,30 @@ class Drop extends Idle {
         if (grid.some(color => color == 0)) {
             drop();
         }
+        else if (getApp().isLastWord() && getApp().isCurrentWordFinished()) {
+            setState(new End());
+        }
         /*else {
             checkChains();
         }*/
     }
     
     touchup(x, y) {}
+}
+
+class End extends Idle {
+    constructor() {
+        console.log(`end`);
+        super();
+    }
+    
+    touchup(x, y) {
+        x -= min*0.5;
+        y -= min*0.5;
+        if (x*x+y*y < size*size*0.25) {
+            window.location.href = 'https://english.fromatogra.com';
+        }
+    }
 }
 
 function setState(s) {
@@ -306,42 +320,44 @@ function setColor(color, x, y) {
     }
 }
 
-/*function pop(x, y) {
+function pop(i, j) {
     console.log("pop started");
-    if (typeof x == 'number') {
-        let color = getColor(x, y);
-        if (color) {
-            sounds[color-1].play();
-            setState(new Pop([posxy(x, y)]));
-        }
-        else {
-            console.log("no color to pop");
-        }
-    }
-    else {
-        setState(new Pop(x));
-    }
-    console.log("pop done");
-}*/
-
-function pop(x, y) {
-    console.log("pop started");
-    if (typeof x == 'number') {
-        let color = getColor(x, y);
-        let list = canPop(color, x, y);
+    if (typeof i == 'number') {
+        let color = getColor(i, j);
+        let list = canPop(color, i, j);
         if (list && list.length > 2) {
             sounds[color-1].play();
             let phoneme = phonemes[color-1];
-            let position = positions[phoneme] || [0, 0];
-            console.log("positions", phoneme, position, positions)
-            setState(new Pop(list, ...position));
+            let position = positions[phoneme];
+            let trajectories;
+            let finished;
+            if (position) {
+                let [x2, y2, part] = position;
+                trajectories = list.map(pos => {
+                    let x = xpos(pos);
+                    let y = ypos(pos);
+                    let dx = margin+x*size;
+                    let dy = margin+y*size;
+                    return calcTrajectory(0, 0, x2-dx, y2-dy);
+                });
+                finished = function() {
+                    part[4] = 1;
+                    if (getApp().isCurrentWordFinished()) {
+                        app.nextWord();
+                    }
+                }
+            }
+            else {
+                trajectories = [];
+            }
+            setState(new Pop(list, trajectories, finished));
         }
         else {
             console.log("no color to pop");
         }
     }
     else {
-        setState(new Pop(x));
+        setState(new Pop(i));
     }
     console.log("pop done");
 }
@@ -467,6 +483,51 @@ function canPop(color, x, y) {
     return collected.size ? [...collected] : false;
 }
 
+function evaluateLine(p1x, p1y, p2x, p2y, t) {
+    return [p1x + (p2x-p1x)*t, p1y + (p2y-p1y)*t];
+}
+
+function evaluateCatmulRomSegment3(p0x, p0y, p1x, p1y, p2x, p2y, p3x, p3y, t) {
+    let a = 0.5*(((  -t+2)*t-1)*t);
+    let b = 0.5*((( 3*t-5)*t  )*t+2);
+    let c = 0.5*(((-3*t+4)*t+1)*t);
+    let d = 0.5*(((   t-1)*t  )*t);
+    let x = a*p0x+b*p1x+c*p2x+d*p3x;
+    let y = a*p0y+b*p1y+c*p2y+d*p3y;
+    return [x,y];
+  }
+  
+  function evaluateCatmulRom(points, t) {
+      let count = (points.length / 2)-1;
+      let s = t * count;
+      let i = Math.floor(s);
+      t = s - i;
+      i *= 2;
+      if (i == 0) {
+        return evaluateCatmulRomSegment3(points[0], points[1], points[0], points[1], points[2], points[3], points[4], points[5], t);
+      }
+      else if (i >= count) {
+        return evaluateCatmulRomSegment3(points[points.length-6], points[points.length-5], points[points.length-4], points[points.length-3], points[points.length-2], points[points.length-1], points[points.length-2], points[points.length-1], t);
+      }
+      else {
+        return evaluateCatmulRomSegment3(points[i-2], points[i-1], points[i], points[i+1], points[i+2], points[i+3], points[i+4], points[i+5], t);
+      }
+  }
+
+  function calcTrajectory(x1, y1, x2, y2) {
+    // Vector from p1 to p2
+    let [vx, vy] = [x2-x1, y2-y1];
+    // Vector perpendicular to v
+    let [nx, ny] = [-vy, vx];
+    // Random up or down from -1 to 1
+    let dir = Math.random()*2 -1;
+    // Point 25% on the way, 25% distance from the line
+    let [x11, y11] = [x1+0.25*vx+dir*0.25*nx, y1+0.25*vy+dir*0.25*ny];
+    // Point 75% on the way, 125% distance from the line on the other side
+    let [x22, y22] = [x1+0.75*vx-dir*0.125*nx, y1+0.75*vy-dir*0.125*ny];
+    return [x1, y1, x11, y11, x22, y22, x2, y2];
+  }
+
 const wordLists = [
     ["heaven","saw","how","lonely","you","were"],
     ["the","old","people","were","amazed"],
@@ -482,18 +543,6 @@ class GameApp extends App {
     constructor(div) {
         super(div);
 
-        img = this.createImageFromImageData(renderSprite(this.ctx));
-
-        this.colors = {
-            "none": "black",
-            "AH": "rgb(255,242,89)",
-            "AO": "rgb(120,63,4)",
-            "ER": "rgb(225,124,167)",
-            "IU": "rgb(244,190,127)"
-        };
-
-        this.recreateGradients();
-
         this.words = [
             [["h", "none"], ["ea", "EH"], ["v", "none"], ["e","AH"], ["n", "none"]], 
             [["s", "none"], ["aw", "AO"]], 
@@ -503,10 +552,102 @@ class GameApp extends App {
             [["we", "none"], ["r", "ER"], ["e", "none"]],
         ];
 
+        this.currentWord = 0;
+
+        phonemes = [];
+        this.words.forEach(word => {
+            phonemes = [...phonemes, ...word.filter(w => w[1] != "none").map(w => w[1])];
+        });
+        phonemes = Array.from(new Set(phonemes));
+        console.log("all", phonemes);
+
+        this.fillNextRandom();
+
+        // We do this in two parts so checkneighbours won't complain
+        grid = new Array(columns*rows).fill(0);
+        grid = grid.map((v, i) => randomColor(i));
+
+        img = this.createImageFromImageData(renderSprite(this.ctx, phonemes));
+
+        sounds = phonemes.map(phoneme => 
+            new Howl({
+                src: ["../../phonemes/"+voice+"/"+phoneme+".wav"],
+                html5: true
+            })
+        );
+
+        this.colors = {
+            "none": "black",
+            "AH": "rgb(255,242,89)",
+            "AO": "rgb(120,63,4)",
+            "ER": "rgb(225,124,167)",
+            "IU": "rgb(244,190,127)"
+        };
+
+        this.layoutWords();
+        this.recreateGradients();
+
         this.loop();
     }
 
-     createImageFromImageData(imagedata) {
+    layoutWords() {
+        let left, x, y;
+        if (this.canvas.width > this.canvas.height) {
+            left = x = min + 20;
+            y = margin + size * 0.5;
+        }
+        else {
+            left = x = 20;
+            y = min;
+        }
+
+        this.words.forEach((word, i) => {
+            word.forEach(part => {
+                let [s, c, px, py, level] = part;
+                part[2] = x;
+                part[3] = y;
+                x += this.ctx.measureText(s).width;
+            });
+            x = left;
+            y += size;
+        });
+
+        this.fillPositions();
+    }
+
+    fillPositions() {
+        this.words[this.currentWord].forEach(part => {
+            if (part[1] == "none") {
+                return;
+            }
+            let [s, c, px, py, level] = part;
+            positions[c] = [px, py, part];
+        });
+    }
+
+    fillNextRandom() {
+        nextRandom = [];
+        for (let i = this.currentWord; i < this.words.length; i++) {
+            let word = this.words[i];
+            nextRandom = [...nextRandom, ...word.filter(w => w[1] != "none" && !nextRandom.includes(w[1])).map(w => w[1])];
+            if (nextRandom.length >= 5)
+                break;
+        }
+        if (nextRandom.length > 5)
+            nextRandom = nextRandom.slice(5);
+        console.log("random", nextRandom);
+    }
+
+    nextWord() {
+        if (this.isLastWord()) {
+            return;
+        }
+        this.currentWord++;
+        this.fillNextRandom();
+        this.fillPositions();
+    }
+
+    createImageFromImageData(imagedata) {
         var canvas = document.createElement('canvas');
         var ctx = canvas.getContext('2d');
         canvas.width = imagedata.width;
@@ -544,6 +685,14 @@ class GameApp extends App {
         this.colors["OW"] = ow;
     }
 
+    isCurrentWordFinished() {
+        return this.words[this.currentWord].every(pos => pos[1] == "none" || pos[4]);
+    }
+
+    isLastWord() {
+        return this.currentWord == this.words.length-1;
+    }
+
     resize() {
         super.resize();
 
@@ -553,6 +702,7 @@ class GameApp extends App {
         this.ctx.font = `${size}px sans-serif`;
 
         if (this.colors) {
+            this.layoutWords();
             this.recreateGradients();
         }
     }
@@ -563,36 +713,49 @@ class GameApp extends App {
     
     draw(ctx) {
         ctx.clearRect(0, 0, canvas.width, canvas.height);
-        state.draw(ctx);
 
         // Draw words
         ctx.fillStyle = "white";
         ctx.strokeStyle = "black";
         ctx.textBaseline = "top"; 
-        if (this.canvas.width > this.canvas.height) {
-            this.words.forEach((w, i) => {
-                let x = min + 20;
-                let y = size + i * size;
-                w.forEach(p => {
-                    let [s, c] = p;
-                    if (!positions[c])
-                    positions[c] = [x, y];
-                    c = this.colors[c];
-                    ctx.save();
-                    ctx.translate(x, y);
-                    ctx.fillStyle = c;
-                    ctx.fillText(s, 0, 0);
-                    ctx.strokeText(s, 0, 0);
-                    ctx.restore();
-                    x += ctx.measureText(s).width;
-                });
+        this.words.forEach((w, i) => {
+            w.forEach(p => {
+                let [s, c, px, py, level] = p;
+                c = c == "none" || level ? this.colors[c] : "white";
+                ctx.save();
+                ctx.translate(px, py);
+                ctx.fillStyle = c;
+                ctx.fillText(s, 0, 0);
+                ctx.strokeText(s, 0, 0);
+                if (i > this.currentWord) {
+                    ctx.fillStyle = "#00808080";
+                    ctx.fillRect(0, -5, 200, size);
+                }
+                ctx.restore();
             });
-        }
-        else {
-            this.words.forEach((w, i) => {
-                ctx.fillText(w, 20, min + 20 + i * size);
-                ctx.strokeText(w, 20, min + 20 + i * size);
-            });
+        });
+
+        // Draw game
+        state.draw(ctx);
+
+        // Draw finish button
+        if (this.isLastWord() && this.isCurrentWordFinished()) {
+            ctx.fillStyle = "purple";
+            ctx.save();
+            ctx.translate(min*0.5, min*0.5);
+            ctx.beginPath();
+            ctx.arc(0, 0, size, 0 , 2*Math.PI);
+            ctx.fill();
+            ctx.stroke();
+            ctx.fillStyle = "white";
+            ctx.beginPath();
+            ctx.moveTo(-size*0.5, -size*0.5);
+            ctx.lineTo(size*0.5,0);
+            ctx.lineTo(-size*0.5, size*0.5);
+            ctx.closePath();
+            ctx.stroke();
+            ctx.fill();
+            ctx.restore();
         }
     }
     
@@ -610,3 +773,7 @@ class GameApp extends App {
 }
 
 let app = new GameApp(document.getElementById("canvasContainer"));
+
+function getApp() {
+    return app;
+}
