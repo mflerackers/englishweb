@@ -1,0 +1,32 @@
+html {
+    font-family: sans-serif;
+}
+
+body {
+    margin: 0;
+    text-align: center;
+    color: white;
+    line-height: 100px;
+}
+
+section {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+header {
+    background: purple;
+    height: 100px;
+}
+
+article {
+    background: teal;
+    flex: 1 1 25vw;
+    padding: 10px;
+    margin: 10px;
+}
+
+a:link, a:visited, a:hover, a:active {
+    color: white;
+    text-decoration: none;
+}
