@@ -275,7 +275,7 @@ class End extends Idle {
 
         x -= size * 3;
         if (x*x+y*y < size*size*0.25) {
-            window.location.href = 'https://english.fromatogra.com';
+            window.location.href = 'https://english.fromatogra.com/games/index.html';
         }
     }
 }
