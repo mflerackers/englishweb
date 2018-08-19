@@ -267,8 +267,13 @@ class End extends Idle {
     }
     
     touchup(x, y) {
-        x -= min*0.5;
+        x -= min*0.5 - size * 1.5;
         y -= min*0.5;
+        if (x*x+y*y < size*size*0.25) {
+            location.reload();
+        }
+
+        x -= size * 3;
         if (x*x+y*y < size*size*0.25) {
             window.location.href = 'https://english.fromatogra.com';
         }
@@ -608,8 +613,20 @@ class GameApp extends App {
                 part[3] = y;
                 x += this.ctx.measureText(s).width;
             });
-            x = left;
-            y += size;
+            if (this.canvas.width > this.canvas.height) {
+                x = left;
+                y += size;
+            }
+            else {
+                x =  i < 2 ? left : left + 5 * size;
+                if (i == 2) {
+                    y = min;
+                }
+                else {
+                    y += size;
+                }
+            }
+            
         });
 
         this.fillPositions();
@@ -717,6 +734,7 @@ class GameApp extends App {
         // Draw words
         ctx.fillStyle = "white";
         ctx.strokeStyle = "black";
+        ctx.textAlign = "left";
         ctx.textBaseline = "top"; 
         this.words.forEach((w, i) => {
             w.forEach(p => {
@@ -738,23 +756,34 @@ class GameApp extends App {
         // Draw game
         state.draw(ctx);
 
-        // Draw finish button
+        // Draw back and finish button
         if (this.isLastWord() && this.isCurrentWordFinished()) {
-            ctx.fillStyle = "purple";
             ctx.save();
-            ctx.translate(min*0.5, min*0.5);
+            
+            ctx.translate(min*0.5 - size * 1.5, min*0.5);
+            ctx.fillStyle = "purple";
             ctx.beginPath();
             ctx.arc(0, 0, size, 0 , 2*Math.PI);
             ctx.fill();
             ctx.stroke();
+            ctx.textAlign = "center";
+            ctx.textBaseline = "middle"; 
             ctx.fillStyle = "white";
+            ctx.fillText("↺", 0, 0);
+            ctx.strokeText("↺", 0, 0);
+
+            ctx.translate(size * 3, 0);
+            ctx.fillStyle = "purple";
             ctx.beginPath();
-            ctx.moveTo(-size*0.5, -size*0.5);
-            ctx.lineTo(size*0.5,0);
-            ctx.lineTo(-size*0.5, size*0.5);
-            ctx.closePath();
-            ctx.stroke();
+            ctx.arc(0, 0, size, 0 , 2*Math.PI);
             ctx.fill();
+            ctx.stroke();
+            ctx.textAlign = "center";
+            ctx.textBaseline = "middle"; 
+            ctx.fillStyle = "white";
+            ctx.fillText("☛", 0, 0);
+            ctx.strokeText("☛", 0, 0);
+            
             ctx.restore();
         }
     }
