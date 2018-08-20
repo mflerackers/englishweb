@@ -200,6 +200,7 @@ function renderSprite(ctx, phonemes) {
     phonemeColors.EH = [colors.getColor("ao"), colors.getColor("iu")];
     phonemeColors.AH = colors.getColor("ah");
     phonemeColors.AO = colors.getColor("ao");
+    phonemeColors.AW = [colors.getColor("aw0"), colors.getColor("aw1")];
     phonemeColors.OW = [colors.getColor("ul"), colors.getColor("ow1")];
     phonemeColors.IY = [colors.getColor("iy0"), colors.getColor("ao")];
     phonemeColors.IU = colors.getColor("iu");

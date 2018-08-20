@@ -122,8 +122,8 @@ let grid;
 
 let img;
 
-let phonemes;
-let nextRandom;
+let phonemes = [];
+let nextRandom = [];
 let voice = "monet";
 let sounds;
 
@@ -551,7 +551,7 @@ class GameApp extends App {
         this.words = [
             [["h", "none"], ["ea", "EH"], ["v", "none"], ["e","AH"], ["n", "none"]], 
             [["s", "none"], ["aw", "AO"]], 
-            [["h", "none"], ["ow", "OW"]],
+            [["h", "none"], ["ow", "AW"]],
             [["l", "none"], ["o", "OW"], ["nel", "none"], ["y", "IY"]],
             [["you", "IU"]],
             [["we", "none"], ["r", "ER"], ["e", "none"]],
@@ -643,16 +643,18 @@ class GameApp extends App {
     }
 
     fillNextRandom() {
-        nextRandom = [];
+        let list = [];
         for (let i = this.currentWord; i < this.words.length; i++) {
             let word = this.words[i];
-            nextRandom = [...nextRandom, ...word.filter(w => w[1] != "none" && !nextRandom.includes(w[1])).map(w => w[1])];
-            if (nextRandom.length >= 5)
+            list = [...list, ...word.filter(w => w[1] != "none" && !list.includes(w[1])).map(w => w[1])];
+            if (list.length >= 5)
                 break;
         }
-        if (nextRandom.length > 5)
-            nextRandom = nextRandom.slice(5);
-        console.log("random", nextRandom);
+        if (list.length > 5){
+            list = list.slice(0, 5);
+        }
+        nextRandom = list;
+        console.log("random", list);
     }
 
     nextWord() {
@@ -677,6 +679,14 @@ class GameApp extends App {
     }
 
     recreateGradients() {
+        let aw = this.ctx.createLinearGradient(0, 0, 0, size);
+        aw.addColorStop(0,  "rgb(187,187,255)");
+        aw.addColorStop(0.5,"rgb(187,187,255)");
+        aw.addColorStop(0.5,"rgb(0,255,0)");
+        aw.addColorStop(1,  "rgb(0,255,0)");
+
+        this.colors["AW"] = aw;
+
         let eh = this.ctx.createLinearGradient(0, 0, 0, size);
         eh.addColorStop(0,  "rgb(120,63,4)");
         eh.addColorStop(0.5,"rgb(120,63,4)");
