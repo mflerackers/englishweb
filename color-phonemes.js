@@ -115,7 +115,7 @@ letters = {
     T  : ["d", "tt", "t"],
     TH : ["th"],
     UH : ["a", "e", "i", "ia", "oo", "ou", "o", "u"],
-    UL : ["al", "il", "l", "ol", "ull", "ul"],
+    UL : ["al", "all", "il", "l", "ol", "ull", "ul"],
     UW : ["eu", "ew", "oo", "ou", "o", "u", "ue", "wo"],
     V  : ["v", "v", "f"],
     W  : ["u", "wh", "w"],
