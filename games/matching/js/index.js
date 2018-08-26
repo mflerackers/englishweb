@@ -27,92 +27,6 @@
 *
 */
 
-class App {
-    constructor(div) {
-        this.div = div;
-        this.canvas = document.getElementById("canvas");
-        this.ctx = canvas.getContext('2d');
-        this.dirty = true;
-        this.prev = +new Date();
-        this.prevPos = [0, 0];
-        
-        this.resize();
-        
-        window.addEventListener('resize', () => this.resize(), false);
-        
-        this.canvas.addEventListener("mousedown", (event) => {
-            this.prevPos = App.getmousePos(event)
-            this.touchdown(...this.prevPos);
-            event.preventDefault();
-        }); 
-        this.canvas.addEventListener("mousemove", (event) => {
-            let curPos = App.getmousePos(event);
-            this.touchmove(...curPos, curPos[0]-this.prevPos[0], curPos[1]-this.prevPos[1]);
-            this.prevPos = curPos;
-            event.preventDefault();
-        });
-        this.canvas.addEventListener("mouseup", (event) => {
-            this.touchup(...App.getmousePos(event));
-            event.preventDefault();
-        });
-        this.canvas.addEventListener("touchstart", (event) => {
-            this.prevPos = App.getmousePos(event)
-            this.touchdown(...this.prevPos);
-            event.preventDefault();
-        });
-        this.canvas.addEventListener("touchmove", (event) => {
-            let curPos = App.getmousePos(event);
-            this.touchmove(...curPos, curPos[0]-this.prevPos[0], curPos[1]-this.prevPos[1]);
-            this.prevPos = curPos;
-            event.preventDefault();
-        });
-        this.canvas.addEventListener("touchend", (event) => {
-            this.touchup(...App.getmousePos(event));
-            event.preventDefault();
-        });
-    }
-    
-    resize() {
-        this.canvas.width  = this.div.clientWidth;
-        this.canvas.height = this.div.clientHeight;
-        this.dirty = true;
-    }
-    
-    loop() {
-        let now = +new Date();
-        let dt = now - this.prev;
-        this.prev = now;
-        this.update(dt/1000)
-        if (this.dirty)
-            this.draw(this.ctx);
-        window.requestAnimationFrame(() => this.loop());
-    }
-    
-    update(dt) {}
-    
-    draw(ctx) {
-        ctx.clearRect(0, 0, canvas.width, canvas.height);
-        ctx.rect(0, 0, 100, 100);
-        ctx.fill();
-    }
-    
-    touchdown(x, y) { console.log("down", x, y); }
-    
-    touchmove(x, y) {}
-    
-    touchup(x, y) {}
-    
-    static getmousePos(event) {
-        if (event.changedTouches) {
-            return [event.changedTouches[0].pageX, event.changedTouches[0].pageY];
-        }
-        else {
-            var rect = event.target.getBoundingClientRect();
-            return [event.clientX- rect.left, event.clientY - rect.top];
-        }
-    }
-}
-
 const columns = 10;
 const rows = 10;
 const margin = 10;
@@ -549,19 +463,19 @@ class GameApp extends App {
         super(div);
 
         this.words = [
-            [["h", "none"], ["ea", "EH"], ["v", "none"], ["e","AH"], ["n", "none"]], 
+            [["h", "none"], ["e", "silent"], ["a", "EH"], ["v", "none"], ["e","AH"], ["n", "none"]], 
             [["s", "none"], ["aw", "AO"]], 
             [["h", "none"], ["ow", "AW"]],
-            [["l", "none"], ["o", "OW"], ["nel", "none"], ["y", "IY"]],
+            [["l", "none"], ["o", "OW"], ["n", "none"], ["e", "silent"], ["l", "none"], ["y", "IY"]],
             [["you", "IU"]],
-            [["we", "none"], ["r", "ER"], ["e", "none"]],
+            [["w", "none"], ["e", "silent"], ["r", "ER"], ["e", "silent"]],
         ];
 
         this.currentWord = 0;
 
         phonemes = [];
         this.words.forEach(word => {
-            phonemes = [...phonemes, ...word.filter(w => w[1] != "none").map(w => w[1])];
+            phonemes = [...phonemes, ...word.filter(w => w[1] != "none" && w[1] != "silent").map(w => w[1])];
         });
         phonemes = Array.from(new Set(phonemes));
         console.log("all", phonemes);
@@ -583,6 +497,7 @@ class GameApp extends App {
 
         this.colors = {
             "none": "black",
+            "silent": "white",
             "AH": "rgb(255,242,89)",
             "AO": "rgb(120,63,4)",
             "ER": "rgb(225,124,167)",
@@ -634,7 +549,7 @@ class GameApp extends App {
 
     fillPositions() {
         this.words[this.currentWord].forEach(part => {
-            if (part[1] == "none") {
+            if (part[1] == "none" || part[1] == "silent") {
                 return;
             }
             let [s, c, px, py, level] = part;
@@ -646,7 +561,7 @@ class GameApp extends App {
         let list = [];
         for (let i = this.currentWord; i < this.words.length; i++) {
             let word = this.words[i];
-            list = [...list, ...word.filter(w => w[1] != "none" && !list.includes(w[1])).map(w => w[1])];
+            list = [...list, ...word.filter(w => w[1] != "none" && w[1] != "silent" && !list.includes(w[1])).map(w => w[1])];
             if (list.length >= 5)
                 break;
         }
@@ -713,7 +628,7 @@ class GameApp extends App {
     }
 
     isCurrentWordFinished() {
-        return this.words[this.currentWord].every(pos => pos[1] == "none" || pos[4]);
+        return this.words[this.currentWord].every(pos => pos[1] == "none" || pos[1] == "silent" || pos[4]);
     }
 
     isLastWord() {
@@ -749,7 +664,7 @@ class GameApp extends App {
         this.words.forEach((w, i) => {
             w.forEach(p => {
                 let [s, c, px, py, level] = p;
-                c = c == "none" || level ? this.colors[c] : "white";
+                c = c == "none" || c == "silent" || level ? this.colors[c] : "silver";
                 ctx.save();
                 ctx.translate(px, py);
                 ctx.fillStyle = c;
