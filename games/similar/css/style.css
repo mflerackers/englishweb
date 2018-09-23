@@ -1,0 +1,12 @@
+body {
+    margin: 0;
+    text-align: center;
+    color: black;
+    font-size: 20vh;
+}
+
+article {
+    font-family: 'Kalam', cursive;
+    -webkit-text-stroke: 1.2px black;
+    line-height: 20vh;
+}

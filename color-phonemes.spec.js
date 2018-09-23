@@ -103,6 +103,9 @@ describe("Transform tests", function() {
     it("their", function() {
         expect(doTransform("their")).toEqual([ "DH", "EH", "R" ]);
     });
+    it("sure", function() {
+        expect(doTransform("sure")).toEqual([ "SH", "UH", "R" ]);
+    });
 });
 
 describe("Match tests", function() {
@@ -183,5 +186,8 @@ describe("Match tests", function() {
     });
     it("their", function() {
         expect(doMatch("their")).toBeTruthy();
+    });
+    it("sure", function() {
+        expect(doMatch("sure")).toBeTruthy();
     });
 });
