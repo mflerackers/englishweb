@@ -111,7 +111,7 @@ letters = {
     P  : ["pp", "p"],
     R  : ["rr", "r"],
     S  : ["c", "ss", "s"],
-    SH : ["ch", "ci", "c", "sh", "si", "ti"],
+    SH : ["ch", "ci", "c", "sh", "si", "s", "ti"],
     T  : ["d", "tt", "t"],
     TH : ["th"],
     UH : ["a", "e", "i", "ia", "oo", "ou", "o", "u"],
