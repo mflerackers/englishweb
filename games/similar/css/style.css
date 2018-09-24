@@ -6,7 +6,7 @@ body {
 }
 
 header {
-    font-family: "Noto Color Emoji", sans-serif;
+    --font-family: "Noto Color Emoji", sans-serif;
 }
 
 article {
