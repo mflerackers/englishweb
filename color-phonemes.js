@@ -53,9 +53,11 @@ class MatchCandidate {
         if (phoneme == "silent") {
             score = score - 2; // Silent grapheme
         } else {
-            score = score + 1;
+            score = score + grapheme.length;
         }
-        score = score / this.remaining
+        score = score / this.remaining.length
+
+        console.log(remaining, phonemes, graphemes, score);
         
         return new MatchCandidate(remaining, phonemes, graphemes, score)
     }
@@ -76,7 +78,8 @@ class MatchCandidate {
         return match;
     }
     score() {
-        return this._score + (this.remaining.length) ? -2 : 0;
+        console.log(this.remaining)
+        return this._score + (this.remaining.length ? -2 : 0);
     }
 }
 
