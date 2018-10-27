@@ -12,7 +12,22 @@ let games = [
     ["🙂", "smile", "small", "smell"],
     ["🌽", "corn", "cone", "con"],
     ["💖", "heart", "hard", "hearth"],
-    ["🦇", "bat", "beat", "bet"]
+    ["🦇", "bat", "beat", "bet"],
+    ["🤡", "clown", "crown", "cloud"],
+    ["👹", "ogre", "odor", "okra"],
+    ["👽", "alien","align","allies"],
+    ["👅", "tongue","tone","tong"],
+    ["👂", "ear", "eat", "earl"],
+    ["💪", "arm", "air", "ale"],
+    ["🧠", "brain", "bra", "brat"],
+    ["👀", "eyes", "eat", "ever"],
+    ["👶", "baby", "bath", "barn"],
+    ["👦", "boy", "bay", "bomb"],
+    ["🧒", "girl", "gift", "gin"],
+    ["🧚", "fairy", "fail", "faint"],
+    ["🚶", "walk", "wall", "wail"],
+    ["🏃", "run", "rule", "rut"],
+    ["⛷", "ski", "skin", "skirt"]
 ];
 
 function getClasses(match) {
