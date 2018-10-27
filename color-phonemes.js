@@ -87,7 +87,7 @@ letters = {
     AA : ["o", "au", "aw", "ou", "a"],
     AE : ["au", "a"],
     AH : ["ou", "u", "a", "e", "o", "oo", "io", "i", "y"],
-    AO : ["oa", "au", "aw", "ou", "oo", "o", "a"],
+    AO : ["oa", "al", "au", "aw", "ou", "oo", "o", "a"],
     AW : ["ou", "ow"],
     AY : ["ai", "ie", "uy", "ey", "i", "y"],
     B  : ["bb", "b"],

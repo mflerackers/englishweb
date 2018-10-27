@@ -106,6 +106,9 @@ describe("Transform tests", function() {
     it("sure", function() {
         expect(doTransform("sure")).toEqual([ "SH", "UH", "R" ]);
     });
+    it("walk", function() {
+        expect(doTransform("walk")).toEqual([ "W", "AO", "K" ]);
+    });
 });
 
 describe("Match tests", function() {
@@ -189,5 +192,8 @@ describe("Match tests", function() {
     });
     it("sure", function() {
         expect(doMatch("sure")).toBeTruthy();
+    });
+    it("walk", function() {
+        expect(doMatch("walk")).toBeTruthy();
     });
 });
