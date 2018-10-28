@@ -95,6 +95,7 @@ let game = null;
 
 var sound = new Howl({
     src: ['data/similar-male.m4a'],
+    preload: true,
     sprite: {
         clown:[1200,800],
         crown:[2750,750],
@@ -267,7 +268,7 @@ var sound = new Howl({
         con:[259000,1000],
         heart:[260500,1000],
         hard:[262000,1000],
-        hearth:[283500,1000],
+        hearth:[263500,1000],
         bat:[265000,750],
         beat:[266250,1000],
         bet:[267750,1000],
