@@ -89,7 +89,7 @@ letters = {
     AH : ["ou", "u", "a", "e", "o", "oo", "io", "i", "y"],
     AO : ["oa", "al", "au", "aw", "ou", "oo", "o", "a"],
     AW : ["ou", "ow"],
-    AY : ["ai", "ie", "uy", "ey", "i", "y"],
+    AY : ["ai", "ie", "uy", "ey", "i", "oi", "y"],
     B  : ["bb", "b"],
     CH : ["ch", "tch", "t"],
     D  : ["dd", "d"],
@@ -121,7 +121,7 @@ letters = {
     UL : ["al", "all", "il", "l", "ol", "ull", "ul"],
     UW : ["eu", "ew", "oo", "ou", "o", "u", "ue", "wo"],
     V  : ["v", "v", "f"],
-    W  : ["u", "wh", "w"],
+    W  : ["h", "u", "wh", "w"], // HACK, remove h once choir has a decent fix
     X  : ["x", "cs", "ks"],
     Z  : ["x", "zz", "z", "s"],
     ZH : ["s", "su"]

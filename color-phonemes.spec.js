@@ -109,6 +109,9 @@ describe("Transform tests", function() {
     it("walk", function() {
         expect(doTransform("walk")).toEqual([ "W", "AO", "K" ]);
     });
+    it("choir", function() {
+        expect(doTransform("choir")).toEqual([ "K", "W", "AY", "ER" ]);
+    });
 });
 
 describe("Match tests", function() {
@@ -195,5 +198,8 @@ describe("Match tests", function() {
     });
     it("walk", function() {
         expect(doMatch("walk")).toBeTruthy();
+    });
+    it("choir", function() {
+        expect(doMatch("choir")).toBeTruthy();
     });
 });
