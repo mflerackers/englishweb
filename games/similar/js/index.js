@@ -299,7 +299,7 @@ function buildGame() {
             article.addEventListener("click", () => {
                 sound.play(article.innerText);
                 if (article.innerText.slice(-1) != "✓")
-                    article.innerText += " ✓";
+                    article.innerHTML += " ✓";
                 window.setTimeout(buildGame, 500);
             });
         }
@@ -307,7 +307,7 @@ function buildGame() {
             article.addEventListener("click", () => {
                 sound.play(article.innerText);
                 if (article.innerText.slice(-1) != "✗")
-                article.innerText += " ✗";
+                article.innerHTML += " ✗";
             });
         }
         section.appendChild(article);
