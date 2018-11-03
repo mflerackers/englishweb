@@ -41,6 +41,9 @@
         .uw {
             fill:url("#uw");
         }
+        .kw {
+            fill:url("#kw");
+        }
         .sh {
             fill:url("#sh");
         }
@@ -151,6 +154,12 @@
                 <stop offset="50%" stop-color="rgb(0,153,206)"/>
                 <stop offset="100%" stop-color="rgb(0,153,206)"/>
             </linearGradient>
+            <linearGradient id="kw" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0%" stop-color="rgb(165,166,164)"/>
+                <stop offset="50%" stop-color="rgb(165,166,164)"/>
+                <stop offset="50%" stop-color="rgb(110,120,172)"/>
+                <stop offset="100%" stop-color="rgb(110,120,172)"/>
+            </linearGradient>
             <linearGradient id="sh" x1="0" y1="0" x2="0" y2="1">
                 <stop offset="0%" stop-color="rgb(0,68,51)"/>
                 <stop offset="50%" stop-color="rgb(0,68,51)"/>
@@ -176,7 +185,7 @@
     </template>
     <div style="margin-top: 15vh;"><center><div id="container"></div></center></div>
     <script>
-        var phonemes = ["AA", "AE", "AH", "AO", "AW", "AY", "CH", "EH", "ER", "EY", "F", "IH", "IU", "IY", "JH", "OW", "OY", "SH", "UH", "UL", "UW", "ZH"];
+        var phonemes = ["AA", "AE", "AH", "AO", "AW", "AY", "CH", "EH", "ER", "EY", "F", "IH", "IU", "IY", "JH", "KW", "OW", "OY", "SH", "UH", "UL", "UW", "ZH"];
         var phonemeBuffers = {};
         var audioContext;
         var fieldset;

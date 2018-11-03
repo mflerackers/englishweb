@@ -105,6 +105,7 @@ letters = {
     IY : ["a", "i", "y", "ee", "ea", "e", "ui"],
     JH : ["d", "dge", "ge", "g", "j", "s"],
     K  : ["ch", "ck", "c", "k", "q"],
+    KW : ["ch", "cu", "qu"],
     L  : ["ll", "l", "l"],
     M  : ["mm", "m"],
     N  : ["nn", "n"],
@@ -154,7 +155,12 @@ function transformPhonemes(phonemes) {
                 if (phoneme == "S") {
                     newPhonemes.push("X");
                     continue;
-                } else {
+                } 
+                else if (phoneme == "W") {
+                    newPhonemes.push("KW");
+                    continue;
+                }
+                else {
                     newPhonemes.push("K");
                     break;
                 }

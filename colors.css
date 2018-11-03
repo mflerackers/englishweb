@@ -94,6 +94,13 @@ span.f {
 span.jh {
     color: rgb(152,199,102);
 }
+span.kw {
+    background: -webkit-linear-gradient( rgb(165,166,164), rgb(165,166,164) 50%, rgb(110,120,172) 50%, rgb(110,120,172));
+    background: linear-gradient( rgb(165,166,164), rgb(165,166,164) 50%, rgb(110,120,172) 50%, rgb(110,120,172));
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
 span.sh {
     background: -webkit-linear-gradient( rgb(0,68,51), rgb(0,68,51) 50%, rgb(244,190,131) 50%, rgb(244,190,131));
     background: linear-gradient( rgb(0,68,51), rgb(0,68,51) 50%, rgb(244,190,131) 50%, rgb(244,190,131));
