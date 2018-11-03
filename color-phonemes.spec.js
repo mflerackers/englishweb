@@ -86,7 +86,7 @@ describe("Transform tests", function() {
         expect(doTransform("quiche")).toEqual([ "K", "IY", "SH" ]);
     });
     it("squirrel", function() {
-        expect(doTransform("squirrel")).toEqual([ "S", "K", "W", "ER", "UL" ]);
+        expect(doTransform("squirrel")).toEqual([ "S", "KW", "ER", "UL" ]);
     });
     it("fetch", function() {
         expect(doTransform("fetch")).toEqual([ "F", "EH", "CH" ]);
@@ -110,7 +110,7 @@ describe("Transform tests", function() {
         expect(doTransform("walk")).toEqual([ "W", "AO", "K" ]);
     });
     it("choir", function() {
-        expect(doTransform("choir")).toEqual([ "K", "W", "AY", "ER" ]);
+        expect(doTransform("choir")).toEqual([ "KW", "AY", "ER" ]);
     });
 });
 
