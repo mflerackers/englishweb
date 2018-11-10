@@ -112,6 +112,12 @@ describe("Transform tests", function() {
     it("choir", function() {
         expect(doTransform("choir")).toEqual([ "KW", "AY", "ER" ]);
     });
+    it("coyote", function() {
+        expect(doTransform("coyote")).toEqual([ "K", "AY", "OW", "T", "IY" ]);
+    });
+    it("rhythm", function() {
+        expect(doTransform("rhythm")).toEqual([ "R", "IH", "DH", "AH", "M" ]);
+    });
 });
 
 describe("Match tests", function() {
@@ -201,5 +207,11 @@ describe("Match tests", function() {
     });
     it("choir", function() {
         expect(doMatch("choir")).toBeTruthy();
+    });
+    it("coyote", function() {
+        expect(doMatch("coyote")).toBeTruthy();
+    });
+    it("rhythm", function() {
+        expect(doMatch("rhythm")).toBeTruthy();
     });
 });
