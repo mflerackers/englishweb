@@ -118,6 +118,9 @@ describe("Transform tests", function() {
     it("rhythm", function() {
         expect(doTransform("rhythm")).toEqual([ "R", "IH", "DH", "AH", "M" ]);
     });
+    it("suit", function() {
+        expect(doTransform("suit")).toEqual([ "S", "UW", "T" ]);
+    });
 });
 
 describe("Match tests", function() {
@@ -213,5 +216,8 @@ describe("Match tests", function() {
     });
     it("rhythm", function() {
         expect(doMatch("rhythm")).toBeTruthy();
+    });
+    it("suit", function() {
+        expect(doMatch("suit")).toBeTruthy();
     });
 });

@@ -120,7 +120,7 @@ letters = {
     TH : ["th"],
     UH : ["a", "e", "i", "ia", "oo", "ou", "o", "u"],
     UL : ["al", "all", "il", "l", "ol", "ull", "ul"],
-    UW : ["eu", "ew", "oo", "ou", "o", "u", "ue", "wo"],
+    UW : ["eu", "ew", "oo", "ou", "o", "u", "ue", "ui", "wo"],
     V  : ["v", "v", "f"],
     W  : ["h", "u", "wh", "w"], // HACK, remove h once choir has a decent fix
     X  : ["x", "cs", "ks"],
