@@ -104,7 +104,7 @@ letters = {
     IU : ["eau", "ew", "iew", "ue", "u", "you"],
     IY : ["a", "i", "y", "ee", "ea", "e", "ui"],
     JH : ["d", "dge", "ge", "g", "j", "s"],
-    K  : ["ch", "ck", "c", "k", "q"],
+    K  : ["ck", "c", "k", "q"],
     KW : ["ch", "cu", "qu"],
     L  : ["ll", "l", "l"],
     M  : ["mm", "m"],
