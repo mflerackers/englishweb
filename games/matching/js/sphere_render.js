@@ -191,7 +191,7 @@ function renderSprite(ctx, phonemes) {
     colors.ow1 = [137,104,158];
     colors.oy1 = [1,153,124];
     colors.ul = [221,76,54];
-    colors.ch = [0,68,51];
+    colors.ch = [1,153,124];
     colors.f  = [130,101,27];
     colors.jh = [152,199,102];
 
