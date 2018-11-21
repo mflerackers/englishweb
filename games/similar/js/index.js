@@ -110,7 +110,7 @@ function getClasses(match) {
 }
 
 function phonemize(word) {
-    if (word == "one" || word == "once" || word == "usual" || word == "usually") {
+    if (word == "one" || word == "once" || word == "usual" || word == "usually" || word == "genuine") {
         return "<span class='weird'>" + word + "</span>";
     }
     else if (word == "obaasan") {
