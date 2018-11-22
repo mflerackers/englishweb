@@ -124,6 +124,9 @@ describe("Transform tests", function() {
     it("figure", function() {
         expect(doTransform("figure")).toEqual([ "F", "IH", "G", "IY", "ER" ]);
     });
+    it("climber", function() {
+        expect(doTransform("climber")).toEqual([ "K", "L", "AY", "M", "ER" ]);
+    });
 });
 
 describe("Match tests", function() {
@@ -225,5 +228,8 @@ describe("Match tests", function() {
     });
     it("figure", function() {
         expect(doMatch("figure")).toBeTruthy();
+    });
+    it("climber", function() {
+        expect(doMatch("climber")).toBeTruthy();
     });
 });
