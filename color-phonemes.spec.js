@@ -121,6 +121,9 @@ describe("Transform tests", function() {
     it("suit", function() {
         expect(doTransform("suit")).toEqual([ "S", "UW", "T" ]);
     });
+    it("figure", function() {
+        expect(doTransform("figure")).toEqual([ "F", "IH", "G", "IY", "ER" ]);
+    });
 });
 
 describe("Match tests", function() {
@@ -219,5 +222,8 @@ describe("Match tests", function() {
     });
     it("suit", function() {
         expect(doMatch("suit")).toBeTruthy();
+    });
+    it("figure", function() {
+        expect(doMatch("figure")).toBeTruthy();
     });
 });

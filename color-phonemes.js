@@ -102,7 +102,7 @@ letters = {
     HH : ["h"],
     IH : ["a", "ee", "e", "ui", "i", "y"],
     IU : ["eau", "ew", "iew", "ue", "u", "you"],
-    IY : ["a", "i", "y", "ee", "ea", "e", "ui"],
+    IY : ["a", "i", "y", "ee", "ea", "e", "ui", "u"],
     JH : ["d", "dge", "ge", "g", "j", "s"],
     K  : ["ck", "c", "k", "q"],
     KW : ["ch", "cu", "qu"],
