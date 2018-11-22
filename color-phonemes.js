@@ -125,7 +125,7 @@ letters = {
     W  : ["h", "u", "wh", "w"], // HACK, remove h once choir has a decent fix
     X  : ["x", "cs", "ks"],
     Z  : ["x", "zz", "z", "s"],
-    ZH : ["s", "su"]
+    ZH : ["g", "s", "su"]
 };
 
 silents = ["c", "ew", "e", "gh", "g", "h", "k", "w", "p", "s", "t", "b"];

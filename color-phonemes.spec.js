@@ -127,6 +127,9 @@ describe("Transform tests", function() {
     it("climber", function() {
         expect(doTransform("climber")).toEqual([ "K", "L", "AY", "M", "ER" ]);
     });
+    it("massage", function() {
+        expect(doTransform("massage")).toEqual([ "M", "AH", "S", "AA", "ZH" ]);
+    });
 });
 
 describe("Match tests", function() {
@@ -231,5 +234,8 @@ describe("Match tests", function() {
     });
     it("climber", function() {
         expect(doMatch("climber")).toBeTruthy();
+    });
+    it("massage", function() {
+        expect(doMatch("massage")).toBeTruthy();
     });
 });
