@@ -84,26 +84,26 @@ class MatchCandidate {
 }
 
 letters = {
-    AA : ["o", "au", "aw", "ou", "a"],
+    AA : ["e", "o", "au", "aw", "ou", "a"],
     AE : ["au", "a"],
-    AH : ["ou", "u", "a", "e", "o", "oo", "io", "i", "y", "h"],
+    AH : ["ou", "ui", "u", "a", "e", "o", "oo", "io", "i", "y", "h"],
     AO : ["oa", "al", "au", "aw", "ou", "oo", "o", "a"],
     AW : ["ou", "ow"],
-    AY : ["ai", "ie", "uy", "ey", "i", "oi", "oy", "y"],
+    AY : ["ai", "ie", "ui", "uy", "ey", "i", "oi", "oy", "y"],
     B  : ["bb", "b"],
     CH : ["ch", "tch", "t"],
     D  : ["dd", "d"],
     DH : ["th", "t"],
     EH : ["ea", "e", "ei", "ai", "a"],
-    ER : ["ear", "er", "ir", "or", "r", "irr", "ur"],
+    ER : ["ear", "er", "ir", "oar", "or", "r", "irr", "ur"],
     EY : ["ay", "ai", "a", "ei", "ey", "e"],
     G  : ["gg", "g"],
     F  : ["ff", "f", "ph", "gh"],
     HH : ["h"],
-    IH : ["a", "ee", "e", "ui", "i", "y"],
+    IH : ["a", "ee", "e", "ui", "u", "ie", "i", "y"],
     IU : ["eau", "ew", "iew", "ue", "u", "you"],
-    IY : ["a", "i", "y", "ee", "ea", "e", "ui", "u"],
-    JH : ["d", "dge", "ge", "g", "j", "s"],
+    IY : ["a", "i", "y", "ee", "ea", "e", "ui", "u", "y"],
+    JH : ["d", "dg", "ge", "g", "j", "s"],
     K  : ["ck", "c", "k", "q"],
     KW : ["ch", "cu", "qu"],
     L  : ["ll", "l", "l"],
@@ -120,15 +120,15 @@ letters = {
     TH : ["th"],
     UH : ["a", "e", "i", "ia", "oo", "ou", "o", "u"],
     UL : ["al", "all", "il", "l", "ol", "ull", "ul"],
-    UW : ["eu", "ew", "oo", "ou", "o", "u", "ue", "ui", "wo"],
+    UW : ["eu", "ew", "oo", "ou", "o", "u", "ue", "ui"],
     V  : ["v", "v", "f"],
-    W  : ["h", "u", "wh", "w"], // HACK, remove h once choir has a decent fix
+    W  : ["h", "u", "w"], // HACK, remove h once choir has a decent fix
     X  : ["x", "cs", "ks"],
     Z  : ["x", "zz", "z", "s"],
     ZH : ["g", "s", "su"]
 };
 
-silents = ["c", "ew", "e", "gh", "g", "h", "k", "w", "p", "s", "t", "b"];
+silents = ["c", "ew", "e", "gh", "g", "h", "k", "w", "p", "s", "t", "b", "l", "n", "ou", "i", "d", "z", "ch", "w", "u"];
 
 function getSilents(graphemes) {
     //console.log("looking for silent in " + graphemes);
@@ -136,6 +136,7 @@ function getSilents(graphemes) {
 }
 
 function transformPhonemes(phonemes) {
+    console.log("pre-transform", phonemes);
     newPhonemes = [];
     let prev = null
     for (phoneme of phonemes) {
@@ -193,7 +194,7 @@ function transformPhonemes(phonemes) {
     if (prev) {
         newPhonemes.push(prev);
     }
-    
+    console.log("post-transform", newPhonemes);
     return newPhonemes;
 }
 

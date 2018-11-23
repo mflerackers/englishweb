@@ -79,7 +79,9 @@
                 html += "<span class='OW'>o</span>b<span class='AA'>aa</span>s<span class='AH'>a</span>n";
             }
             else if (m[1]) {
-                let phonemes = RiTa.getPhonemes(word).toUpperCase().split("-");
+                let phonemes = RiTa.getPhonemes(word);
+                console.log(phonemes);
+                phonemes = phonemes.toUpperCase().split("-").filter(ph => ph.length > 0);
                 phonemes = transformPhonemes(phonemes);
                 
                 console.log(phonemes);

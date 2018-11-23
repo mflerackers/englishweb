@@ -1,0 +1,24 @@
+body {
+    margin: 0;
+    text-align: center;
+    color: black;
+    font-size: 20vh;
+}
+
+header {
+    --font-family: "Noto Color Emoji", sans-serif;
+}
+
+article {
+    font-family: 'Kalam', cursive;
+    -webkit-text-stroke: 1.2px black;
+    line-height: 20vh;
+}
+
+span {
+    -webkit-transition: all 1s linear;
+    -moz-transition: all 1s linear;
+    -o-transition: all 1s linear;
+    transition: all 1s linear;
+    cursor: pointer;
+}
