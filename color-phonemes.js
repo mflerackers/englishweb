@@ -122,7 +122,7 @@ letters = {
     UL : ["al", "all", "il", "l", "ol", "ull", "ul"],
     UW : ["eu", "ew", "oo", "ou", "o", "u", "ue", "ui"],
     V  : ["v", "v", "f"],
-    W  : ["h", "u", "w"], // HACK, remove h once choir has a decent fix
+    W  : ["u", "w"], // HACK, remove h once choir has a decent fix
     X  : ["x", "cs", "ks"],
     Z  : ["x", "zz", "z", "s"],
     ZH : ["g", "s", "su"]
