@@ -6,7 +6,7 @@ let games = [
     "vegetable", "bridge", "clothes",
     "align", "alight", "champagne", "high", "light", "reign", "though", "sign",
     "right", "drought", "eight", "weigh", "sigh", "night",
-    "choir", "hour", "honour", "honest", "herb", "rhyme", "rhythm", "thyme", "Thailand", "psychology", "why",
+    "choir", "hour", "honor", "honest", "herb", "rhyme", "rhythm", "thyme", "Thailand", "psychology", "why",
     "business", "parliament",
     "know", "knot", "knee", "knife", "knight", "knock", "knowledge",
     "calm", "folk", "salmon", "talk", "walk", "could", "should", "would", "folk", "half", "calf", "chalk", "yolk",
@@ -61,7 +61,10 @@ function phonemize(word) {
         let html = "";
         for (matches of result) {
             for (c of [...matches.ch]) {
-                html += "<span class='" + getClasses(matches).toLowerCase() + "'>" + c + "</span>";
+                if (matches.ph == "S" && c == "c")
+                    html += "<span class='weird'>" + c + "</span>";
+                else
+                    html += "<span class='" + getClasses(matches).toLowerCase() + "'>" + c + "</span>";
             }
         }
         return html;

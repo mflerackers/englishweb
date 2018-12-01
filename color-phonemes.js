@@ -114,7 +114,7 @@ letters = {
     OY : ["oi", "oy"],
     P  : ["pp", "p"],
     R  : ["rr", "r"],
-    S  : ["c", "ss", "s"],
+    S  : ["c", "sc", "ss", "s"],
     SH : ["ch", "ci", "c", "sh", "si", "s", "ti"],
     T  : ["d", "tt", "t"],
     TH : ["th"],
@@ -122,7 +122,7 @@ letters = {
     UL : ["al", "all", "il", "l", "ol", "ull", "ul"],
     UW : ["eu", "ew", "oo", "ou", "o", "u", "ue", "ui"],
     V  : ["v", "v", "f"],
-    W  : ["u", "w"], // HACK, remove h once choir has a decent fix
+    W  : ["u", "w"],
     X  : ["x", "cs", "ks"],
     Z  : ["x", "zz", "z", "s"],
     ZH : ["g", "s", "su"]

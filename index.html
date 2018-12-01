@@ -99,7 +99,10 @@
                 
                 for (matches of result) {
                     for (c of [...matches.ch]) {
-                        html += "<span class='" + getClasses(matches) + "'>" + c + "</span>";
+                        if (matches.ph == "S" && c == "c")
+                            html += "<span class='weird'>" + c + "</span>";
+                        else
+                            html += "<span class='" + getClasses(matches) + "'>" + c + "</span>";
                     }
                 }
             }
