@@ -100,7 +100,7 @@ letters = {
     G  : ["gg", "g"],
     F  : ["ff", "f", "ph", "gh"],
     HH : ["h"],
-    IH : ["a", "ee", "e", "ui", "u", "ie", "i", "y"],
+    IH : ["a", "ee", "e", "ui", "u", "ie", "i", "o", "y"],
     IU : ["eau", "ew", "iew", "ue", "u", "you"],
     IY : ["a", "i", "y", "ee", "ea", "e", "ui", "u", "y"],
     JH : ["d", "dg", "ge", "g", "j", "s"],
