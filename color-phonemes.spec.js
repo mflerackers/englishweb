@@ -130,6 +130,9 @@ describe("Transform tests", function() {
     it("massage", function() {
         expect(doTransform("massage")).toEqual([ "M", "AH", "S", "AA", "ZH" ]);
     });
+    it("women", function() {
+        expect(doTransform("women")).toEqual([ "W", "IH", "M", "EH", "N" ]);
+    });
 });
 
 describe("Match tests", function() {
@@ -237,5 +240,8 @@ describe("Match tests", function() {
     });
     it("massage", function() {
         expect(doMatch("massage")).toBeTruthy();
+    });
+    it("women", function() {
+        expect(doMatch("women")).toBeTruthy();
     });
 });
