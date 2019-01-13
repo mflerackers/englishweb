@@ -1,5 +1,5 @@
 let games = [
-    "comb", "climb", "debt", "tomb", "dumb", "bomb", "doubt", "numb", "thumb", "womb",
+    /*"comb", "climb", "debt", "tomb", "dumb", "bomb", "doubt", "numb", "thumb", "womb",
     "muscle", "scissors",
     "yacht",
     "handkerchief", "Wednesday",
@@ -16,7 +16,13 @@ let games = [
     "beret", "Chevrolet", "depot", "listen", "whistle", "wrestle", "trestle", "mortgage", "apostle", "match", "watch", "etch",
     "baguette", "biscuit", "building", "circuit", "disguise", "guard", "guess", "guest", "guilt", "guitar", "tongue",
     "who", "whole", "write", "wrong", "two", "sword", "wrist", "answer", "wrap", "wrote",
-    "rendezvous"
+    "rendezvous"*/
+    "times", "people", "lived", "alone", "island", "huge", "knew", "vegetables", "which", "wife", 
+    "knew", "gnarly", "tongue", "talking", "caught", "salmon", "autumn", "house", "clothes", "strange", 
+    "sight", "some", "scissors", "snipped", "line", "attached", "ashore", "sword", "could", "voice", 
+    "please", "poke", "dumbfounded", "who", "ghost", "hole", "whole", "popped", "little", "knowledge", 
+    "there", "through", "explained", "came", "place", "white", "like", "lonely", "couple", "purpose", 
+    "lives", "eyes", "these", "surprised", "pleased", "sense", "purpose"
 ];
 
 function getClasses(match) {

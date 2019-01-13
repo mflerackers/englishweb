@@ -27,30 +27,43 @@
 *
 */
 
-pages = [`Many years before in old Japan
-there was an old man and his wife
-living in a small village next to a river.
-The old man was called ojiisan.
-The old woman was called obaasan.
-Ojiisan cut wood for his job.
-Obaasan washed clothes for her job.
-They lived alone and had no children.`,
+pages = [`In ancient times, 
+an elderly pair of people lived alone 
+on an island in a huge river. They 
+knew a lot about herbs and vegetables, 
+which the wife knew a lot about. 
+The husband, a gnarly old guy with 
+a quick tongue, was always talking about 
+this and that. Too much for the wife, 
+in fact, so she never responded much to his talk.`,
 
-`One day the old woman went to the river.
-She had just begun washing the clothes when
-to her surprise a giant peach
-was floating down the river.
-It was the biggest peach
-she had ever seen and she
-pulled it out of the water.
-She took it home for supper.`,
+`The husband, Ojisan, caught fish, mainly 
+salmon, as there were many in the river. 
+He caught many in the autumn, when the 
+salmon swam upstream past their house. 
+The wife, Obaasan, was hanging up the clothes 
+one day and saw a strange sight. Down the river 
+was slowly floating a giant peach. `,
 
-`When she got her knife to cut it open,
-she heard the voice of a child say,
-'Wait don't cut me!'
-Suddenly, the peach split open
-and a beautiful baby boy jumped out.
-The old people were very surprised!
+`It was near the bank so she took some scissors 
+and snipped a length of clothes line, 
+attached a hook and threw it over the peach. 
+She then pulled it closer ashore, grabbed a 
+sword from the closet and began to cut it 
+into pieces that could be eaten. Suddenly, 
+a small voice said, 'Please don't poke me 
+with your sword!'. `,
+
+`She was dumbfounded, in shock, and said, 
+'Who are you? Are you a ghost?' The voice 
+replied, 'I don't know who I am, but I 
+don't think I am a ghost. I can see myself." 
+Obaasan then made a hole in the center of the 
+whole peach, which was really big, and out 
+popped a little baby boy, with big blue eyes 
+and rosy cheeks.`,
+
+`The old people were very surprised!
 More surprising, the baby boy said,
 'Don't be afraid!
 Heaven saw how lonely you were
