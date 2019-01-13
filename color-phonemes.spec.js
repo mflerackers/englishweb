@@ -133,6 +133,12 @@ describe("Transform tests", function() {
     it("women", function() {
         expect(doTransform("women")).toEqual([ "W", "IH", "M", "EH", "N" ]);
     });
+    it("ancient", function() {
+        expect(doTransform("ancient")).toEqual([ "EY", "N", "CH", "AH", "N", "T" ]);
+    });
+    it("length", function() {
+        expect(doTransform("length")).toEqual([ "L", "EH", "NG", "K", "TH"]);
+    });
 });
 
 describe("Match tests", function() {
@@ -243,5 +249,11 @@ describe("Match tests", function() {
     });
     it("women", function() {
         expect(doMatch("women")).toBeTruthy();
+    });
+    it("ancient", function() {
+        expect(doMatch("ancient")).toBeTruthy();
+    });
+    it("length", function() {
+        expect(doMatch("length")).toBeTruthy();
     });
 });
