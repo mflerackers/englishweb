@@ -11,9 +11,37 @@
     <link href="https://fonts.googleapis.com/css?family=Kalam" rel="stylesheet">
 </head>
 <body>
-    <header id="header"></header>
-    <section id="section">
-    </section>
+    <div id="tutorial">
+        <div class="dialog">
+            <div class="title">Instructions</div>
+            For every exercise, a picture is shown which represents a word.
+            If you want to hear the word once more, tap the picture. The goal is
+            to click the correct phoneme which matches the sound you hear in
+            the word.
+            <br>
+            <button onclick="hideDialog('tutorial')">OK</button>
+        </div>
+    </div>
+    <div id="start">
+        <div class="dialog">
+            <div class="title">Ready?</div>
+            <br>
+            <button onclick="hideDialog('start')">Go</button>
+        </div>
+    </div>
+    <div id="score" onclick="main()">
+        <ul class="stars3">
+            <li class="star star1">⭐</li>
+            <li class="star star2">⭐</li>
+            <li class="star star3">⭐</li>
+        </ul>
+    </div>
+    <div id="screen">
+        <div id="help" onclick="showDialog('tutorial')">?</div>
+        <header id="header"></header>
+        <section id="section">
+        </section>
+    </div>
     <script  src="js/index.js"></script>
 </body>
 </html>
