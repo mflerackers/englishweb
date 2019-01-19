@@ -2,6 +2,7 @@ body {
     margin: 0;
     text-align: center;
     color: black;
+    font-family: "Dejavu Serif";
     font-size: 20vh;
 }
 
@@ -10,9 +11,170 @@ header {
     cursor: pointer;
 }
 
+#screen {
+    position: relative;
+    width: 100%;
+    height: 100%;
+}
+
+#help {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 10vh;
+    height: 10vh;
+    font-size: 10vh;
+    cursor: pointer;
+}
+
+#tutorial {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    visibility:hidden;
+    display:none;
+    background-color: rgba(22,22,22,0.5);
+}
+
+#tutorial.show {
+    visibility: visible;
+    display: block;
+}
+
+#start {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    z-index:40;
+    visibility:hidden;
+    display:none;
+    background-color: rgba(22,22,22,0.5);
+}
+
+#start.show {
+    visibility: visible;
+    display: block;
+}
+
+.dialog {
+    font-size: 2vh;
+    background:#e1e1e1;
+    margin: 0 auto;
+    width:30vh;
+    position:relative;
+    z-index:41;
+    top: 25%;
+    padding:30px;
+    -webkit-box-shadow:0 0 10px rgba(0,0,0,0.4);
+    -moz-box-shadow:0 0 10px rgba(0,0,0,0.4);
+    box-shadow:0 0 10px rgba(0,0,0,0.4);
+}
+
+.dialog .title {
+    font-size: 3vh;
+    font-weight: bold;
+    margin-bottom:4vh;
+}
+
+.dialog button {
+    background-color: white;
+    border: none;
+    padding: 2vh;
+    font-size: 3vh;
+    color: black;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    cursor: pointer;
+    margin-top:4vh;
+}
+
 article {
     --font-family: 'Kalam', cursive;
     -webkit-text-stroke: 1.2px black;
     line-height: 22vh;
     cursor: pointer;
+    -webkit-user-select: none; /* Safari */        
+    -moz-user-select: none; /* Firefox */
+    -ms-user-select: none; /* IE10+/Edge */
+    user-select: none; /* Standard */
+    position: relative;
+}
+
+#score {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(22,22,22,0.5);
+    z-index:39;
+
+    visibility:hidden;
+    display:none;
+
+    cursor: pointer;
+}
+
+#score.show {
+    visibility: visible;
+    display: block;
+}
+
+#score ul {
+    position: absolute;
+    left: 5%;
+    top: 0;
+    width: 90%;
+    margin: 0;
+    padding: 0;
+}
+
+li.star {
+    display: inline-block;
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+    font-size: 20vw;
+    
+    animation:spin 1s ease both;
+    
+    transform:scale(0.0, 0.0);
+}
+
+ul.stars1 li.star2 {
+    visibility: hidden;
+}
+
+ul.stars1 li.star3 {
+    visibility: hidden;
+}
+
+ul.stars2 li.star3 {
+    visibility: hidden;
+}
+
+li.star1 {
+    animation-delay: 0.0s;
+}
+
+li.star2 {
+    animation-delay: 0.5s;
+}
+
+li.star3 {
+    animation-delay: 1.0s;
+}
+
+@keyframes spin {
+    0% { 
+        -webkit-transform: rotate(360deg) scale(0.0, 0.0); 
+        transform:rotate(0deg) scale(0.0, 0.0);
+    }
+    90% { 
+        -webkit-transform: rotate(360deg) scale(1.0, 1.0); 
+        transform: rotate(360deg) scale(1.2, 1.2);
+    }
+    100% { 
+        -webkit-transform: rotate(360deg) scale(0.0, 0.0); 
+        transform: rotate(360deg) scale(1.0, 1.0);
+    }
 }

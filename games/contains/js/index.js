@@ -410,12 +410,19 @@ function getPhonemeSound(phoneme) {
     return sound;
 }
 
-function buildGame() {
-    
-    let oldGame = game;
-    while (oldGame == game) {
-        game = games[Math.floor(Math.random()*(games.length))];
+// For now just locally, later these will come from the server
+function fetchStages() {
+    let gameIndexes = []
+    for (let i = 0; i < games.length; i++) {
+        gameIndexes[i] = i;
     }
+    gameIndexes = randomize(gameIndexes).slice(0, 5);
+    return gameIndexes.map(i => games[i]);
+}
+
+function buildGame(stages, index) {
+    
+    let game = stages[index];
 
     let header = document.getElementById("header");
     header.innerHTML = `<span>${game[0]}</span>`;
@@ -435,28 +442,106 @@ function buildGame() {
     for (let i = 0; i < 3; i++) {
         let article = document.createElement("article");
         let phoneme = answers[i].toLowerCase();
-        article.innerHTML = "<span class=" + phoneme + ">⬤</span>"
+        article.innerHTML = "<div><span class=" + phoneme + ">⬤</span></div>";
         let sound = getPhonemeSound(phoneme);
         if (answers[i] == game[2]) {
             article.addEventListener("click", () => {
                 sound.play();
-                if (article.innerText.slice(-1) != "✓")
-                    article.innerHTML += " ✓";
-                window.setTimeout(buildGame, 500);
+                if (article.innerText.slice(-1) != "✓") {
+                    article.innerHTML += "<div style='margin-top:-22vh;'><span>✓</span></div>";
+                }
+                if (++index < stages.length) {
+                    window.setTimeout(()=>{ buildGame(stages, index) }, 500);
+                }
+                else {
+                    showScore(index);
+                }
             });
         }
         else {
             article.addEventListener("click", () => {
                 sound.play();
-                if (article.innerText.slice(-1) != "✗")
-                article.innerHTML += " ✗";
+                if (article.innerText.slice(-1) != "✗") {
+                    article.innerHTML += "<div style='margin-top:-22vh;'><span>✗</span></div>";
+                    miss(index);
+                }
             });
         }
         section.appendChild(article);
     }
-
-    
-    
 }
 
-buildGame();
+function getSettings() {
+    console.log("loading", document.cookie)
+    let settingsString = document.cookie.match(new RegExp("settings=([^;]+)"));
+    settingsString && (settingsString = settingsString[1]);
+    console.log("loading", settingsString);
+    let settings = JSON.parse(settingsString) || {tutorial:true};
+    console.log("loading", settings);
+    return settings;
+}
+
+function setSettings(settings) {
+    console.log("saving", settings);
+    settingsString = "settings=" + JSON.stringify(settings);
+    console.log("saving", settingsString);
+    document.cookie = settingsString;
+}
+
+let onDialogClosed;
+
+function showDialog(name) {
+    document.getElementById(name).className = "show";
+    return new Promise((resolve, reject) => { onDialogClosed = resolve; });
+}
+
+function hideDialog(name) {
+    document.getElementById(name).className='';
+    setSettings({tutorial:false});
+    if (onDialogClosed) onDialogClosed();
+}
+
+function shouldShowTutorial() {
+    return getSettings().tutorial;
+}
+
+let scores;
+
+function miss(index) {
+    scores[index] == 0 || (scores[index]--);
+    console.log(scores[index]);
+}
+
+function getScore(index) {
+    return scores.reduce((a,s) => a+s) / index;
+}
+
+function showScore(index) {
+    let scoreDiv = document.getElementById("score");
+    let ul = scoreDiv.getElementsByTagName("ul")[0];
+    ul.className = "stars" + Math.floor(getScore(index));
+    scoreDiv.className = "show";
+}
+
+function hideScore() {
+    let scoreDiv = document.getElementById("score");
+    scoreDiv.className = "";
+}
+
+function main() {
+    let stages = fetchStages();
+    scores = stages.map(s => 3);
+
+    hideScore();
+
+    buildGame(stages, 0);
+
+    if (shouldShowTutorial()) {
+        showDialog("tutorial").then(()=>{ wordSound.play(word); });
+    }
+    else {
+        showDialog("start").then(()=>{ wordSound.play(word); });
+    }
+}
+
+main();
