@@ -135,10 +135,12 @@ li.star {
     margin: 0;
     font-size: 20vw;
     
-    animation:spin 1s ease both;
-    
     -webkit-transform: scale(0.0, 0.0);
     transform:scale(0.0, 0.0);
+}
+
+#score.show li.star {
+    animation:spin 1s ease both;
 }
 
 ul.stars1 li.star2 {
@@ -153,15 +155,15 @@ ul.stars2 li.star3 {
     visibility: hidden;
 }
 
-li.star1 {
+#score.show li.star1 {
     animation-delay: 0.0s;
 }
 
-li.star2 {
+#score.show li.star2 {
     animation-delay: 0.5s;
 }
 
-li.star3 {
+#score.show li.star3 {
     animation-delay: 1.0s;
 }
 
