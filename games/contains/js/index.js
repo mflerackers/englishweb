@@ -451,7 +451,7 @@ function buildGame(stages, index) {
                     article.innerHTML += "<div style='margin-top:-22vh;'><span>✓</span></div>";
                 }
                 if (++index < stages.length) {
-                    window.setTimeout(()=>{ buildGame(stages, index) }, 500);
+                    window.setTimeout(()=>{ buildGame(stages, index) }, 800);
                 }
                 else {
                     showScore(index);
@@ -469,6 +469,10 @@ function buildGame(stages, index) {
         }
         section.appendChild(article);
     }
+
+    wordSound.play(word);
+
+    return word;
 }
 
 function getSettings() {
@@ -534,7 +538,7 @@ function main() {
 
     hideScore();
 
-    buildGame(stages, 0);
+    let word = buildGame(stages, 0);
 
     if (shouldShowTutorial()) {
         showDialog("tutorial").then(()=>{ wordSound.play(word); });
