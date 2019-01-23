@@ -27,54 +27,54 @@
 *
 */
 
-pages = [`In ancient times, 
-an elderly pair of people lived alone 
-on an island in a huge river. They 
-knew a lot about herbs and vegetables, 
-which the wife knew a lot about. 
-The husband, a gnarly old guy with 
-a quick tongue, was always talking about 
-this and that. Too much for the wife, 
-in fact, so she never responded much to his talk.`,
+pages = [`The Story of Momotaro the Peach Boy. 
+In ancient times, an elderly pair of people lived 
+alone on an island in a huge river. They ate
+ a lot of fish cooked with herbs and vegetables, 
+ which the wife knew a lot about. The husband, 
+ a gnarly old guy with a quick tongue, was always 
+ talking about this and that.`,
+ 
+ `Too much for the wife, in fact, so she never 
+ responded much to his talk. The husband, Ojisan, 
+ caught the fish, mainly salmon, as there were many 
+ in the river. He caught more in the autumn, when 
+ the salmon swam upstream past their house.`,
+ 
+ `The wife, Obaasan, was hanging up the clothes one 
+ day and saw a strange sight. Down the river was 
+ slowly floating a giant peach. It was near the bank 
+ so she took some scissors and snipped a length of 
+ clothes line, attached a hook and threw it over the 
+ peach.`,
+ 
+ `She then pulled it closer ashore, grabbed a sword 
+ from the closet and began to cut it into pieces that 
+ could be eaten. Suddenly, a small voice said, "Please 
+ don't poke me with your sword!". She was dumbfounded, 
+ in shock, and said, "Who are you? Are you a ghost?" The 
+ voice replied, "I don't know who I am, but I don't think I am a ghost. I can see myself."`,
+ 
+ `Obaasan then made a hole in the center of the whole peach, 
+ which was really big, and out popped a little baby boy, 
+ with big blue eyes and rosy cheeks.
+Obaasan took the baby boy home to meet her husband. 
+They asked the boy who he was and why he was in the peach. 
+The boy said he had no knowledge of who he was or why he was there. 
+He said he only woke up, from a deep sleep when the tip of his 
+toe was pricked by the scissors, sending a sharp pain through 
+his body, which woke him up. He explained that he can't 
+describe much from before that.`,
 
-`The husband, Ojisan, caught fish, mainly 
-salmon, as there were many in the river. 
-He caught many in the autumn, when the 
-salmon swam upstream past their house. 
-The wife, Obaasan, was hanging up the clothes 
-one day and saw a strange sight. Down the river 
-was slowly floating a giant peach. `,
-
-`It was near the bank so she took some scissors 
-and snipped a length of clothes line, 
-attached a hook and threw it over the peach. 
-She then pulled it closer ashore, grabbed a 
-sword from the closet and began to cut it 
-into pieces that could be eaten. Suddenly, 
-a small voice said, 'Please don't poke me 
-with your sword!'. `,
-
-`She was dumbfounded, in shock, and said, 
-'Who are you? Are you a ghost?' The voice 
-replied, 'I don't know who I am, but I 
-don't think I am a ghost. I can see myself." 
-Obaasan then made a hole in the center of the 
-whole peach, which was really big, and out 
-popped a little baby boy, with big blue eyes 
-and rosy cheeks.`,
-
-`The old people were very surprised!
-More surprising, the baby boy said,
-'Don't be afraid!
-Heaven saw how lonely you were
-without any children and sent me to you.'`,
-
-`So, the old people happily took the baby
-and raised him as their own son.
-They named him 'Momotaro',
-which means 'Peach Boy' in Japanese.
-They loved him very much and
-they raised him to be a very fine boy.`];
+`However, he did remember that he came from a bright sunny place, 
+with lots of white billowy clouds, music twinkling like the stars 
+and hearing a soft voice saying that he was a gift for a lonely 
+couple who had no clear purpose in their lives. He looked with new 
+eyes at the old couple and without his will, his tongue spoke 
+these words: "Heaven saw how lonely you were and sent me to you".
+The old couple were both surprised and pleased as they were lonely 
+and had no sense of purpose.`
+];
 
 function getClasses(match) {
     if ((match.ph == "S" && match.ch == "c") ||
