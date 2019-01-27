@@ -124,6 +124,7 @@ function randomize(list) {
 }
 
 let game = null;
+let loading = true;
 
 var wordSound = new Howl({
     src: ['../similar/data/similar-male.m4a'],
@@ -396,6 +397,11 @@ var wordSound = new Howl({
     }
 });
 
+wordSound.once('load', function(){
+    loading = false;
+    hideDialog("loading");
+});
+
 phonemeSounds = {};
 
 function getPhonemeSound(phoneme) {
@@ -495,12 +501,12 @@ function setSettings(settings) {
 let onDialogClosed;
 
 function showDialog(name) {
-    document.getElementById(name).className = "show";
+    document.getElementById(name).classList.add("show");
     return new Promise((resolve, reject) => { onDialogClosed = resolve; });
 }
 
 function hideDialog(name) {
-    document.getElementById(name).className='';
+    document.getElementById(name).classList.remove("show");
     setSettings({tutorial:false});
     if (onDialogClosed) onDialogClosed();
 }
@@ -524,12 +530,21 @@ function showScore(index) {
     let scoreDiv = document.getElementById("score");
     let ul = scoreDiv.getElementsByTagName("ul")[0];
     ul.className = "stars" + Math.floor(getScore(index));
-    scoreDiv.className = "show";
+    scoreDiv.classList.add("show");
 }
 
 function hideScore() {
     let scoreDiv = document.getElementById("score");
-    scoreDiv.className = "";
+    scoreDiv.classList.remove("show");
+}
+
+function firstInteraction() {
+    if (shouldShowTutorial()) {
+        showDialog("tutorial").then(()=>{ wordSound.play(word); });
+    }
+    else {
+        showDialog("start").then(()=>{ wordSound.play(word); });
+    }
 }
 
 function main() {
@@ -540,11 +555,11 @@ function main() {
 
     let word = buildGame(stages, 0);
 
-    if (shouldShowTutorial()) {
-        showDialog("tutorial").then(()=>{ wordSound.play(word); });
+    if (loading) {
+        showDialog("loading").then(firstInteraction);
     }
     else {
-        showDialog("start").then(()=>{ wordSound.play(word); });
+        firstInteraction();
     }
 }
 

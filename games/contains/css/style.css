@@ -17,6 +17,10 @@ header {
     height: 100%;
 }
 
+#loading div {
+    top: 45%;
+}
+
 #help {
     position: absolute;
     top: 0;
@@ -27,7 +31,7 @@ header {
     cursor: pointer;
 }
 
-#tutorial {
+.layer {
     width: 100%;
     height: 100%;
     position: absolute;
@@ -37,22 +41,7 @@ header {
     background-color: rgba(22,22,22,0.5);
 }
 
-#tutorial.show {
-    visibility: visible;
-    display: block;
-}
-
-#start {
-    width: 100%;
-    height: 100%;
-    position: absolute;
-    z-index:40;
-    visibility:hidden;
-    display:none;
-    background-color: rgba(22,22,22,0.5);
-}
-
-#start.show {
+.layer.show {
     visibility: visible;
     display: block;
 }
@@ -103,21 +92,7 @@ article {
 }
 
 #score {
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(22,22,22,0.5);
-    z-index:39;
-
-    visibility:hidden;
-    display:none;
-
     cursor: pointer;
-}
-
-#score.show {
-    visibility: visible;
-    display: block;
 }
 
 #score ul {
