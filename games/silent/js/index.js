@@ -165,6 +165,21 @@ wordSound.once('load', function(){
     hideDialog("loading");
 });
 
+phonemeSounds = {};
+
+function getPhonemeSound(phoneme) {
+    console.log("loading " + phoneme);
+    let sound = phonemeSounds[phoneme];
+    if (!sound) {
+        sound = new Howl({
+            src: [`../../phonemes/arthur/${phoneme.toUpperCase()}.wav`],
+            preload: true
+        });
+        phonemeSounds[phoneme] = sound;
+    }
+    return sound;
+}
+
 // For now just locally, later these will come from the server
 function fetchStages() {
     let gameIndexes = []
@@ -203,6 +218,8 @@ function buildGame(stages, index) {
         span._class = span.className;
         span.className = null;
 
+        let sound = (span._class && span._class != "silent") ? getPhonemeSound(span._class) : null;
+
         span.addEventListener("click", () => {
             if (span.className == span._class)
                 return;
@@ -212,6 +229,9 @@ function buildGame(stages, index) {
             }
             else {
                 miss(index);
+                if (sound) {
+                    sound.play();
+                }
             }
             span.className = span._class;
             if (found == count) {
