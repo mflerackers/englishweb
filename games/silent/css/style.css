@@ -22,3 +22,138 @@ span {
     transition: all 1s linear;
     cursor: pointer;
 }
+
+#screen {
+    position: relative;
+    width: 100%;
+    height: 100%;
+}
+
+#loading div {
+    top: 45%;
+}
+
+#help {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 10vh;
+    height: 10vh;
+    font-size: 10vh;
+    cursor: pointer;
+}
+
+.layer {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    z-index:40;
+    visibility:hidden;
+    display:none;
+    background-color: rgba(22,22,22,0.5);
+}
+
+.layer.show {
+    visibility: visible;
+    display: block;
+}
+
+.dialog {
+    font-size: 2vh;
+    background:#e1e1e1;
+    margin: 0 auto;
+    width:30vh;
+    position:relative;
+    z-index:41;
+    top: 25%;
+    padding:30px;
+    -webkit-box-shadow:0 0 10px rgba(0,0,0,0.4);
+    -moz-box-shadow:0 0 10px rgba(0,0,0,0.4);
+    box-shadow:0 0 10px rgba(0,0,0,0.4);
+}
+
+.dialog .title {
+    font-size: 3vh;
+    font-weight: bold;
+    margin-bottom:4vh;
+}
+
+.dialog button {
+    background-color: white;
+    border: none;
+    padding: 2vh;
+    font-size: 3vh;
+    color: black;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    cursor: pointer;
+    margin-top:4vh;
+}
+
+#score {
+    cursor: pointer;
+}
+
+#score ul {
+    position: absolute;
+    left: 5%;
+    top: 0;
+    width: 90%;
+    margin: 0;
+    padding: 0;
+}
+
+li.star {
+    display: inline-block;
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+    font-size: 20vw;
+    
+    -webkit-transform: scale(0.0, 0.0);
+    transform:scale(0.0, 0.0);
+}
+
+#score.show li.star {
+    animation:spin 1s ease both;
+}
+
+ul.stars1 li.star2 {
+    visibility: hidden;
+}
+
+ul.stars1 li.star3 {
+    visibility: hidden;
+}
+
+ul.stars2 li.star3 {
+    visibility: hidden;
+}
+
+#score.show li.star1 {
+    animation-delay: 0.0s;
+}
+
+#score.show li.star2 {
+    animation-delay: 0.5s;
+}
+
+#score.show li.star3 {
+    animation-delay: 1.0s;
+}
+
+@keyframes spin {
+    0% { 
+        -webkit-transform: rotate(0deg) scale(0.0, 0.0);
+        transform:rotate(0deg) scale(0.0, 0.0);
+    }
+    90% { 
+        -webkit-transform: rotate(360deg) scale(1.2, 1.2);
+        transform: rotate(360deg) scale(1.2, 1.2);
+    }
+    100% { 
+        -webkit-transform: rotate(360deg) scale(1.0, 1.0);
+        transform: rotate(360deg) scale(1.0, 1.0);
+    }
+}
