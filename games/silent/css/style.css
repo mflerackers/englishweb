@@ -3,6 +3,11 @@ body {
     text-align: center;
     color: black;
     font-size: 20vh;
+
+    -webkit-transition: background-color 1s linear;
+    -moz-transition: background-color 1s linear;
+    -o-transition: background-color 1s linear;
+    transition: background-color 1s linear;
 }
 
 header {

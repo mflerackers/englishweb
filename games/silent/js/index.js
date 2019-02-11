@@ -83,6 +83,15 @@ var wordSound = new Howl({
     }
 });
 
+const colors = [
+    "#7ed97c",
+    "#b0e098",
+    "#f8f89d",
+    "#fcb954",
+    "#964850",
+    "#a48568"
+]
+
 function getClasses(match) {
     if ((match.ph == "S" && match.ch == "c") ||
     (match.ph == "V" && match.ch == "f") ||
@@ -168,6 +177,8 @@ function fetchStages() {
 
 function buildGame(stages, index) {
     
+    document.getElementsByTagName("body")[0].style.backgroundColor = colors[index%colors.length];
+
     let game = stages[index];
 
     let header = document.getElementById("header");
