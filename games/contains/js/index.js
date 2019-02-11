@@ -411,7 +411,7 @@ function getPhonemeSound(phoneme) {
             src: [`../../phonemes/arthur/${phoneme.toUpperCase()}.wav`],
             preload: true
         });
-        phonemeSounds = sound;
+        phonemeSounds[phoneme] = sound;
     }
     return sound;
 }
