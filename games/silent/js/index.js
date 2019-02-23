@@ -36,11 +36,11 @@ var wordSound = new Howl({
 		island:[5600,1000],
 		huge:[7000,1000], 
 		knew:[8250,1000], 
-		vegetables:[9600,1000], 
+		vegetables:[9600,1400], 
 		which:[11200,1000], 
 		wife:[12500,750], 
 		knew:[13500,1000], 
-		gnarly:[14800,1000], 
+		gnarly:[14800,1200], 
 		tongue:[16250,1000], 
 		talking:[17600,1000],
 		caught:[18900,800],
@@ -66,7 +66,7 @@ var wordSound = new Howl({
 		ghost:[47200,1000], 
 		hole:[48500,1000], 
 		whole:[48500,1000],
-		popped:[51200,800], 
+		popped:[51200,1000], 
 		little:[52600,800], 
 		knowledge:[54000,1000], 
 		there:[55500,1000], 
@@ -80,6 +80,9 @@ var wordSound = new Howl({
 		couple:[67000,1000], 
 		purpose:[68400,1000],
 		lives: [69600,1400],
+		surprised:[73000,1250],
+		eyes:[71200,1200],
+		sense:[75000,1200],
     }
 });
 
