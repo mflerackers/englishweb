@@ -31,7 +31,8 @@ const columns = 10;
 const rows = 10;
 const margin = 10;
 let min = Math.min(canvas.width, canvas.height);
-let size = (min-2*margin) / columns;
+let size = Math.floor((min-2*margin) / columns);
+let spriteSize = size;
 let grid;
 
 let img;
@@ -69,7 +70,7 @@ class Idle {
     }
 
     drawDotRaw(ctx, color, x, y, s) {
-        ctx.drawImage(img, color*50, 0, 50, 50, x, y, s * size, s * size);
+        ctx.drawImage(img, color*spriteSize, 0, spriteSize, spriteSize, x, y, s * size, s * size);
     }
     
     drawDot(ctx, i, j, pos, dx, dy, s) {
@@ -147,7 +148,7 @@ class Drop extends Idle {
     
     drawDot(ctx, x, y, pos) {
         if (this.list && y <= this.list[x]) {
-            super.drawDot(ctx, x, y, pos, 0, -50*(dropTime-this.time)/dropTime);
+            super.drawDot(ctx, x, y, pos, 0, -spriteSize*(dropTime-this.time)/dropTime);
         }
         else {
             super.drawDot(ctx, x, y, pos);
@@ -486,7 +487,7 @@ class GameApp extends App {
         grid = new Array(columns*rows).fill(0);
         grid = grid.map((v, i) => randomColor(i));
 
-        img = this.createImageFromImageData(renderSprite(this.ctx, phonemes));
+        this.recreateSprites();
 
         sounds = phonemes.map(phoneme => 
             new Howl({
@@ -581,6 +582,10 @@ class GameApp extends App {
         this.fillPositions();
     }
 
+    recreateSprites() {
+        img = this.createImageFromImageData(renderSprite(this.ctx, phonemes, spriteSize));
+    }
+
     createImageFromImageData(imagedata) {
         var canvas = document.createElement('canvas');
         var ctx = canvas.getContext('2d');
@@ -639,7 +644,9 @@ class GameApp extends App {
         super.resize();
 
         min = Math.min(canvas.width, canvas.height);
-        size = (min-2*margin) / columns;
+        size = Math.floor((min-2*margin) / columns);
+        spriteSize = size;
+        this.recreateSprites();
 
         this.ctx.font = `${size}px sans-serif`;
 
