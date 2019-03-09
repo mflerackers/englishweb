@@ -173,7 +173,7 @@ function renderSphere(img, x, y, r, c, l) {
     sphere.render(img, material, l);
 }
 
-function renderSprite(ctx, phonemes) {
+function renderSprite(ctx, phonemes, size) {
 
     let colors = {};
     colors.getColor = (id) => colors[id].map(c => c / 255.0);
@@ -206,11 +206,11 @@ function renderSprite(ctx, phonemes) {
     phonemeColors.IU = colors.getColor("iu");
     phonemeColors.ER = colors.getColor("er");
     
-    let light = vec3.normalize(vec3.fromTo([0, 0, 0],[-20, -20, 50]));
-    let img = ctx.createImageData(50+50*phonemes.length,50);
+    let light = vec3.normalize(vec3.fromTo([0, 0, 0],[-size*0.4, -size*0.4, size]));
+    let img = ctx.createImageData(size+size*phonemes.length,size);
 
     for (let i = 0; i < phonemes.length; i++) {
-        renderSphere(img, 50+25+i*50, 25, 20, phonemeColors.getColors(phonemes[i]), light);
+        renderSphere(img, size*1.5+i*size, size*0.5, size*0.5, phonemeColors.getColors(phonemes[i]), light);
     }
 
     /*renderSphere(img, 25, 25, 20, colors.getColor("aa"), light);
