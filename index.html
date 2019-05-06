@@ -37,7 +37,7 @@
 </header>
 <body>
     <a href="./phoneme-quiz.html">Phoneme quiz</a>
-    <center><input id="word" type="text" placeholder="Type here"></center>
+    <center><input id="word" type="text" placeholder="Type here" style="width: 90%"></center>
     <div class="container">
         <div class="word" id="worddisplay"></div>
     </div>
@@ -116,23 +116,30 @@
 
         let html = "";
         let pairs = analyze(text)
+        let wasPunctuation = false
 
         pairs.forEach(pair => {
             [word, phonemes, tag] = pair
 
             if (word == "one" || word == "once" || word == "usual" || word == "usually" || word == "genuine") {
                 if (html) { html += " " }
-                html += "<span class='weird'>" + word + "</span>";
+                html += "<span class='weird'>" + word + "</span>"
+                wasPunctuation = false
             }
             else if (word == "obaasan") {
                 if (html) { html += " " }
-                html += "<span class='OW'>o</span>b<span class='AA'>aa</span>s<span class='AH'>a</span>n";
+                html += "<span class='OW'>o</span>b<span class='AA'>aa</span>s<span class='AH'>a</span>n"
+                wasPunctuation = false
             }
             else if (RiTa.isPunctuation(word)) {
-                html += "<span>" + word + "</span> "
+                html += "<span>" + word + "</span>"
+                if (!wasPunctuation && [".", ",", "!", "?"].includes(word)) {
+                    html += " "
+                    wasPunctuation = true;
+                }
             }
             else {
-                if (html) { html += " " }
+                if (html && !wasPunctuation) { html += " " }
 
                 phonemes = phonemes.toUpperCase().split("-").filter(ph => ph.length > 0);
                 phonemes = transformPhonemes(phonemes);
@@ -160,6 +167,7 @@
                     }
                 }
                 html += "</span>"
+                wasPunctuation = false
             }
         });
         
