@@ -209,16 +209,16 @@ function matchPhonemes(word, phonemes) {
             //console.log("current grapheme match : ", grapheme);
             for (let candidate of candidates) {
                 //console.log("current candidate match: ", candidate);
-                if (candidate.remaining.startsWith(grapheme)) {
+                if (candidate.remaining.toLowerCase().startsWith(grapheme)) {
                     //console.log("added " + grapheme + " for " + phoneme);
-                    newCandidates.push(candidate.extend(phoneme, grapheme));
+                    newCandidates.push(candidate.extend(phoneme, candidate.remaining.slice(0, grapheme.length)));
                 }
                 else {
                     //console.log("grapheme " + grapheme + " for " + phoneme + " not in " + candidate.remaining);
                 }
                 // Only match silents within a word
                 //if (candidate.remaining.length < word.length) {
-                    let silents = getSilents(candidate.remaining);
+                    let silents = getSilents(candidate.remaining.toLowerCase());
                     //console.log("got silents ", silents);
                     silents.forEach(silent => {
                         if (candidate.remaining.indexOf(grapheme) == silent.length) {
