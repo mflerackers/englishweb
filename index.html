@@ -25,19 +25,19 @@
             width: 100%
         }
         div.word span {
-            -webkit-text-stroke: 1.5px black;
+            -webkit-text-stroke: 0.01em black;
         }
         #error {
             font-family: "Lato", "Lucida Grande", "Lucida Sans Unicode", "Tahoma", "Sans-Serif";
         }
     </style>
-    <link rel="stylesheet" type="text/css" href="./colors.css/">
+    <link rel="stylesheet" type="text/css" href="./colors.css">
     <script src="./rita-full.min.js"/></script>
     <script src="./color-phonemes.js"/></script>
 </header>
 <body>
     <a href="./phoneme-quiz.html">Phoneme quiz</a>
-    <center><input id="word" type="text" placeholder="Type here" style="width: 90%"></center>
+    <center><input id="word" type="text" placeholder="Type here" style="width: 90%"><br><select id="voices"></select> <button id="say">Say</button></center>
     <div class="container">
         <div class="word" id="worddisplay"></div>
     </div>
@@ -179,5 +179,62 @@
     }
     
     refreshText(document.getElementById("word"));
+
+    let synth = window.speechSynthesis
+
+    function fillVoices(voices) {
+        voices = voices.filter((v)=>v.lang.startsWith("en"))
+        let voiceSelect = document.getElementById("voices")
+        if (voices.length) {
+            voices.forEach((voice)=>{
+                let option = document.createElement("option")
+                option.text = `${voice.name} (${voice.lang})`
+                option.value = voice.name
+                voiceSelect.appendChild(option)
+            })
+        }
+        else {
+            let option = document.createElement("option")
+            option.text = "default voice"
+            voiceSelect.appendChild(option)
+        }
+    }
+
+    if (synth) {
+        let voices = synth.getVoices()
+
+        if (!voices || !voices.length) {
+            console.log("No voices, waiting for callback")
+            synth.onvoiceschanged = ()=>{
+                fillVoices(voices)
+            };
+        }
+        else {
+            fillVoices(voices)
+        }
+
+        document.getElementById("say").addEventListener("click", ()=>{
+            let text = document.getElementById("word").value;
+            let voiceSelect = document.getElementById("voices")
+
+            if (!text) { return }
+
+            let name = voiceSelect.value
+            let voice = voices.find((v)=>v.name == name)
+
+            console.log(name, voice)
+
+            let utterance = new SpeechSynthesisUtterance(text);
+            utterance.voice = voice
+
+            synth.speak(utterance);
+        })
+    }
+    else {
+        document.getElementById("say").hidden = true
+        document.getElementById("voices").hidden = true
+    }
+
+    
 </script>
 </html>
