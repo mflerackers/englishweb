@@ -95,7 +95,7 @@ letters = {
     D  : ["dd", "d"],
     DH : ["th", "t"],
     EH : ["ea", "e", "ei", "ai", "a"],
-    ER : ["ear", "er", "ir", "oar", "or", "r", "irr", "ur"],
+    ER : ["ear", "er", "ir", "oar", "or", "rr", "r", "irr", "ur"],
     EY : ["ay", "ai", "a", "ei", "ey", "e"],
     G  : ["gg", "g"],
     F  : ["ff", "f", "ph", "gh"],
