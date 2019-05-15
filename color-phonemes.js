@@ -123,7 +123,7 @@ letters = {
     UW : ["eu", "ew", "oo", "ou", "o", "u", "ue", "ui"],
     V  : ["v", "v", "f"],
     W  : ["u", "w"],
-    X  : ["x", "cs", "ks"],
+    X  : ["x", "cs", "kes", "ks"],
     Z  : ["x", "zz", "z", "s"],
     ZH : ["g", "s", "su"]
 };
