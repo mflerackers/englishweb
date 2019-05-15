@@ -128,7 +128,7 @@ letters = {
     ZH : ["g", "s", "su"]
 };
 
-silents = ["c", "ew", "e", "gh", "g", "h", "k", "w", "p", "s", "t", "b", "l", "n", "ou", "i", "d", "z", "ch", "w", "u"];
+silents = ["c", "ew", "e", "gh", "g", "h", "k", "w", "p", "s", "t", "b", "l", "n", "o", "ou", "i", "d", "z", "ch", "w", "u"];
 
 function getSilents(graphemes) {
     //console.log("looking for silent in " + graphemes);
