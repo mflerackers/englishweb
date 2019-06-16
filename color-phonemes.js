@@ -89,7 +89,7 @@ letters = {
     AH : ["ou", "ui", "u", "a", "e", "o", "oo", "io", "i", "y", "h"],
     AO : ["oa", "al", "au", "aw", "ou", "oo", "o", "a"],
     AW : ["ou", "ow"],
-    AY : ["ai", "ie", "ui", "uy", "ey", "i", "oi", "oy", "y"],
+    AY : ["a", "ai", "ie", "ui", "uy", "ey", "i", "oi", "oy", "y"],
     B  : ["bb", "b"],
     CH : ["ch", "c", "tch", "t"],
     D  : ["dd", "d"],
