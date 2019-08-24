@@ -159,9 +159,10 @@
         </label>
     </template>
     <header id="words"></header>
-    <div><center><fieldset>
+    <article id="image" style="text-align:center; display:none;"><img src="./resources/cat_on_a_bed.png"/></article>
+    <div id="cards" style="text-align:center;"><fieldset>
         
-    </fieldset></center></div>
+    </fieldset></div>
     <script>
         var phonemes = ["AA", "AE", "AH", "EH"];
         var phonemeBuffers = {};
@@ -318,6 +319,14 @@
                     spans[i].classList.remove("phoneme-hidden")
                 }
             }
+            let cards = document.querySelectorAll("input[type=checkbox]")
+            for (let i=0; i < cards.length; ++i) {
+                if (!cards[i].disabled) {
+                    return
+                }
+            }
+            document.getElementById("cards").style.display = "none"
+            document.getElementById("image").style.display = "block"
         }
         function playPhoneme(phoneme, finished) {
             let source = audioContext.createBufferSource();
