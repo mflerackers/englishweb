@@ -12,44 +12,7 @@
         gtag('config', 'UA-109740765-2');
     </script>
     <link rel="stylesheet" type="text/css" href="./colors.css">
-    <link rel="stylesheet" type="text/css" href="./svg-colors.css">
     <style>
-        .ae {
-            fill:url("#ae");
-        }
-        .aw {
-            fill:url("#aw");
-        }
-        .eh {
-            fill:url("#eh");
-        }
-        .ih {
-            fill:url("#ih");
-        }
-        .iy {
-            fill:url("#iy");
-        }
-        .ow {
-            fill:url("#ow");
-        }
-        .oy {
-            fill:url("#oy");
-        }
-        .uh {
-            fill:url("#uh");
-        }
-        .uw {
-            fill:url("#uw");
-        }
-        .kw {
-            fill:url("#kw");
-        }
-        .sh {
-            fill:url("#sh");
-        }
-        .zh {
-            fill:url("#zh");
-        }
         body {
             width: 100%;
             background: #f17563;
@@ -136,89 +99,30 @@
             -webkit-user-select: none;
             -ms-user-select: none;
         }
+
+        header#words {
+            font-size: 15vh;
+            text-align: center;
+        }
+
+        span {
+            text-stroke: 1.2px black;
+            -webkit-text-stroke: 1.2px black;
+        }
+
+        span.phoneme-hidden {
+            color : white;
+            background: initial;
+            background-clip: initial;
+            -webkit-background-clip: initial;
+            -webkit-text-fill-color: initial;
+        }
     </style>
-    <script src="../../rita-full.min.js"/></script>
-    <script src="../../color-phonemes.js"/></script>
+    <script src="./rita-full.min.js"/></script>
+    <script src="./color-phonemes.js"/></script>
 </header>
 <body>
-    <div><a href="./index.html">Text input</a></div>
     <div><a href="./phoneme-quiz.html?voice=male">male</a> <a href="./phoneme-quiz.html?voice=female">female</a></div>
-    <svg style="width:0px;height:0px;" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
-        <defs>
-            <linearGradient id="ae" x1="0" y1="0" x2="0" y2="1">
-                <stop offset="0%" stop-color="rgb(230,173,38)"/>
-                <stop offset="50%" stop-color="rgb(230,173,38)"/>
-                <stop offset="50%" stop-color="rgb(244,190,127)"/>
-                <stop offset="100%" stop-color="rgb(244,190,127)"/>
-            </linearGradient>
-            <linearGradient id="aw" x1="0" y1="0" x2="0" y2="1">
-                <stop offset="0%" stop-color="#bbf"/>
-                <stop offset="50%" stop-color="#bbf"/>
-                <stop offset="50%" stop-color="#0f0"/>
-                <stop offset="100%" stop-color="#0f0"/>
-            </linearGradient>
-            <linearGradient id="eh" x1="0" y1="0" x2="0" y2="1">
-                <stop offset="0%" stop-color="rgb(120,63,4)"/>
-                <stop offset="50%" stop-color="rgb(120,63,4)"/>
-                <stop offset="50%" stop-color="rgb(244,190,127)"/>
-                <stop offset="100%" stop-color="rgb(244,190,127)"/>
-            </linearGradient>
-            <linearGradient id="ih" x1="0" y1="0" x2="0" y2="1">
-                <stop offset="0%" stop-color="rgb(152,199,102)"/>
-                <stop offset="50%" stop-color="rgb(152,199,102)"/>
-                <stop offset="50%" stop-color="rgb(255,242,89)"/>
-                <stop offset="100%" stop-color="rgb(255,242,89)"/>
-            </linearGradient>
-            <linearGradient id="iy" x1="0" y1="0" x2="0" y2="1">
-                <stop offset="0%" stop-color="rgb(1,153,124)"/>
-                <stop offset="50%" stop-color="rgb(1,153,124)"/>
-                <stop offset="50%" stop-color="rgb(120,63,4)"/>
-                <stop offset="100%" stop-color="rgb(120,63,4)"/>
-            </linearGradient>
-            <linearGradient id="ow" x1="0" y1="0" x2="0" y2="1">
-                <stop offset="0%" stop-color="rgb(221,76,54)"/>
-                <stop offset="50%" stop-color="rgb(221,76,54)"/>
-                <stop offset="50%" stop-color="rgb(137,104,158)"/>
-                <stop offset="100%" stop-color="rgb(137,104,158)"/>
-            </linearGradient>
-            <linearGradient id="oy" x1="0" y1="0" x2="0" y2="1">
-                <stop offset="0%" stop-color="rgb(221,76,54)"/>
-                <stop offset="50%" stop-color="rgb(221,76,54)"/>
-                <stop offset="50%" stop-color="rgb(1,153,124)"/>
-                <stop offset="100%" stop-color="rgb(1,153,124)"/>
-            </linearGradient>
-            <linearGradient id="uh" x1="0" y1="0" x2="0" y2="1">
-                <stop offset="0%" stop-color="rgb(244,190,127)"/>
-                <stop offset="50%" stop-color="rgb(244,190,127)"/>
-                <stop offset="50%" stop-color="rgb(255,242,89)"/>
-                <stop offset="100%" stop-color="rgb(255,242,89)"/>
-            </linearGradient>
-            <linearGradient id="uw" x1="0" y1="0" x2="0" y2="1">
-                <stop offset="0%" stop-color="rgb(137,104,158)"/>
-                <stop offset="50%" stop-color="rgb(137,104,158)"/>
-                <stop offset="50%" stop-color="rgb(0,153,206)"/>
-                <stop offset="100%" stop-color="rgb(0,153,206)"/>
-            </linearGradient>
-            <linearGradient id="kw" x1="0" y1="0" x2="0" y2="1">
-                <stop offset="0%" stop-color="rgb(165,166,164)"/>
-                <stop offset="50%" stop-color="rgb(165,166,164)"/>
-                <stop offset="50%" stop-color="rgb(110,120,172)"/>
-                <stop offset="100%" stop-color="rgb(110,120,172)"/>
-            </linearGradient>
-            <linearGradient id="sh" x1="0" y1="0" x2="0" y2="1">
-                <stop offset="0%" stop-color="rgb(0,68,51)"/>
-                <stop offset="50%" stop-color="rgb(0,68,51)"/>
-                <stop offset="50%" stop-color="rgb(244,190,131)"/>
-                <stop offset="100%" stop-color="rgb(244,190,131)"/>
-            </linearGradient>
-            <linearGradient id="zh" x1="0" y1="0" x2="0" y2="1">
-                <stop offset="0%" stop-color="rgb(221,76,54)"/>
-                <stop offset="50%" stop-color="rgb(221,76,54)"/>
-                <stop offset="50%" stop-color="rgb(225,124,167)"/>
-                <stop offset="100%" stop-color="rgb(225,124,167)"/>
-            </linearGradient>
-        </defs>
-    </svg>  
     <svg style="display:none;" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
         <circle id="circ" cx="100" cy="100" r="100"/>
         <g id="ice">
@@ -242,7 +146,8 @@
             </div>
         </label>
     </template>
-    <div style="margin-top: 15vh;"><center><fieldset>
+    <header id="words"></header>
+    <div><center><fieldset>
         
     </fieldset></center></div>
     <script>
@@ -297,6 +202,9 @@
             }
             else if (word == "said") {
                 return "s<span class='eh'>ai</span>d";
+            }
+            else if (word == "a") {
+                return "<span class='eh'>a</span>";
             }
             else {
                 let phonemes = RiTa.getPhonemes(word).toUpperCase().split("-").filter(ph => ph.length > 0);
@@ -377,13 +285,39 @@
                 div.appendChild(node);
             }
             fieldset.appendChild(div);
+
+            // Create words
+            let sentence = "cat on a bed"
+            let element = document.getElementById("words")
+            element.innerHTML = RiTa.tokenize(sentence).map(word=>phonemize(word)).join(" ")
+            let spans = element.querySelectorAll("span")
+            for (let i = 0; i < spans.length; ++i) {
+                if (phonemes.some(ph=>spans[i].classList.contains(ph.toLowerCase()))) {
+                    spans[i].classList.add("phoneme-hidden")
+                }
+            }
+        }
+        function revealPhoneme(phoneme) {
+            phoneme = phoneme.toLowerCase()
+            let element = document.getElementById("words")
+            let spans = element.querySelectorAll("span")
+            for (let i = 0; i < spans.length; ++i) {
+                if (spans[i].classList.contains(phoneme)) {
+                    spans[i].classList.remove("phoneme-hidden")
+                }
+            }
         }
         function playPhoneme(phoneme, finished) {
             let source = audioContext.createBufferSource();
             let buffer = phonemeBuffers[phoneme];
             if (!buffer) {
-                if (finished)
-                    finished();
+                console.log("No buffer, emulating")
+                document.querySelector("fieldset").disabled = true;
+                window.setTimeout(()=>{
+                    document.querySelector("fieldset").disabled = false;
+                    if (finished)
+                        finished();
+                }, 800)
                 return;
             }
             source.buffer = buffer;
@@ -399,33 +333,35 @@
             document.querySelector("fieldset").disabled = true;
         }
         function cardClicked(event) {
-            let clickedCard = event.target;
+            let clickedCard = event.target
             if (!clickedCard.checked)
-                return;
-            let clickedPhoneme = clickedCard.parentNode.querySelector("div.back span").className.toUpperCase();
-            console.log("clicked on " + clickedPhoneme);
-            let cards = document.querySelectorAll("input[type=checkbox]");
+                return
+            let clickedPhoneme = clickedCard.parentNode.querySelector("div.back span").className.toUpperCase()
+            console.log("clicked on " + clickedPhoneme)
+            let cards = document.querySelectorAll("input[type=checkbox]")
             for (let i=0; i < cards.length; ++i) {
-                let card = cards[i];
+                let card = cards[i]
                 if (card == clickedCard)
-                continue;
+                    continue
                 if (card.disabled || !card.checked)
-                continue;
-                let phoneme = card.parentNode.querySelector("div.back span").className.toUpperCase();
+                    continue
+                let phoneme = card.parentNode.querySelector("div.back span").className.toUpperCase()
                 if (phoneme == clickedPhoneme) {
-                    clickedCard.disabled = true;
-                    card.disabled = true;
-                    playPhoneme(clickedPhoneme);
+                    clickedCard.disabled = true
+                    card.disabled = true
+                    playPhoneme(clickedPhoneme, ()=>{
+                        revealPhoneme(phoneme)
+                    })
                 }
                 else {
-                    playPhoneme(clickedPhoneme, function() {
-                        card.checked = false;
-                        clickedCard.checked = false;
+                    playPhoneme(clickedPhoneme, ()=>{
+                        card.checked = false
+                        clickedCard.checked = false
                     });
                 }
                 return;
             }
-            playPhoneme(clickedPhoneme);
+            playPhoneme(clickedPhoneme)
         }
     </script>
 </body>
