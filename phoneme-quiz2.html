@@ -32,13 +32,6 @@
             cursor: pointer;
             margin:1vw;
         }
-
-        @media (min-aspect-ratio: 1/1) {
-            label {
-                width: 20vh;
-                height: 30vh;
-            }
-        }
         
         .card {
             position: relative;
@@ -57,7 +50,7 @@
             width: 100%;
             background: #fff;
             text-align: center;
-            line-height: 25vh;
+            line-height: 30vw;
             -webkit-backface-visibility: hidden;
             backface-visibility: hidden;
             border-radius: 8px;
@@ -78,7 +71,7 @@
         .card .back span {
             padding: 35% 10%;
             width: 80%;
-            font-size: 15vh;
+            font-size: 15vw;
         }
         
         input {
@@ -101,7 +94,7 @@
         }
 
         header#words {
-            font-size: 15vh;
+            font-size: 15vw;
             text-align: center;
         }
 
@@ -116,6 +109,25 @@
             background-clip: initial;
             -webkit-background-clip: initial;
             -webkit-text-fill-color: initial;
+        }
+
+        @media (min-aspect-ratio: 1/1) {
+            label {
+                width: 20vh;
+                height: 30vh;
+            }
+
+            header#words {
+                font-size: 15vh;
+            }
+
+            .card div {
+                line-height: 30vh;
+            }
+
+            .card .back span {
+                font-size: 15vh;
+            }
         }
     </style>
     <script src="./rita-full.min.js"/></script>
