@@ -101,6 +101,7 @@
         span {
             text-stroke: 1.2px black;
             -webkit-text-stroke: 1.2px black;
+            transition: all 1s
         }
 
         span.phoneme-hidden {
@@ -305,7 +306,7 @@
             fieldset.appendChild(div);
 
             // Create words
-            let sentence = "cat on a bed"
+            let sentence = "a cat on a bed"
             let element = document.getElementById("words")
             element.innerHTML = RiTa.tokenize(sentence).map(word=>phonemize(word)).join(" ")
             let spans = element.querySelectorAll("span")
