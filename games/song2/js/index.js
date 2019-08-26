@@ -129,7 +129,9 @@ function buildGame() {
                 pos++;
                 if (pos >= notes.length) {
                     window.setTimeout(() => {
-                        buildGame();
+                        //buildGame();
+                        piano.style.display = "none"
+                        document.getElementById("image").style.display = "inline-block"
                     }, nextGameDelay);
                 }
             }
