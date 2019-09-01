@@ -4,7 +4,6 @@ body {
     color: black;
     font-size: 10vw;
     overflow: hidden;
-    --position: relative;
 }
 
 span {

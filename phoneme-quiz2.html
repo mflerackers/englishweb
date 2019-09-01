@@ -11,6 +11,7 @@
         
         gtag('config', 'UA-109740765-2');
     </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/howler/2.0.15/howler.min.js"></script>
     <link rel="stylesheet" type="text/css" href="./colors.css">
     <style>
         body {
@@ -170,10 +171,28 @@
         
     </fieldset></div>
     <script>
+        let gameData = {
+            "a cat on a bed":["cat_on_a_bed.png"],
+            "a hog wears a dress":["a hog in a dress.png"],
+            "a lot of fast pets":["fast pets.png"],
+            "a hen on a nest of eggs":["hen on eggs.png"],
+        }
+        let sentence = ""
         var phonemes = ["AA", "AE", "AH", "EH"];
         var phonemeBuffers = {};
         var audioContext;
         var fieldset;
+
+        var sound = new Howl({
+            src: ['./resources/animals.m4a'],
+            preload: true,
+            sprite: {
+                "a cat on a bed":[2500,3000],
+                "a hog wears a dress":[47000,3500],
+                "a lot of fast pets":[12500,40000],
+                "a hen on a nest of eggs":[70000,4000],
+            }
+        });
 
         function randomize(list) {
             let newList = list.slice();
@@ -306,7 +325,11 @@
             fieldset.appendChild(div);
 
             // Create words
-            let sentence = "a cat on a bed"
+            let index = Math.floor(Math.random() * Object.keys(gameData).length);
+            sentence = Object.keys(gameData)[index]
+            let image = document.getElementById("image")
+            let img = image.getElementsByTagName("img")[0]
+            img.src = "./resources/" + gameData[sentence][0]
             let element = document.getElementById("words")
             element.innerHTML = RiTa.tokenize(sentence).map(word=>phonemize(word)).join(" ")
             let spans = element.querySelectorAll("span")
@@ -333,6 +356,7 @@
             }
             document.getElementById("cards").style.display = "none"
             document.getElementById("image").style.display = "block"
+            sound.play(sentence)
         }
         function playPhoneme(phoneme, finished) {
             let source = audioContext.createBufferSource();
