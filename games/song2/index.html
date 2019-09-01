@@ -11,13 +11,15 @@
     <link href="https://fonts.googleapis.com/css?family=Kalam" rel="stylesheet">
 </head>
 <body>
-    <div style="height: 30vh;">
-        <div id="song"></div>
-    </div>
-    <div id="pianoblock" style="position: relative; width: 100%; height: 50vh;">
-        <div style="position: absolute; top: 0; left: 0; width: 100%"><ul id="piano"></ul></div>
-        <div id="block" class="overlay"></div>
-        <article id="image" style="text-align:center; display:none; position: absolute; top: 0; left: 0; width: 100%"><img src="../../resources/cat_on_a_bed.png"/></article>
+    <div style="height: 100vh; display: flex; flex-direction: column; align-content: stretch; justify-content: space-between;">
+        <div style="flex-grow: 0">
+            <div id="song"></div>
+        </div>
+        <div id="pianoblock" style="position: relative; width: 100%; flex-grow: 1;">
+            <div style="position: absolute; bottom: 0; left: 0; width: 100%; margin-bottom: 5vh;"><ul id="piano"></ul></div>
+            <div id="block" class="overlay"></div>
+            <article id="image" style="text-align:center; display:none; position: absolute; top: 0; left: 0; width: 100%"><img src="../../resources/cat_on_a_bed.png"/></article>
+        </div>
     </div>
     <script  src="js/index.js"></script>
 </body>
