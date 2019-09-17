@@ -13,9 +13,9 @@ function randomize(list) {
 
 let gameData = {
     "a cat on a bed":["cat_on_a_bed.png"],
-    "a hog wears a dress":["a hog in a dress.png"],
+    "a hog has a dress on":["a hog in a dress.png"],
     "a lot of fast pets":["fast pets.png"],
-    "a hen on a nest of eggs":["hen on eggs.png"],
+    "a fat hen on a nest of eggs":["hen on eggs.png"],
 }
 let sentence = ""
 
@@ -24,9 +24,9 @@ var sound = new Howl({
     preload: true,
     sprite: {
         "a cat on a bed":[2500,3000],
-        "a hog wears a dress":[47000,3500],
+        "a hog has a dress on":[47000,3500],
         "a lot of fast pets":[12500,40000],
-        "a hen on a nest of eggs":[70000,4000],
+        "a fat hen on a nest of eggs":[70000,4000],
     }
 });
 
