@@ -1,0 +1,111 @@
+<html>
+    <title>Sound test</title>
+    <head>
+        <style>
+            div > div {
+                border-style: solid;
+                border-color: black;
+                border-width: 1px;
+                padding: 2px;
+                margin: 2px;
+            }
+        </style>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/howler/2.0.15/howler.min.js"></script>
+        <script>
+            var pages = [`Many years before in old Japan 
+there was an old man and his wife 
+living in a small village next to a river 
+The old man was called ojiisan 
+The old woman was called obaasan 
+Ojiisan cut wood for his job 
+Obaasan washed clothes for her job 
+They lived alone and had no children`,
+
+`One day the old woman went to the river 
+She had just begun washing the clothes when 
+to her surprise a giant peach 
+was floating down the river 
+It was the biggest peach 
+she had ever seen and she 
+pulled it out of the water 
+She took it home for supper`,
+
+`When she got her knife to cut it open 
+she heard the voice of a child say 
+Wait don't cut me 
+Suddenly the peach split open
+and a beautiful baby boy jumped out 
+The old people were very surprised 
+More surprising the baby boy said 
+Don't be afraid 
+Heaven saw how lonely you were 
+without any children and sent me to you`,
+
+`So the old people happily took the baby
+and raised him as their own son 
+They named him Momotaro 
+which means Peach Boy in Japanese 
+They loved him very much and 
+they raised him to be a very fine boy`]; 
+
+            var sprites = {
+                many: [1590, 500],
+                years: [2100, 400],
+                before: [2400, 700],
+                in: [3100, 400],
+                old: [3500, 300],
+                japan: [3800, 600],
+                there: [4500, 350],
+                was: [4850, 200],
+                // Insert new words here, make sure you put a comma after each entry
+                // word: [start, duration],
+            };
+        </script>
+    </head>
+    <body>
+        <button id="prev">Previous</button> <button id="next">Next</button>
+        <div id="container"></div>
+        <script>
+            var sound = new Howl({
+                src: ['Momotaro- Monet recitation - 2018_09_12 18.49.m4a'],
+                sprite: sprites
+            });
+
+            let pageIndex = 0;
+            let page = pages[pageIndex];
+            let container = document.getElementById("container");
+
+            function buildPage() {
+                while (container.firstChild) {
+                    container.removeChild(container.firstChild);
+                }
+                page.split(" ").forEach(w => {
+                    let div = document.createElement("div");
+                    w = w.toLowerCase().trim();
+                    console.log("["+w+"]");
+                    div.innerHTML = w + " [" + (sprites[w] ? sprites[w].join(", ") : "") + "]";
+                    div.onclick = () => { console.log(w); sound.play(w); };
+                    container.appendChild(div);
+                });
+            }
+            let prev = document.getElementById("prev");
+            prev.onclick = () => {
+                if (pageIndex > 0) {
+                    pageIndex--;
+                    page = pages[pageIndex];
+                    buildPage();
+                }
+            };
+            let next = document.getElementById("next");
+            next.onclick = () => {
+                if (pageIndex < pages.length-1) {
+                    pageIndex++;
+                    page = pages[pageIndex];
+                    buildPage();
+                }
+            };
+
+            buildPage();
+        </script>
+    </body>
+</html>
