@@ -143,10 +143,10 @@ function buildGame() {
         let li = document.createElement("li");
         let phoneme = phonemes[i];
         li.innerHTML = "<span class=" + phoneme + ">⬤</span>"
-        let sound = getPhonemeSound(phoneme);
+        let phonemeSound = getPhonemeSound(phoneme);
         console.log(phoneme, sound);
         li.addEventListener("click", () => {
-            sound.play();
+            phonemeSound.play();
             let note = notes[pos]
             if (note.phoneme == phoneme) {
                 note.span.classList.remove("phoneme-hidden")
@@ -156,6 +156,7 @@ function buildGame() {
                         //buildGame();
                         piano.style.display = "none"
                         document.getElementById("image").style.display = "inline-block"
+                        sound.play(sentence)
                     }, nextGameDelay);
                 }
             }
