@@ -171,34 +171,34 @@
         
     </fieldset></div>
     <script>
-        let gameData = {
-            "a cat on a bed":["cat_on_a_bed.png"],
-            "bugs on the web are glad":["bugs on the web are glad.png"],
-            "a lot of fast pets":["a lot of fast pets.png"],
-            "wet frog on a bag":["wet frog on a bag.png"],
-            "a bear and a fox":["a bear and a fox.png"],
-            "a box of red clams":["a box of red clams.png"],
-            "a lot of bad bears":["a lot of bad bears.png"],
-            "an odd rat has an umbrella":["an odd rat has an umbrella.png"],
-            "a hog has a dress on":["a hog has a dress on.png"],
-            "a bear wears a top hat":["a bear wears a top hat.png"],
-            "a rat on a jet":["a rat on a jet.png"],
-            "a rat has a lot of hair":["a rat has a lot of hair.png"],
-            "some rats wear a red hat":["some rats wear a red hat.png"],
-            "a fat hen on a nest of eggs":["a fat hen on a nest of eggs.png"],
-            "a red cat got wet":["a red cat got wet.png"],
-            "a bobcat gets a haircut":["a bobcat gets a haircut.png"],
-            "complex cats get dressed up":["complex cats get dressed up.png"],
-            "some red and black swans":["some red and black swans"],
-            "a bad bug on a bed":["a bad bug on a bed"],
-            "a red frog on the back of a dump truck":["a red frog on the back of a dump truck.png"],
-            "a crab on the back of an elk":["a crab on the back of an elk.png"],
-            "a bug on the back of a heron":["a bug on the back of a heron.png"],
-            "a fennec fox wants a snack":["a fennec fox wants a snack.png"],
-            "the gazelle has a black hat on":["the gazelle  has a black hat on.png"],
-            "a llama on the deck of a tug":["a llama back of the deck on a tug.png"],
-            "a musk ox gets a snack of some grass":["a musk ox gets a snack of some grass.png"],
-        }
+        let gameData = [
+            "a bad bug on a bed",
+            "a bear and a fox",
+            "a bear wears a top hat",
+            "a bobcat gets a haircut",
+            "a box of red clams",
+            "a cat on a bed",
+            "a crab on the back of an elk",
+            "a fat hen on a nest of eggs",
+            "a fennec fox wants a snack",
+            "a frog on the back of a dumptruck",
+            "a grasshopper lands on a heron",
+            "a hog has a dress on",
+            "a llama on the deck of a tug",
+            "a lot of bad bears",
+            "a lot of fast pets",
+            "a musk ox gets a snack of some grass",
+            "a rat has a lot of hair",
+            "a rat on a jet",
+            "a wet cat has a bath",
+            "bugs on the web are glad",
+            "complex cats get dressed up",
+            "fat rat has an umbrella",
+            "some rats wear a red hat",
+            "some red and black swans",
+            "the gazelle has a black hat on",
+            "wet frog on a bag"
+        ]
         let sentence = ""
         var phonemes = ["AA", "AE", "AH", "EH"];
         var phonemeBuffers = {};
@@ -206,36 +206,8 @@
         var fieldset;
 
         var sound = new Howl({
-            src: ['./resources/animals.m4a'],
-            preload: true,
-            sprite: {
-                "a cat on a bed":[1000,1500], 
-                "bugs on the web are glad":[5250,2250],
-                "a lot of fast pets":[11000,2500],
-                "wet frog on a bag":[16250,2000],
-                "a bear and a fox":[21500,2250],
-                "a box of red clams":[26000,2250],
-                "a lot of bad bears":[31000,2250],
-                "an odd rat has an umbrella":[36000,3000],
-                "a hog has a dress on":[42000,2000],
-                "a bear wears a top hat":[46750,2500],
-                "a rat on a jet":[51500,2000],
-                "a rat has a lot of hair":[56500,2000],
-                "some rats wear a red hat":[61750,2750],
-                "a fat hen on a nest of eggs":[67500,2750],
-                "a red cat got wet":[72500,2250],
-                "a bobcat gets a haircut":[77250,2500],
-                "complex cats get dressed up":[82500,2750],
-                "some red and black swans":[88250,3000],
-                "a bad bug on a bed":[88250,2750],
-                "a red frog on the back of a dump truck":[97500,6600],
-                "a crab on the back of an elk":[106500,2500],
-                "a bug on the back of a heron":[111500,2750],
-                "a fennec fox wants a snack":[116250,3250],
-                "the gazelle has a black hat on":[123750,3000],
-                "a llama on the deck of a tug":[129750,3500],
-                "a musk ox gets a snack of some grass":[136500,4500],
-            }
+            src: ['./resources/a cat on a bed.m4a'],
+            preload: true
         });
 
         function randomize(list) {
@@ -369,11 +341,20 @@
             fieldset.appendChild(div);
 
             // Create words
-            let index = Math.floor(Math.random() * Object.keys(gameData).length);
-            sentence = Object.keys(gameData)[index]
+            let index = Math.floor(Math.random() * gameData.length);
+            sentence = gameData[index]
+
+            // Load sound
+            sound = new Howl({
+                src: ["./resources/" + sentence + ".m4a"],
+                preload: true
+            });
+
+            // Load image
             let image = document.getElementById("image")
             let img = image.getElementsByTagName("img")[0]
-            img.src = "./resources/" + gameData[sentence][0]
+            img.src = "./resources/" + sentence + ".png"
+
             let element = document.getElementById("words")
             element.innerHTML = RiTa.tokenize(sentence).map(word=>phonemize(word)).join(" ")
             let spans = element.querySelectorAll("span")
@@ -400,7 +381,7 @@
             }
             document.getElementById("cards").style.display = "none"
             document.getElementById("image").style.display = "block"
-            sound.play(sentence)
+            sound.play()
         }
         function playPhoneme(phoneme, finished) {
             let source = audioContext.createBufferSource();
