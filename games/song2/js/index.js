@@ -14,7 +14,7 @@ function randomize(list) {
 let gameData = [
     "a bad bug on a bed",
     "a bear and a fox",
-    "a bear wears a top hat",
+    //"a bear wears a top hat",
     "a bobcat gets a haircut",
     "a box of red clams",
     "a cat on a bed",
