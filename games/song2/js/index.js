@@ -43,8 +43,7 @@ let sentence = ""
 
 var sound = new Howl({
     src: ['../../resources/a cat on a bed.m4a'],
-    preload: true,
-    html5: true
+    preload: true
 });
 
 let phonemeSounds = {};
@@ -55,8 +54,7 @@ function getPhonemeSound(phoneme) {
         console.log("Caching sound " + phoneme);
         sound = new Howl({
             src: [`../../phonemes/arthur/${phoneme.toUpperCase()}.wav`],
-            preload: true,
-            html5: true
+            preload: true
         });
         phonemeSounds[phoneme] = sound;
     }
@@ -134,8 +132,7 @@ function buildGame() {
     // Load sound
     sound = new Howl({
         src: ["../../resources/" + sentence + ".m4a"],
-        preload: true,
-        html5: true
+        preload: true
     });
 
     // Load image
